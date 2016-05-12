@@ -129,7 +129,7 @@ div.deck div.overlay {
 /* The individual cards css is generated and resides in fx.css */
 div.player.hand {
     bottom: 0;
-    height: 300px;
+    height: 340px;
     position: absolute;
     left: 160px;
     width: 956px;
@@ -145,14 +145,15 @@ div.hand > div > div {
     background-size: 100% 100%;
     background-position: center center;
     background-repeat: no-repeat;
+    border-radius: 10px;
     -webkit-transform-origin: bottom center;
     -moz-transform-origin: bottom center;
     -ms-transform-origin: bottom center;
-    height: 200px;
+    height: 240px;
     position: absolute;
-    top: 10px;
+    top: 15px;
     transform-origin: bottom center;
-    width: 140px;
+    width: 150px;
 }
 .gold{background-image:url(../images/cards/gold.jpg);}
 .silver{background-image:url(../images/cards/silver.jpg);}

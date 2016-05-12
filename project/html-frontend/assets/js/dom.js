@@ -118,6 +118,13 @@ $(function () {
  * @property {String} name - The name of the player.
  * @property {Number} score - The score of the player.
  */
+/**
+ *  @typedef {Object} PlayerCard
+ *  @property {Number} id
+ *  @property {String} pile "Discard", "Deck", "Hand", "Playing", "Table"
+ *  @property {Number} order The order in which the card is sorted.
+ *  @property {Number} cardId The id of the card.
+ */
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * The result of a high scores request.

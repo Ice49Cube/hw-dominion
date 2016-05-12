@@ -7,21 +7,25 @@
 <![CDATA[
 
 // https://jsfiddle.net/Le1cpn16/7/
-var rotate_deg = 11;
+var rotate_deg = 30;
 var deck_width = 900;
-var deck_height = 300;
-var card_width = 140;
-var card_height = 200;
+var deck_height = 340;
+var card_width = 150;
+var card_height = 240;
 var center = new Point(deck_width >> 1, deck_height);
 
 function generateBlock(block) {
    	var point = new Point((deck_width >> 1) - (card_width >> 1), 15);
     var start = ((block - 1) / 2);
+	if (rotate_deg * (block - 1) >= 180) {
+		rotate_deg = 180 / (block - 1);
+	}
     var degrees = -(start * rotate_deg);
 	for(var i = 1; i <= block; i++) {
-		var current = point.rotate(center, degrees);
-		var left = "left:" + (point.x + degrees).toFixed() + "px;";
-		var transform = "transform:rotateZ(" + degrees + "deg);";
+		var current = Math.round(degrees);
+		
+		var left = "left:" + (point.x + current) + "px;";
+		var transform = "transform:rotateZ(" + current + "deg);";
 		WScript.Echo(".fx-card" + block + ":nth-child(" + i + ") {" + left + transform + "}");
 		degrees += rotate_deg;
 	}
