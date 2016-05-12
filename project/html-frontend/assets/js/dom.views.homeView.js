@@ -1,78 +1,28 @@
 /**
- * @module homeView
- * @description The home view module.
- * @memberOf views
+ * @namespace dom.views.homeView
+ * @extends IView
  */
 (function () {
     "use strict";
-    // Imports
-    var game = window.game = window.game || {};
-    var view = window.view = window.view || {};
-    var views = window.views = window.views || {};
-    var homeView = views.homeView = views.homeView || {};
-    /**
-     * @var divHome
-     * @description Holds the home view container.
-     * @private
-     */
-    var divHome;
-    /**
-     * @function initialize
-     * @description Initializes the home view.
-     */
+    /*global namespace*/
+    var homeView = namespace("views.homeView");
+    var dom = namespace;
+    var elements = {};
     homeView.initialize = function () {
-        divHome = $("#divHome");
-        /**
-         * @function aNewGame_click
-         * @description Handles the click on aNewGame.
-         * @private
-         */
-        $("#aNewGame").on("click", function (e) {
-            view.showNext(views.newGameView);
+        elements.view = $(".view.home");
+        elements.view.find(".new-game").on("click", function (e) {
             e.preventDefault();
+            dom.view.showNext(dom.views.newGameView);
         });
-        /**
-         * @function aContinueGame_click
-         * @description Handles the click on aContinueGame
-         * @private
-         */
-        $("#aContinueGame").on("click", function (e) {
-            view.showNext(views.continueGameView);
+        elements.view.find(".view-high-scores").on("click", function (e) {
             e.preventDefault();
-        });
-        /**
-         * @function aViewHighScores_click
-         * @description Handles the click on aViewHighScores
-         * @private
-         */
-        $("#aViewHighScores").on("click", function (e) {
-            //view.showNext(views.highScoresView);
-            game.viewHighScores();
-            e.preventDefault();
+            dom.game.viewHighScores();
         });
     };
-    /**
-     * @function show
-     * @description Shows the view.
-     * @param {callback} oncompleted Called on completed.
-     * @static
-     */
     homeView.show = function (oncompleted) {
-        divHome.slideDown(oncompleted);
+        elements.view.fadeIn(oncompleted);
     };
-    /**
-     * @function hide
-     * @description Hides the view.
-     * @param {callback} oncompleted Called on completed.
-     * @static
-     */
     homeView.hide = function (oncompleted) {
-        divHome.slideUp(oncompleted);
+        elements.view.slideUp(oncompleted);
     };
-    /**
-     * @property name
-     * @description Name of this module.
-     * @type {string}
-     */
-    homeView.name = "homeView";
 }());

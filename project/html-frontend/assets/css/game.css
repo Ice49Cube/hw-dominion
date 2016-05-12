@@ -1,232 +1,252 @@
-@import url(https://fonts.googleapis.com/css?family=Uncial+Antiqua);
-@import url(https://fonts.googleapis.com/css?family=Muli);
 
-* {
-    -webkit-user-select: none;  /* Chrome all / Safari all */
-    -moz-user-select: none;     /* Firefox all */
-    -ms-user-select: none;      /* IE 10+ */
-    user-select: none;          /* Likely future */
-}
+div.deck { position: absolute; top: 0; }
 
-html, body {
-    font-family: 'Times New Roman';
-    font-size: 16px;
-    background: black url("../images/background2.jpg") no-repeat center center fixed;
-    color: lightgoldenrodyellow;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+div.deck.kingdoms  { width: 800px; left: 320px;  }
+div.deck.treasures { width: 160px; right: 0;  }
+div.deck.victories { width: 320px; left: 0;  }
 
-}
-
-body {
-    background-color: black;
-    display: table;
-    height: 100%;
-    left: 0;
-    overflow: auto;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-div.container {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-div.view {
-    display: none;
-    height: 960px;
-    margin: 0 auto;
-    position: relative;
-    width: 1280px;
-}
-
-div.view > div.overlay {
-    display: none;
-    height: 960px;
-    margin: 0 auto;
-    position: absolute;
-    width: 1280px;
-    background: rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-    -webkit-box-shadow: 0px 0px 300px 200px rgba(255,255,255,0.4);
-    -moz-box-shadow: 0px 0px 300px 200px rgba(255,255,255,0.4);
-    box-shadow: 0px 0px 300px 200px rgba(255,255,255,0.4);
-}
-
-/* 	Decks, contains cards that can be bought, thus cards that do not belong to a player...
-	The same for all cards on the table that do not belong to a player...
-	classname: deck
-*/
+div.deck.kingdoms  figure { border: 4px solid black; }
+div.deck.treasures figure { border: 4px solid darkgoldenrod; }
+div.deck.victories figure { border: 4px solid green; }
+div.deck.victories figure.curse { border-color: purple; }
 
 div.deck figure {
-    display: block;
-    position: relative;
-    background-color: black;
-    border: 4px solid black;
-    margin-bottom: 4px;
-    cursor: pointer;
+    background: black;
+    -webkit-border-radius: 0 8px;
+    -moz-border-radius: 0 8px;
+    -ms-border-radius: 0 8px;
     border-radius: 0 8px;
+    cursor: pointer;
+    float: left;
+    margin: 0 4px 4px 0;
+    position: relative;
+    width: 148px;
 }
-
-div.deck figure img {
-    width: 100%;
+div.deck img.art {
+    -webkit-border-radius: 0 4px 0 0;
+    -moz-border-radius: 0 4px 0 0;
+    -ms-border-radius: 0 4px 0 0;
     border-radius: 0 4px 0 0;
+    cursor: pointer;
+    width: 100%;
+    height: 110px;
 }
-
-div.deck figure figcaption {
-    background: black none left center/auto 100% no-repeat;
-    height: 20px;
-    color: lightgoldenrodyellow;
-    line-height: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding-left: 22px;
-    /*
-    text-align: center;
-    padding-left: 8px;*/
-    border-radius: 0 0px 0 4px;
-}
-
-div.deck figure figcaption:first-letter {
-    font-family: 'Uncial Antiqua';
-    font-size: 1rem;
-    font-weight: bold;
-}
-
 div.deck div.count {
-    position: absolute;
-    background-color:blue;
-    width: 24px;
-    height:24px;
-    border-radius:48px;
-    line-height:24px;
-    text-align:center;
+    background-color:black;
+    border: 1px solid lightgoldenrodyellow;
+    -webkit-border-radius: 48px;
+    -moz-border-radius: 48px;
+    -ms-border-radius: 48px;
+    border-radius: 48px;
+    color: lightgoldenrodyellow;
+    cursor: pointer;
     font-weight:bold;
     font-size: 1.1rem;
+    height: 24px;
+    line-height: 24px;
+    position: absolute;
+    text-align: center;
     top: -2px;
     right: -2px;
+    width: 24px;
 }
-
 div.deck div.buy {
-    float:right;
-    background-color:blue;
-    width:20px;
-    height:20px;
-    font-size:1.7rem;
-    line-height:18px;
-    text-align:center;
-    cursor:pointer;
-    font-family: 'Arial Black';
+    background: transparent url(../images/plus.png) center center/100% 100% no-repeat;
+    cursor: pointer;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 20px;
 }
-
-div.deck div.buy:before {
-    content:"+";
+div.deck figcaption {
+    background: black none left center/auto 100% no-repeat;
+    border-radius: 0 0 0 4px;
+    color: lightgoldenrodyellow;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    height: 20px;
+    line-height: 21px;
+    margin: -1px 0 2px 2px;
+    padding-left: 24px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    -webkit-transition: 0.4s ease-in-out;
+    -moz-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
 }
-
+div.deck figcaption:first-letter {
+    font-family: 'Uncial Antiqua', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: larger;
+    font-weight: bold;
+}
+div.deck div.buy:hover + figcaption {
+    padding-left: 27px;
+}
+div.deck img.coin {
+    background-color: black;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    bottom: 2px;
+    cursor: pointer;
+    left: 2px;
+    height: 20px;
+    position: absolute;
+    -webkit-transition: 0.4s ease-in-out;
+    -moz-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+    width: 20px;
+}
+div.deck div.buy:hover + figcaption + img {
+    bottom: -2px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 0 15px 8px lightgoldenrodyellow;
+    -moz-box-shadow: 0 0 15px 8px lightgoldenrodyellow;
+    -ms-box-shadow: 0 0 15px 8px lightgoldenrodyellow;
+    box-shadow: 0 0 15px 8px lightgoldenrodyellow;
+    height: 28px;
+    left: -2px;
+    width: 28px;
+}
 div.deck div.overlay {
     background: rgba(255, 255, 255, 0.5);
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    width: calc(100% + 8px);
-    height: calc(100% + 8px);
+    -webkit-border-radius: 0 8px;
+    -moz-border-radius: 0 8px;
+    -ms-border-radius: 0 8px;
     border-radius: 0 8px;
     cursor: not-allowed;
+    height: calc(100% + 8px);
+    left: -4px;
+    position: absolute;
+    top: -4px;
+    width: calc(100% + 8px);
 }
-/* OF met nadruk door een wittere border...
-	"background": "rgba(255, 255, 255, 0.5)",
-	"position": "absolute",
-	"top": 0,
-	"left": 0,
-	"width" : card.width(),
-	"height": card.height(),
-	"border": "4px solid rgba(255, 255, 255, 0.5)",
-	"margin": "-4px 0 0 -4px",
-	"border-radius": "0 8px"
-*/
+
+/* The individual cards css is generated and resides in fx.css */
+div.player.hand {
+    bottom: 0;
+    height: 300px;
+    position: absolute;
+    left: 160px;
+    width: 956px;
+}
+div.hand > div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+div.hand > div > div {
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-transform-origin: bottom center;
+    -moz-transform-origin: bottom center;
+    -ms-transform-origin: bottom center;
+    height: 200px;
+    position: absolute;
+    top: 10px;
+    transform-origin: bottom center;
+    width: 140px;
+}
+.gold{background-image:url(../images/cards/gold.jpg);}
+.silver{background-image:url(../images/cards/silver.jpg);}
+.copper{background-image:url(../images/cards/copper.jpg);}
+.adventurer{background-image:url(../images/cards/adventurer.jpg);}
+.bureaucrat{background-image:url(../images/cards/bureaucrat.jpg);}
+.cellar{background-image:url(../images/cards/cellar.jpg);}
+.chancellor{background-image:url(../images/cards/chancellor.jpg);}
+.chapel{background-image:url(../images/cards/chapel.jpg);}
+.council-room{background-image:url(../images/cards/council_room.jpg);}
+.feast{background-image:url(../images/cards/feast.jpg);}
+.festival{background-image:url(../images/cards/festival.jpg);}
+.gardens{background-image:url(../images/cards/gardens.jpg);}
+.laboratory{background-image:url(../images/cards/laboratory.jpg);}
+.library{background-image:url(../images/cards/library.jpg);}
+.market{background-image:url(../images/cards/market.jpg);}
+.militia{background-image:url(../images/cards/militia.jpg);}
+.mine{background-image:url(../images/cards/mine.jpg);}
+.moat{background-image:url(../images/cards/moat.jpg);}
+.moneylender{background-image:url(../images/cards/moneylender.jpg);}
+.remodel{background-image:url(../images/cards/remodel.jpg);}
+.smithy{background-image:url(../images/cards/smithy.jpg);}
+.spy{background-image:url(../images/cards/spy.jpg);}
+.thief{background-image:url(../images/cards/thief.jpg);}
+.throne-room{background-image:url(../images/cards/throne_room.jpg);}
+.village{background-image:url(../images/cards/village.jpg);}
+.witch{background-image:url(../images/cards/witch.jpg);}
+.woodcutter{background-image:url(../images/cards/woodcutter.jpg);}
+.workshop{background-image:url(../images/cards/workshop.jpg);}
+.province{background-image:url(../images/cards/province.jpg);}
+.duchy{background-image:url(../images/cards/duchy.jpg);}
+.estate{background-image:url(../images/cards/estate.jpg);}
+.curse{background-image:url(../images/cards/curse.jpg);}
 
 /* COINS add others when needed */
+/*div.deck figure figcaption.coin8 { background-image:url('../images/cards/coins/coin8.png') }
+div.deck figure figcaption.coin7 { background-image:url('../images/cards/coins/coin7.png') }
+div.deck figure figcaption.coin6 { background-image:url('../images/cards/coins/coin6.png') }
+div.deck figure figcaption.coin5 { background-image:url('../images/cards/coins/coin5.png') }
+div.deck figure figcaption.coin4 { background-image:url('../images/cards/coins/coin4.png') }
+div.deck figure figcaption.coin3 { background-image:url('../images/cards/coins/coin3.png') }
+div.deck figure figcaption.coin2 { background-image:url('../images/cards/coins/coin2.png') }
+div.deck figure figcaption.coin0 { background-image:url('../images/cards/coins/coin0.png') }*/
 
-div.deck figure figcaption.coin8 { background-image:url('../images/cards/coins/coin8.png'); }
-div.deck figure figcaption.coin6 { background-image:url('../images/cards/coins/coin6.png'); }
-div.deck figure figcaption.coin5 { background-image:url('../images/cards/coins/coin5.png'); }
-div.deck figure figcaption.coin4 { background-image:url('../images/cards/coins/coin4.png'); }
-div.deck figure figcaption.coin3 { background-image:url('../images/cards/coins/coin3.png'); }
-div.deck figure figcaption.coin2 { background-image:url('../images/cards/coins/coin2.png'); }
-div.deck figure figcaption.coin0 { background-image:url('../images/cards/coins/coin0.png'); }
 
-/* Specific for certain decks/cards */
 
-div.deck-victory {
+
+
+/* The cards of the player */
+
+/*
+
+div.player.table,
+div.player.hand {
+    background: transparent none center center/100% 100% no-repeat;
+    width: 1116px;
+    height: 335px;
     position: absolute;
-    width: 158px;
     left: 0;
-    top: 0;
 }
-div.deck-victory figure { border-color: green; }
-div.deck-victory figure.curse { border-color: purple; }
-
-div.deck-kingdom {
-    position: absolute;
-    width: 900px;
-    left: 215px;
-    top: 0;
+div.player.table {
+    background-image: url(../images/table.png);
+    top: 294px;
+}
+div.player.hand {
+    background-image: url(../images/table.png);
+    bottom: 0;
+    left: 0;
 }
 
-div.deck-kingdom figure {
+div.player.table img,
+div.player.hand img {
     float: left;
-    width: 168px;
-    margin-right: 4px;
-}
-div.deck-kingdom img { height: 110px; }
-div.deck-kingdom div:last-child { margin-right: 0; }
+    margin-top: 18px;
+    height: 300px;
+    width: 188px;
+    /*margin-left: -143px;
 
-div.deck-treasure {
+}
+div.player.hand img:after {
+    content: "hello";
     position: absolute;
-    width: 122px;
-    right: 0;
-    top: 0;
-}
-div.deck-treasure figure { border-color: darkgoldenrod; }
-
-div.deck-victory > figure:last-child,
-div.deck-kingdom > div > figure:last-child,
-div.deck-treasure > figure:last-child {
-    margin-bottom: 0;
+    z-index:100000;
+    left:-50px;
+    top:10px;
+    color: green;
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+    font-size: 48pt;
 }
 
-.hide {
-    display: none;
-}
+div.player.table img:first-child,
+div.player.hand img:first-child {
+    margin-left: 35px !important;
+}*/
 
-/* REMOVE BOTTOM CSS IN RELEASE,
-JUST TO SHOW THE SIZE OF THE VIEWS AND CONTAINERS
 
-div.view {
-	border: 1px solid yellow;
-}
-
-div.deck-victory {
-	border: 1px solid yellow;
-	top: -1px;
-	left: -1px;
-}
-
-div.deck-kingdom {
-	border: 1px solid yellow;
-	top: -1px;
-	left: 214px;
-}
-
-div.deck-treasure {
-	border: 1px solid yellow;
-	top: -1px;
-	right: -1px;
-}
-
-*/

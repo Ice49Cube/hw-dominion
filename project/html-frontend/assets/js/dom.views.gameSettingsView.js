@@ -1,28 +1,22 @@
+/**
+ * The gameSettingsView is responsible for the settings.
+ * @namespace dom.views.gameSettingsView
+ * @extends IView
+ */
 (function () {
     "use strict";
-
-    // Imports
-
-    var views = window.views = window.views || {};
-    var gameSettingsView = views.gameSettingsView = views.gameSettingsView || {};
-
+    /*global namespace*/
+    var gameSettingsView = namespace("views.gameSettingsView");
     // Private
-
-    var divGameSettings;
-
+    var elements = {};
     // Public
-
-    gameSettingsView .initialize = function () {
-        divGameSettings = $('#divGameSettings');
+    gameSettingsView.initialize = function () {
+        elements.view = $('#divGameSettings');
     };
-
-    gameSettingsView .show = function(oncompleted) {
-        divGameSettings.slideDown(oncompleted);
+    gameSettingsView.show = function (oncompleted) {
+        elements.view.slideDown(oncompleted);
     };
-
-    gameSettingsView .hide = function(oncompleted) {
-        divGameSettings.slideUp(oncompleted);
+    gameSettingsView.hide = function (oncompleted) {
+        elements.view.slideUp(oncompleted);
     };
-
-    gameSettingsView.name = "gameSettingsView";
 }());
