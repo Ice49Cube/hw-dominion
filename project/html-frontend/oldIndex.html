@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/screen.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/oldgame.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dominion</title>
+</head>
+<body>
+
+
+<!-- Game -->
+
+<div id="divGame" class="view">
+    <div id="ActionCards">
+        <div class="row ZoomAvailable">
+            <div id="ActionCard1" title="spy"><span id="ActionCard1Amount">10</span> <span id="ActionCard1Coins">4</span>
+            </div>
+            <div id="ActionCard2" title="thief"><span id="ActionCard2Amount"> 9</span> <span id="ActionCard2Coins">6</span>
+            </div>
+            <div id="ActionCard3" title="moneylender"><span id="ActionCard3Amount">10</span> <span
+                    id="ActionCard3Coins">2</span></div>
+            <div id="ActionCard4"><span id="ActionCard4Amount">10</span> <span id="ActionCard4Coins">5</span></div>
+            <div id="ActionCard5"><span id="ActionCard5Amount">7</span> <span id="ActionCard5Coins">6</span></div>
+        </div>
+        <div class="row ZoomAvailable">
+            <div id="ActionCard6"><span id="ActionCard6Amount">10</span> <span id="ActionCard6Coins">3</span></div>
+            <div id="ActionCard7"><span id="ActionCard7Amount">5</span> <span id="ActionCard7Coins">2</span></div>
+            <div id="ActionCard8"><span id="ActionCard8Amount">10</span> <span id="ActionCard8Coins">4</span></div>
+            <div id="ActionCard9"><span id="ActionCard9Amount">6</span> <span id="ActionCard9Coins">5</span></div>
+            <div id="ActionCard10"><span id="ActionCard10Amount">10</span> <span id="ActionCard10Coins">3</span></div>
+        </div>
+    </div>
+
+    <div id="TreasureCards" class="ZoomAvailable">
+        <div class="Gold" title="gold"></div>
+        <div class="Silver" title="silver"></div>
+        <div class="Copper" title="copper"></div>
+        <div class="Curse" title="curse"></div>
+    </div>
+
+    <div id="PointCards" class="ZoomAvailable">
+        <div class="Estate" title="estate"></div>
+        <div class="Duchy" title="duchy"></div>
+        <div class="Province" title="province"></div>
+
+    </div>
+    <div id="CardZoom">
+
+    </div>
+
+    <div id="CardZoomBackground">
+
+    </div>
+    <div id="Playground">
+    </div>
+
+    <div id="Hand" class="playCards">
+    </div>
+
+    <div id="EndTurn" class="options">
+        End turn
+    </div>
+
+    <div id="PlayTreasures" class="options">
+        Play Treasures
+    </div>
+
+    <div id="Actions" class="counter">
+        Actions: <span id="ActionCount">1</span>
+    </div>
+
+    <div id="Buys" class="counter">
+        Buys: <span id="BuyCount">3</span>
+    </div>
+
+    <div id="Coins" class="counter">
+        Coins: <span id="CoinCount">2</span>
+    </div>
+
+    <div id="DebugDiv">
+
+    </div>
+</div>
+
+<a id="aBack" class="img-button back" href="#" title="Back..."></a>
+
+<div id="divErrorOverlay" class="view overlay">
+
+</div>
+<script type="text/javascript" src="assets/js/jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="assets/js/dom.game.js"></script>
+<script type="text/javascript" src="assets/js/dom.routing.js"></script>
+<script type="text/javascript" src="assets/js/dom.start.js"></script>
+<script type="text/javascript" src="assets/js/dom.view.js"></script>
+<script type="text/javascript" src="assets/js/dom.views.js"></script>
+<script type="text/javascript" src="assets/js/dom.views.continueGameView.js"></script>
+<script type="text/javascript" src="assets/js/dom.views.gameInfoView.js"></script>
+<script type="text/javascript" src="assets/js/dom.views.gameView.js"></script>
+<script type="text/javascript" src="assets/js/dom.views.highScoresView.js"></script>
+<script type="text/javascript" src="assets/js/dom.views.homeView.js"></script>
+<script type="text/javascript" src="assets/js/dom.views.newGameView.js"></script>
+<script type="text/javascript" src="assets/js/dom.views.gameIdView.js"></script>
+<script type="text/javascript" src="assets/js/dom.views.gameSettingsView.js"></script>
+<script type="text/javascript" src="assets/js/oldIndex.js"></script>
+<script type="text/javascript" src="assets/js/poly.js"></script>
+</body>
+</html>

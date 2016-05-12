@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<job>
+	<script language="JScript" src="lib\json3.js"></script>
+	<script language="JScript" src="lib\import.js"></script>
+	<script language="JScript" src="lib\math.js"></script>
+	<script language="JScript">
+<![CDATA[
+
+// https://jsfiddle.net/Le1cpn16/7/
+var rotate_deg = 11;
+var deck_width = 900;
+var deck_height = 300;
+var card_width = 140;
+var card_height = 200;
+var center = new Point(deck_width >> 1, deck_height);
+
+function generateBlock(block) {
+   	var point = new Point((deck_width >> 1) - (card_width >> 1), 15);
+    var start = ((block - 1) / 2);
+    var degrees = -(start * rotate_deg);
+	for(var i = 1; i <= block; i++) {
+		var current = point.rotate(center, degrees);
+		var left = "left:" + (point.x + degrees).toFixed() + "px;";
+		var transform = "transform:rotateZ(" + degrees + "deg);";
+		WScript.Echo(".fx-card" + block + ":nth-child(" + i + ") {" + left + transform + "}");
+		degrees += rotate_deg;
+	}
+	WScript.Echo("");
+}
+
+function main()
+{
+	for(var i = 1; i <= 17; i++) generateBlock(i);
+}
+
+main();
+
+]]>
+	</script>
+ </job>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/screen.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/oldgame.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dominion</title>
+</head>
+<body>
+
+    <h1 class="no-title">Dominion</h1>
+
+    <div id="divHome" class="view">
+        <h2 class="no-title">Home</h2>
+        <a class="img-button new-game" href="#" id="aNewGame" title="New game"></a>
+        <a class="img-button continue-game" href="#" id="aContinueGame" title="Continue game"></a>
+        <a class="img-button view-high-scores" href="#" id="aViewHighScores" title="View high-scores"></a>
+    </div>
+
+    <!-- New Game -->
+
+    <div id="divNewGame" class="view">
+        <h2 class="no-title">New Game - Players</h2>
+        <a class="img-button players2" href="#" title="2 Players"></a>
+        <a class="img-button players3" href="#" title="3 Players"></a>
+        <a class="img-button players4" href="#" title="4 Players"></a>
+    </div>
+
+    <!-- Game Info-->
+
+    <div id="divGameInfo" class="view">
+        <h2 class="no-title">New Game - Info</h2>
+        <label>Player 1<br/><input type="text"/></label>
+        <label>Player 2<br/><input type="text"/></label>
+        <label>Player 3<br/><input type="text"/></label>
+        <label>Player 4<br/><input type="text"/></label>
+        <div>
+            <a class="img-button game-settings" href="#" id="aGameSettings"></a>
+            <a class="img-button start-game" href="#" id="aStartGame"></a>
+        </div>
+    </div>
+
+    <!-- Id Screen -->
+
+    <div id="divGameId" class="view">
+        <h2 class="no-title">GameId</h2>
+        <label>Save this code somewhere so you can continue your game later</label>
+        <label id="gameId">#294535</label>
+        <a class="img-button ok" href="game.html" title="Ok"></a>
+    </div>
+
+    <!-- Settings -->
+
+    <div id="divGameSettings" class="view">
+        <h2 class="no-title">Settings</h2>
+        <h3>Presets</h3>
+        <select id="cardSet" required="required">
+            <option value="firstGame">First Game</option>
+            <option value="2">Preset2</option>
+            <option value="3">Preset3</option>
+        </select>
+
+        <a class="img-button random-set" id="Random" href="#"></a>
+    </div>
+
+    <!-- Continue Game -->
+
+    <div id="divContinueGame" class="view">
+        <h2 class="no-title">Continue game</h2>
+        <label>Enter game ID:<br/><input type="text"/></label>
+        <a href="#" class="button">Continue game</a>
+    </div>
+
+    <!-- High Scores -->
+
+    <div id="divHighScores" class="view overlay">
+        <h2 class="no-title">High Scores</h2>
+        <div><!-- Container --></div>
+    </div>
+
+    <a id="aBack" class="img-button back" href="#" title="Back..."></a>
+
+    <div id="divErrorOverlay" class="view overlay">
+
+    </div>
+    <script type="text/javascript" src="assets/js/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/dom.game.js"></script>
+    <script type="text/javascript" src="assets/js/dom.routing.js"></script>
+    <script type="text/javascript" src="assets/js/dom.start.js"></script>
+    <script type="text/javascript" src="assets/js/dom.view.js"></script>
+    <script type="text/javascript" src="assets/js/dom.views.js"></script>
+    <script type="text/javascript" src="assets/js/dom.views.continueGameView.js"></script>
+    <script type="text/javascript" src="assets/js/dom.views.gameInfoView.js"></script>
+    <script type="text/javascript" src="assets/js/dom.views.gameView.js"></script>
+    <script type="text/javascript" src="assets/js/dom.views.highScoresView.js"></script>
+    <script type="text/javascript" src="assets/js/dom.views.homeView.js"></script>
+    <script type="text/javascript" src="assets/js/dom.views.newGameView.js"></script>
+    <script type="text/javascript" src="assets/js/dom.views.gameIdView.js"></script>
+    <script type="text/javascript" src="assets/js/dom.views.gameSettingsView.js"></script>
+    <script type="text/javascript" src="assets/js/poly.js"></script>
+</body>
+</html>

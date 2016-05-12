@@ -1,0 +1,452 @@
+img {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+    background-image: url("../../images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
+
+#New, #Continue, #Highscores, #Back, #Style{
+    border-style: none;
+    background-color: transparent;
+}
+
+#Back{
+   margin-right:0;
+   display:inline-block;
+}
+
+a {
+    font-size: 400%;
+    display: block;
+    margin-bottom: 8%;
+    margin-left:   35%;
+    margin-right: 35%;
+
+    color:white;
+    text-align: center;
+    text-decoration: none;
+
+    border-style: solid;
+    border-radius: 15px;
+    border-width: medium;
+
+    background-color: rgba(109,120,109,0.4);
+    border-color: #6D786D;
+
+    padding-bottom:1% ;
+    padding-top:1% ;
+}
+
+a:hover {
+    font-weight:bold;
+    background-color: rgba(109,120,109,0.6);
+    color:white;
+}
+
+#GameSettings, #Random {
+    font-size: 200%;
+    margin-bottom: 8%;
+    margin-left: 39%;
+    margin-right: 39%;
+    padding-top: 2%;
+}
+
+a:last-child {
+    margin-bottom: 0%;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Muli', sans-serif;
+    margin-bottom: 5%;
+    padding-top: 1%;
+    font-size: 600%;
+}
+
+h2 {
+    font-size: 200%;
+    color:white;
+}
+
+h3 {
+    color:black;
+    font-size: 300%;
+}
+
+#Play, #Scores, #NewGame, #ContinueGame, #GameInfo, #IdScreen, #Player3Box, #Player4Box, #Settings, #TheGame, #CardZoom, #CardZoomBackground {
+    display: none;
+    text-align: center;
+}
+
+#Settings h2 {
+    text-align: left;
+    display: inline-block;
+    margin-left: 0%;
+    margin-right: 2%;
+}
+
+#settings option {
+    text-align: left;
+    display: inline-block;
+}
+
+#Scores {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+
+#Back {
+    font-size: 200%;
+    display: inline-block;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-right: 0;
+}
+
+#Style{
+    display: inline-block;
+    margin-left: 0;
+}
+
+#GameInfo h2 {
+    text-align: left;
+    display: inline-block;
+}
+
+#GameInfo input{
+    display: inline-block;
+    font-size: 130%;
+    margin-bottom:2%;
+}
+
+#IdScreen h2{
+    margin-bottom: 4%;
+}
+
+#ContinueGame input {
+    margin-top: 1%;
+    margin-bottom: 4%;
+    font-size: 175%;
+    height: 50px;
+}
+
+#Hand{
+    position: absolute;
+    bottom: 1%;
+    left:25%;
+    right:25%;
+    width: 960px;
+    height:290px;
+}
+
+#Hand *{
+    display: inline-block;
+    width: 18%;
+    height:275px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(109,120,109,0.4);
+    margin:0;
+    border-radius: 25px;
+
+}
+
+#Card1 {
+    background-image: url("../../Cards/Copper.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#ActionCards {
+    position: absolute;
+    top: 1%;
+    left:25%;
+    right:25%;
+    width: 960px;
+    height:290px;
+}
+
+#ActionCards *{
+    display: inline-block;
+    width: 18%;
+    height: 150px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(109,120,109,0.4);
+    margin:0;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+#ActionCards span:first-of-type{
+    float:right;
+    background-color: red;
+    font-size: 120%;
+    width: 45px;
+    height: 20px;
+}
+
+#ActionCards span:nth-child(2){
+    background-color: yellow;
+    font-size: 120%;
+    width: 45px;
+    float: left;
+    height: 20px;
+}
+
+#ActionCard1{
+    background-image: url("../../Cards/Spy.jpg");
+    background-size: cover;
+}
+
+h3 + p {
+    color: black;
+}
+
+li {
+    list-style-position: inside;
+    color: black;
+    font-size: 200%;
+    display: inline;
+}
+
+ol {
+    counter-reset: my-badass-counter;
+    display: inline;
+}
+
+li h3 {
+    color:white;
+}
+
+li:before {
+    margin-top: 20px;
+    content: counter(my-badass-counter);
+    counter-increment: my-badass-counter;
+    display: block;
+    font-size: 100%;
+    border-top: solid;
+    border-top-color: white;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+
+li:nth-child(1):before {
+    border-top: none;
+}
+
+div {
+    word-wrap: break-word;
+}
+
+.topcorner {
+    position: absolute;
+    top: 1%;
+    right: 3%;
+}
+
+.bottomcorner {
+    position: absolute;
+    bottom: 1%;
+    left: 0.6%;
+}
+
+select {
+    font-size: 150%;
+    background-color: transparent;
+    color:white;
+}
+
+option{
+    background-color: black;
+}
+
+.hvr-float {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+    -webkit-transform: translateY(-60px);
+    transform: translateY(-60px);
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+#CardZoom{
+    margin-left: 40%;
+    margin-top: 8%;
+    height: 603px;
+    width:390px;
+    background-size: cover;
+    position: absolute;
+    z-index: 10;
+    border-radius: 25px;
+}
+
+#CardZoomBackground{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(77,77,77,0.9);
+    z-index: 9;
+}
+
+#TreasureCards {
+    position: absolute;
+    top: 1%;
+    right:1%;
+    width: 370px;
+    height:300px;
+}
+
+#TreasureCards div{
+    display: inline-block;
+    width: 147px;
+    height: 180px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(109,120,109,0.4);
+    margin:0;
+    border-radius: 25px;
+}
+
+#PointCards{
+    position: absolute;
+    top: 1%;
+    left:1%;
+    width: 370px;
+    height:300px;
+}
+
+#PointCards div{
+    display: inline-block;
+    width: 147px;
+    height: 180px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(109,120,109,0.4);
+    margin:0;
+    border-radius: 25px;
+}
+
+#Gold {
+    background-image: url(../../Cards/Gold.jpg);
+    background-size: cover;
+}
+
+#Silver {
+    background-image: url(../../Cards/Silver.jpg);
+    background-size: cover;
+}
+
+#Copper {
+    background-image: url(../../Cards/Copper.jpg);
+    background-size: cover;
+}
+
+#Province{
+
+}
+
+#Duchy{
+
+}
+
+#Options{
+
+}
+
+#DebugDiv{
+    height: 280px;
+    width: 500px;
+    border: 1px solid #333;
+    overflow:scroll;
+    position: absolute;
+    bottom: 1%;
+    right: 0.6%;
+    color:white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: larger;
+}
+
+.options{
+    line-height: 100px;
+    height: 100px;
+    width:250px;
+    position: absolute;
+    font-size: 40px;
+    color:white;
+    background-color: dimgrey;
+    border-style: solid;
+    border-radius: 15px;
+    border-width: medium;
+    border-color: #6D786D;
+}
+
+#EndTurn{
+    bottom: 50%;
+    right: 50px;
+}
+
+#PlayTreasures{
+    bottom: 35%;
+    right: 50px;
+    font-size: 30px;
+}
+
+.counter{
+    line-height: 60px;
+    height: 60px;
+    width:250px;
+    position: absolute;
+    font-size: 40px;
+    color:white;
+}
+
+.counter span{
+    color:yellow;
+}
+
+#Actions{
+    bottom: 50%;
+    left: 50px;
+}
+
+#Buys{
+    bottom: 42%;
+    left: 50px;
+}
+
+#Coins{
+    bottom: 34%;
+    left: 50px;
+}

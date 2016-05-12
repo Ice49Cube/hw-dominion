@@ -1,0 +1,7 @@
+{
+    "_method_": "validMethod",
+    "someString": "valid string",
+    "someBool": true,
+    "empty": null,
+    "someNumber": 3.14
+}

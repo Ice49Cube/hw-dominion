@@ -1,0 +1,10 @@
+@-moz-document url-prefix() {
+
+    /* Firefox specific CSS goes here...
+
+    div.view > div.overlay {
+        -moz-box-shadow: 0 0 300px 200px rgba(250, 250, 210, 0.45);
+        box-shadow: 0 0 300px 200px rgba(250, 250, 210, 0.44);
+    } */
+
+}

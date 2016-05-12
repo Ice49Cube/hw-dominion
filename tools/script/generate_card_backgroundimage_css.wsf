@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<job>
+	<script language="JScript" src="lib\json3.js"></script>
+	<script language="JScript" src="lib\import.js"></script>
+	<script language="JScript">
+<![CDATA[
+
+function main()
+{
+	var config = loadJSON("cardinfo.json");
+	for(var i = 0; i < config.length; i++) {
+		for(var j = 0; j < config[i].items.length; j++) {
+			var card = config[i].items[j];
+			var name = card.name.split('_').join('-');
+			WScript.Echo("." + name + "{background-image:url(../images/cards/" + card.name + ".jpg);}");
+		}
+		WScript.Echo("");
+	}
+}
+
+function formatCasing(name)
+{
+	name = name.split("_");
+	for(var i = 0; i < name.length; i++)
+		name[i] = name[i].substr(0, 1).toUpperCase() + name[i].substr(1);
+	return name.join("");
+}
+
+main();
+
+]]>
+	</script>
+</job>

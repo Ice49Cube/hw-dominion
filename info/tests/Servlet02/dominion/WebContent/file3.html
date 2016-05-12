@@ -1,0 +1,47 @@
+<DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>Test Upload</title>
+</head>
+<body>
+
+	<button id="theButton">Click here if you dare...</button>
+
+	<script
+		src="https://code.jquery.com/jquery-2.2.2.min.js"   
+		integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   
+		crossorigin="anonymous">
+	</script>
+
+	<script text="text/javascript">
+
+$(document).ready(function() {
+	$('#theButton').on("click", function() {
+		/*$.post( "http://localhost:8080/dominion/dominion", { name:"Naam", age:25, counter: 100 } )
+		.done(function(data) {
+			//$("#TheTextBoxer").val(data.count);
+			alert( "success" );
+			console.log(data);
+		})
+		.fail(function() {
+			var msg = arguments[0] || "";
+			if(msg !== "") msg = msg.description;
+			alert( "Fail\n"  + error);
+			
+		});*/
+		$.ajax({
+			type: "POST",
+			url: "http://localhost8080/dominion/dominion", 
+			data: JSON.stringify({ name: "Naam", age:25, counter: 100 }),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(){alert("ok");}
+		});
+	});
+});
+
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<job>
+	<script language="JScript" src="lib\json3.js"></script>
+	<script language="JScript" src="lib\import.js"></script>
+	<script language="JScript">
+<![CDATA[
+
+var host = WScript.FullName;
+if (host.substr(host.length - 11).toUpperCase() != "CSCRIPT.EXE") {
+	WScript.Echo("Please run this script with cscript.exe instead of wscript.");
+	WScript.Quit();
+}
+
+var config = loadJSON("cardinfo.json");
+for(var i = 0; i < config.length; i++)
+	for(var j = 0; j < config[i].items.length; j++)
+		WScript.Echo(config[i].items[j].name);
+
+]]>
+	</script>
+ </job>

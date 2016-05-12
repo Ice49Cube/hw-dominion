@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Save as UTF-8! -->
+	<meta charset="UTF-8" />
+	<title>Game GUI Template</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+</head>
+<body>
+	<pre>Kunnen al code voorzien om,
+	
+  * Eén game object te maken, deze houd de STATE van de game bij
+  * Speler objecten te kunnen aanmaken, deze houden de status(STATE) van een speler bij
+  * Eventueel één view object te maken, deze bevat alle functies om het scherm up te daten EN ontvangt de events van de GUI
+    (eventueel mag dit view object samen in het game object)</pre>
+
+	<div id="screenHome" class="screen">
+		<button id="buttonAddPlayer">Add player</button><br/>
+		<button id="buttonStartGame">Start game</button> <!-- (continue game niet vergeten) -->
+	</div>
+	<div id="screenTwo" class="screen">
+		<span id="result">Hier komt het resultaat</span>
+	</div>
+	
+	<!-- volgorde maakt niet uit -->
+	<!-- JSLint gebruiken! -->
+	<!-- JSDoc gebruiken! -->
+	<script type="text/javascript" src="assets/js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="assets/js/dominion.player.js"></script>
+	<script type="text/javascript" src="assets/js/dominion.view.js"></script>
+	<script type="text/javascript" src="assets/js/dominion.game.js"></script>
+	<script type="text/javascript" src="assets/js/dominion.controller.js"></script>
+	<!-- dit moet dan wel onderaan -->
+	<script type="text/javascript">
+Game.initialize();
+	</script>
+</body>
+</html>

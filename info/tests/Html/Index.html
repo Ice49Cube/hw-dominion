@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" id="css">
+    <title>Dominion</title>
+</head>
+<body>
+<header>
+
+</header>
+
+<div id="Container">
+
+    <div id="Initial" class="Screen">
+        <img src="images/LogoSchaduw.png" alt="Logo" title="Logo">
+        <a id="New" href="#"><img src="images/NewGame.png" alt="New game" title="New game"></a>
+        <a id="Continue" href="#"><img src="images/Continue.png" alt="Continue" title="Continue"></a>
+        <a id="Highscores" href="#"><img src="images/Highscores.png" alt="Highscores" title="Highscores"></a>
+    </div>
+
+
+    <div id="NewGame" class="Screen">
+        <img src="images/NewGame.png" alt="New game" title="New game">
+        <a id="2P" href="#">2 players</a>
+        <a id="3P" href="#">3 players</a>
+        <a id="4P" href="#">4 players</a>
+    </div>
+
+    <div id="ContinueGame" class="Screen">
+        <img src="images/Continue.png" alt="Continue" title="Continue">
+        <h2>Enter your game ID:</h2>
+        <input type="text" id="GameId" autofocus size="40%">
+        <a href="#">Continue game </a>
+    </div>
+
+    <div id="Scores" class="Screen">
+        <img src="images/Highscores.png" alt="Highscores" title="Highscores">
+        <ol>
+            <li><h3>Jaan</h3> 99999999999999</li>
+            <li><h3>Wout</h3> 99999999999999</li>
+        </ol>
+    </div>
+
+    <div id="GameInfo" class="Screen">
+        <h1>Enter your BankDetails</h1>
+        <p>
+        <h2>Player 1: </h2>
+        <input type="text" id="Player1" autofocus size="20%">
+        </p>
+
+        <p>
+        <h2>Player 2: </h2>
+        <input type="text" id="Player2" autofocus size="20%">
+        </p>
+
+        <div id="Player3Box">
+            <h2>Player 3: </h2>
+            <input type="text" id="Player3" autofocus size="20%">
+        </div>
+
+        <div id="Player4Box">
+            <h2>Player 4: </h2>
+            <input type="text" id="Player4" autofocus size="20%">
+        </div>
+
+        <a id="GameSettings" href="#">GameSettings</a>
+
+        <a id="StartNewGame" href="#" onclick="playSound();" class="playSound">Start Game</a>
+    </div>
+
+    <div id="Settings" class="Screen">
+        <h1>Settings</h1>
+        <h2>Presets:</h2>
+        <select required="required">
+            <option value="1">Preset1</option>
+            <option value="2">Preset2</option>
+            <option value="3">Preset3</option>
+        </select>
+
+        <a id="Random" href="#">Random</a>
+    </div>
+
+    <div id="IdScreen" class="Screen">
+        <h1>Your game-ID</h1>
+        <h2>Save this code somewhere</h2>
+        <a id="IdOk" href="#">Ok</a>
+    </div>
+
+    <div id="TheGame">
+            <div id="ActionCards" class="ZoomAvailable">
+                <div id="ActionCard1" title="Spy"> <span id="ActionCard1Amount">10</span> <span id="ActionCard1Coins">4</span></div>
+                <div id="ActionCard2" title="Thief"> <span id="ActionCard2Amount"> 9</span> <span id="ActionCard2Coins">6</span></div>
+                <div id="ActionCard3" title="Moneylender"> <span id="ActionCard3Amount">10</span> <span id="ActionCard3Coins">2</span></div>
+                <div id="ActionCard4"> <span id="ActionCard4Amount">10</span> <span id="ActionCard4Coins">5</span></div>
+                <div id="ActionCard5"> <span id="ActionCard5Amount">7</span> <span id="ActionCard5Coins">6</span></div>
+                <div id="ActionCard6"> <span id="ActionCard6Amount">10</span> <span id="ActionCard6Coins">3</span></div>
+                <div id="ActionCard7"> <span id="ActionCard7Amount">5</span> <span id="ActionCard7Coins">2</span></div>
+                <div id="ActionCard8"> <span id="ActionCard8Amount">10</span> <span id="ActionCard8Coins">4</span></div>
+                <div id="ActionCard9"> <span id="ActionCard9Amount">6</span> <span id="ActionCard9Coins">5</span></div>
+                <div id="ActionCard10" ><span id="ActionCard10Amount">10</span> <span id="ActionCard10Coins">3</span></div>
+            </div>
+
+            <div id="TreasureCards" class="ZoomAvailable">
+                <div id="Gold" title="Gold"></div>
+                <div id="Silver" title="Silver"></div>
+                <div id="Copper" title="Copper"></div>
+                <div id="Curse" title="Curse"></div>
+            </div>
+
+            <div id="PointCards" class="ZoomAvailable">
+                <div id="Province" title="Province"></div>
+                <div id="Duchy" title="Duchy"></div>
+                <div id="Estate" title="Estate"></div>
+            </div>
+        <div id="CardZoom">
+
+        </div>
+
+        <div ID="CardZoomBackground">
+
+        </div>
+
+        <div id="Hand">
+            <div id="Card1" class="hvr-float"></div>
+            <div id="Card2" class="hvr-float"></div>
+            <div id="Card3" class="hvr-float"></div>
+            <div id="Card4" class="hvr-float"></div>
+            <div id="Card5" class="hvr-float"></div> <!-- LOL -->
+        </div>
+
+        <div id="EndTurn" class="options">
+            End turn
+        </div>
+
+        <div id="PlayTreasures" class="options">
+            Play Treasures
+        </div>
+
+        <div id="Actions" class="counter">
+            Actions: <span id="ActionCount">1</span>
+        </div>
+
+        <div id="Buys" class="counter">
+            Buys: <span id="BuyCount">3</span>
+        </div>
+
+        <div id="Coins" class="counter">
+            Coins: <span id="CoinCount">2</span>
+        </div>
+
+        <div id="DebugDiv">
+
+        </div>
+    </div>
+
+	<!-- Wees consistent. Ik zie class namen met camelCase, hoofdletter en dash ... -->
+    <div class="topcorner">
+        <a id="Back" href="#"><img src="images/Back.png" title="Back" alt="Back"></a>
+    </div>
+
+    <div class="bottomcorner">
+        <a id="Style" href="#"><img src="images/Style.png" title="Style" alt="Style"></a>
+    </div>
+</div>
+
+<!-- online bestanden werken enkel online, daar kan je dus niet offline aan werken -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<!-- komt ook in assets -->
+<script type="text/javascript" src="JQuery/JQuery.js"></script>
+<script type="text/javascript" src="JQuery/console.js"></script>
+<!-- online bestanden werken enkel online, daar kan je dus niet offline aan werken -->
+<link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
+</body>
+</html>

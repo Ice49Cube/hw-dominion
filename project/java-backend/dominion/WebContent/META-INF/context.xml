@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <!-- Specify a JDBC datasource -->
+    <!-- Resource name="jdbc/testdb" auth="Container"
+        type="javax.sql.DataSource" username="DB_USERNAME" password="DB_PASSWORD"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        url="jdbc:oracle:thin:@xxx:1525:dbname"
+        maxActive="10" maxIdle="4" / -->
+	<!--  
+	see https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-configuration-properties.html
+	url="jdbc:mysql://localhost:3306/dominion?autoReconnect=false&amp;useSSL=false&amp;profileSQL=true "
+	-->        
+	<Resource name="jdbc/dom" auth="Container"
+        type="javax.sql.DataSource" username="root" password=""
+        driverClassName="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://localhost:3306/dominion?useSSL=false&amp;autoReconnect=true"
+        maxActive="10" maxIdle="4" />
+</Context>

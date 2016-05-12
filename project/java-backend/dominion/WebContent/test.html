@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--
+	 
+	Run client from php storm or update these sources.
+	
+    Removed the client from here to prevent confusion.
+    
+	 -->
+    <meta charset="UTF-8">
+    <title>Dominion</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+    <style type="text/css">
+
+div, label, pre, textarea {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 5px auto;
+}
+
+button {
+    margin-left: 10px;;
+}
+
+div {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+h1 {
+	text-align: center;
+	font-size: 200%;
+	font-weight: bold;
+}
+
+p {
+	margin: 5px 10px;
+}
+
+pre {
+	background-color: #EEE;
+	overflow-y: scroll;	
+	overflow-y: hidden;
+}
+
+hr.hide {
+	display: none;
+}
+
+    </style>
+</head>
+<body>
+	<h1>Server test page...</h1> 
+	<hr/>
+	
+	<p>Enter the method and some JSON to test the server...</p>
+    <label>Method: <input type="text" id="method" value="testServer"/></label>
+	<textarea rows="15" id="data">{&quot;code&quot;:200,&quot;success&quot;:true}</textarea>
+    <button id="invoke">Test</button>
+    <hr/>
+
+	<div id="status"></div>
+    <pre id="result"></pre>
+    <hr class="hide"/>
+    
+    <pre id="log"></pre>
+    <hr class="hide"/>
+    
+    <p>Start a game, method: <button>startGame</button></p>
+    Data: <pre>{
+    "playerNames":["one","two","three"],
+    "cardSet":""
+}</pre>
+	<hr/>   
+
+    <p>Continue a game, method: <button>startGame</button></p>
+    Data: <pre>{
+    "code": enter_the_id_here,
+}</pre>
+	<hr/>   
+
+    <p>Test play action,  method: <button>playAction</button></p>
+    Data: <pre>{
+"cancel": false,
+"cardId": 1,
+"gameId": 1,
+"playerId": 1,
+"data": {"hello":"world"}
+}</pre>
+	<hr/>   
+
+	<script type="text/javascript" src="assets/js/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="assets/js/dom.routing.js"></script>
+    <script type="text/javascript">
+
+function Application()
+{
+    "use strict";
+
+    var elements = {
+        method: $('#method'),
+        json: $('#data'),
+        status: $('#status'),
+        result: $('#result'),
+        log: $('#log')
+    };
+
+    var onError = function (jqXHR) {
+        elements.status.css('color', 'red').html('Error');
+       	elements.result.text(jqXHR.responseText);
+    };
+
+    var onMethodError = function (data, statusCode) {
+        elements.status.css('color', 'red').html('Error');
+       	elements.result.text(JSON.stringify(data));
+    };
+
+    var onSuccess = function (data) {
+        elements.status.css('color', 'green').html('Success, data: ');
+        elements.result.text(JSON.stringify(data));
+    };
+        
+	// Interface for the routing
+    var client = {
+        onError: onError
+    };
+
+    // Configuration for the routing
+    var config = {
+	    timeout: 3000,
+	    url: location.protocol + "//" + location.host + "/Server"
+	};
+
+    var logging = true;
+    // Initialize routing
+    window.routing.initialize(client, config, logging);
+
+    $('button:not(:first)').on("click", function(){
+    	var $this =$(this);
+    	elements.method.val($this.text());
+    	elements.json.val($this.parent().next().text());
+    });
+    
+    // Call server with JSON code
+    $('#invoke').on('click', function() {
+    	$('hr.hide').show();
+   		elements.log.html('');
+   		elements.result.html('');
+   		elements.status.html('');
+        var jsonObject;
+        try {
+        	jsonObject = JSON.parse(elements.json.val());
+        } catch(e) {
+        	onError();
+        	elements.log.append(e.toString());
+        	return;
+        }
+        var method = elements.method.val();
+        client[method + "Success"] = onSuccess;
+        client[method + "Failed"] = onMethodError;
+        routing.invoke(method, jsonObject);
+    });
+
+    // Chain hook console.log
+    console.log = function (ilog) {
+    	return function() {
+    		var result = ilog.apply(console, arguments);
+    		elements.log.append(Array.prototype.slice.call(arguments).join(', ') + "\n");
+    		return result;
+    	};
+    }(console.log);
+}
+
+$(Application);
+
+    </script>
+</body>
+</html>

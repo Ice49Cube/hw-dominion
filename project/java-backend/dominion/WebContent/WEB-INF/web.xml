@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>dominion</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>test.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description>Dominion AJAX Servlet</description>
+    <display-name>Server</display-name>
+    <servlet-name>Server</servlet-name>
+    <servlet-class>dominion.Server</servlet-class>
+    <init-param>
+    	<param-name>server-demo-parameter</param-name>
+    	<param-value>server-demo-parameter-value</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Server</servlet-name>
+    <url-pattern>/Server</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>CorsFilter</display-name>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>dominion.CorsFilter</filter-class>
+       <init-param>
+    	<param-name>domains</param-name>
+    	<param-value>*</param-value>
+    </init-param> 
+  </filter>
+  <filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <url-pattern>/Server</url-pattern>
+  </filter-mapping>
+</web-app>

@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<job>
+	<resource id="template"><![CDATA[
+public class [CLASSNAME] implements ICard {
+
+
+	public
+}	
+	]]></resource>
+	<resource id="head"><![CDATA[]]></resource>
+	<resource id="body"><![CDATA[]]></resource>
+	<resource id="foot"><![CDATA[]]></resource>
+	<script language="JScript" src="lib\json3.js"></script>
+	<script language="JScript" src="lib\import.js"></script>
+	<script language="JScript">
+<![CDATA[
+
+var filters = [];
+var head = getResource("head");
+var body = getResource("body");
+var foot = getResource("foot");
+
+filters.push(function (data, group, card) {
+	return data.replace(/\[CLASSNAME\]/g, formatCasing(card.name));
+});
+
+filters.push(function (data, group, card) {
+	return data.replace(/\[HEAD\]/g, head);
+});
+
+filters.push(function (data, group, card) {
+	return data.replace(/\[BODY\]/g, body);
+});
+
+filters.push(function (data, group, card) {
+	return data.replace(/\[FOOT\]/g, foot);
+});
+
+function main()
+{
+	var template = getResource("template");
+	var config = loadJSON("cardinfo.json");
+	var fso = new ActiveXObject("Scripting.FileSystemObject");
+	if(!fso.FolderExists("cards"))
+		fso.CreateFolder("cards");
+	var folder = fso.GetFolder("cards").path;
+	var card, group, copy, filename, i, j, k;
+	for(i = 0; i < config.length; i++) {
+		group = config[i];
+		for(j = 0; j < group.items.length; j++) {
+			card = group.items[j];
+			copy = template;
+			for(k = 0; k < filters.length; k++) {
+				copy = filters[k](copy, group, card);
+			}
+			//WScript.Echo(copy);
+			WScript.Echo(fso.BuildPath(folder, formatCasing(card.name) + ".java"));
+		}
+	}
+}
+
+function formatCasing(name)
+{
+	name = name.split("_");
+	for(var i = 0; i < name.length; i++)
+		name[i] = name[i].substr(0, 1).toUpperCase() + name[i].substr(1);
+	return name.join("");
+}
+
+main();
+]]>
+	</script>
+</job>

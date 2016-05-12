@@ -1,0 +1,7 @@
+{
+    "_method_": "THIS METHOD DOES NOT EXIST",
+    "someString": "valid string",
+    "someBool": true,
+    "empty": null,
+    "someNumber": 3.14
+}

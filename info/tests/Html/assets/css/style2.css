@@ -1,0 +1,209 @@
+img {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+
+body {
+    font-family: 'Muli', sans-serif;
+    background-image: url("../../images/BG.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+}
+
+a {
+    font-size: 400%;
+    display: block;
+    margin-bottom: 8%;
+    margin-left:   35%;
+    margin-right: 35%;
+
+    color:white;
+    text-align: center;
+    text-decoration: none;
+
+    border-style: solid;
+    border-radius: 15px;
+    border-width: medium;
+
+    background-color: rgba(109,120,109,0.4);
+    border-color: #6D786D;
+
+    padding-bottom:1% ;
+    padding-top:1% ;
+}
+
+a:hover {
+    font-weight:bold;
+    background-color: rgba(109,120,109,0.6);
+    color:white;
+}
+
+#GameSettings, #Random {
+    font-size: 200%;
+    margin-bottom: 8%;
+    margin-left: 39%;
+    margin-right: 39%;
+    padding-top: 2%;
+}
+
+a:last-child {
+    margin-bottom: 0%;
+}
+
+
+
+h1 {
+    text-align: center;
+    font-family: 'Muli', sans-serif;
+    margin-bottom: 5%;
+    padding-top: 1%;
+    font-size: 600%;
+}
+
+h2 {
+    font-size: 200%;
+    color:white;
+}
+
+h3 {
+    color:black;
+    font-size: 300%;
+}
+
+#Play, #Scores, #NewGame, #ContinueGame, #GameInfo, #IdScreen, #Player3Box, #Player4Box, #Settings, #TheGame {
+    display: none;
+    text-align: center;
+}
+
+#Settings h2 {
+    text-align: left;
+    display: inline-block;
+    margin-left: 0%;
+    margin-right: 2%;
+}
+
+#settings option {
+    text-align: left;
+    display: inline-block;
+}
+#Scores {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+
+#Back {
+    font-size: 200%;
+    display: inline-block;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-right: 0;
+}
+
+#Style{
+    font-size: 200%;
+    display: inline-block;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-left: 0;
+}
+#GameInfo h2 {
+    text-align: left;
+    display: inline-block;
+}
+
+#GameInfo input{
+    display: inline-block;
+    font-size: 130%;
+    margin-bottom:2%;
+}
+
+#IdScreen h2{
+    margin-bottom: 4%;
+}
+
+
+h3 + p {
+    color: black;
+}
+
+li {
+    list-style-position: inside;
+    color: black;
+    font-size: 200%;
+    display: inline;
+}
+
+ol {
+    counter-reset: my-badass-counter;
+    display: inline;
+}
+
+li h3 {
+    color:white;
+}
+
+
+li:before {
+    margin-top: 20px;
+    content: counter(my-badass-counter);
+    counter-increment: my-badass-counter;
+    display: block;
+    font-size: 100%;
+    border-top: solid;
+    border-top-color: white;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+
+li:nth-child(1):before {
+    border-top: none;
+}
+
+div {
+    word-wrap: break-word;
+}
+
+.topcorner {
+    position: absolute;
+    top: 1%;
+    right: 3%;
+}
+
+.bottomcorner {
+    position: absolute;
+    bottom: 1%;
+    left: 0.6%;
+}
+
+#ContinueGame input {
+    padding-top: 2%;
+    margin-bottom: 4%;
+    height:35px;
+    font-size: 150%;
+}
+
+select {
+    font-size: 150%;
+    background-color: transparent;
+    color:white;
+}
+
+option{
+    background-color: black;
+}
+
+
+
+/*LOL*/

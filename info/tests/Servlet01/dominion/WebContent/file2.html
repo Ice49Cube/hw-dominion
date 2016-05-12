@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>Test Session</title>
+	<meta rel="stylesheet" type="text/css" href="reset.css" />
+	<meta rel="stylesheet" type="text/css" href="screen.css" />
+</head>
+<body>
+
+	<button id="TheButtHurtz">Klikt ier ne keer als ge durft</button>
+	&nbsp;
+	<input id="TheTextBoxer" type="text" value=""/>
+
+	<script 
+		src="https://code.jquery.com/jquery-2.2.2.min.js"
+		integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+		crossorigin="anonymous"
+		type="text/javascript">
+	</script>
+
+	<script type="text/javascript">
+	
+function testSession()
+{
+	$.ajax("http://localhost:8080/dominion/dominion")
+		.done(function(data) {
+			$("#TheTextBoxer").val(data.count);
+			alert( "success" );
+			console.log(data);
+			
+		})
+		.fail(function() {
+			var msg = arguments[0] || "";
+			if(msg !== "") msg = msg.description;
+			alert( "Fail\n"  + error);
+		});
+}
+
+$(document).ready(function() {
+	console.log("the document is ready");
+	
+	$("#TheButtHurtz").on("click", testSession);
+	
+});
+	
+	</script>
+	<!--<script src="" type="text/javascript"></script>-->
+
+</body>
+</html>

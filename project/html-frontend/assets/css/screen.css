@@ -1,0 +1,359 @@
+/*************** GLOBAL ELEMENTS ***************/
+@import url(https://fonts.googleapis.com/css?family=Uncial+Antiqua);
+@import url(https://fonts.googleapis.com/css?family=Muli);
+
+* {
+    /* No background selection */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+html {
+    /* Als je rem gebruikt hangt dit af van de waarde van de root...
+    Zie: https://css-tricks.com/almanac/properties/f/font-size/
+    (Ik veronderstel dat men deze waarde dus best kan instellen aan de hand van media queries...) */
+    font-size: 11px;
+}
+
+html, body {
+    background: black url("../images/background2.jpg") no-repeat center center fixed;
+    color: lightgoldenrodyellow;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Uncial Antiqua', cursive, 'Muli', sans-serif;
+    /* Maakt van de body een nette container. "html, body" voor bepaalde browsers... */
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+h1, h2 {
+    background: transparent none top center/auto 100% no-repeat;
+}
+
+h2 {
+    height: 20%;
+
+}
+h3{
+    font-size:80px;
+}
+
+
+/*************** GLOBAL CLASSES AND PSEUDO'S ***************/
+
+a, a:active, a:hover, a:link, a:visited {
+    /* Remove link decoration and states. */
+    color: lightgoldenrodyellow;
+    text-align: center;
+    text-decoration: none;
+}
+
+div.view {
+    /* Each "view" div applies the view class for full screen size and to be hidden at startup. */
+    display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+a.img-button {
+    /* Images scale down with the height, so buttons must be wide enough. Else swap "auto 100%". */
+    background: transparent none center center/auto 100% no-repeat;
+}
+
+a.button {
+    background-color: rgba(109, 120, 109, 0.4);
+    border: medium solid #6D786D;
+    border-radius: 15px;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 1ex;
+}
+
+a.back {
+    background: transparent url(../images/back.png) right center/auto 100% no-repeat;
+    display: inline-block;
+    height: 8%;
+    position: absolute;
+    right: -2%;
+    top: -1%;
+    width: 15%;
+    min-width: 140px;
+}
+
+.no-title {
+    /* Kellum-hack on level 1 and 2 headers, image instead of text! (or override with class name) */
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+
+/*************** HOME VIEW SPECIFIC ***************/
+
+#divHome h2 {
+    background-image: url(../images/logo_schaduw.png);
+}
+
+#divHome a {
+    display: block;
+    height: 13%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    min-width: 400px;
+    width: 400px;
+}
+
+#divHome a.new-game {
+    background-image: url(../images/new_game.png);
+}
+
+#divHome a.continue-game {
+    background-image: url(../images/continue_game.png);
+}
+
+#divHome a.view-high-scores {
+    background-image: url(../images/view_high_scores.png);
+}
+
+/*************** NEW GAME VIEW SPECIFIC ***************/
+
+#divNewGame h2 {
+    background-image: url(../images/new_game.png);
+}
+
+#divNewGame .players2 {
+    background-image: url(../images/2Players.png);
+}
+
+#divNewGame .players3 {
+    background-image: url(../images/3Players.png);
+}
+
+#divNewGame .players4 {
+    background-image: url(../images/4Players.png);
+}
+
+#divNewGame a {
+    display: block;
+    height: 13%;
+    margin-bottom: 10ex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+#divNewGame h2 {
+    margin-bottom: 5ex;
+}
+/*************** CONTINUE GAME VIEW SPECIFIC ***************/
+
+#divContinueGame h2 {
+    background-image: url(../images/continue_game.png);
+}
+
+#divContinueGame input[type=text] {
+    font-size: 3rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+}
+
+#divContinueGame label {
+    text-align: center;
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1ex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    line-height: 8rem;
+}
+
+#divContinueGame a {
+    display: block;
+    margin-bottom: 1ex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+/*************** HIGH SCORES VIEW SPECIFIC ***************/
+
+#divHighScores h2 {
+    background-image: url(../images/view_high_scores.png);
+}
+
+#divHighScores div {
+    background-color: rgba(109, 120, 109, 0.4);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   /* width: 60%;*/
+    height: 80%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#divHighScores div p {
+    display: block;
+    margin-bottom: 1ex;
+    font-size: 3rem;
+    width: 100%;
+    white-space: nowrap;
+}
+
+#divHighScores div p span {
+    display: inline-block;
+    width: 50%;
+    text-align: right;
+    padding-right: 1%;
+}
+
+/*************** GAME INFO VIEW SPECIFIC ***************/
+
+#divGameInfo h2 { background-image: url(../images/new_game.png); }
+
+#divGameInfo div {
+    display: block;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#divGameInfo a {
+    display: inline-block;
+    margin: 1ex;
+}
+
+#divGameInfo label {
+    font-size: 3rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 50%;
+    line-height: 6rem;
+}
+
+#divGameInfo input[type=text] {
+    font-size: 3rem;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+/*************** GAME INFO VIEW SPECIFIC ***************/
+
+/*
+@media screen and (max-height: 860px) {
+    h2 {
+        height: 15%;
+    }
+}
+*/
+
+#divGameInfo div{
+    height: 13%;
+}
+#divGameInfo div a{
+    height: 100%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    min-width: 400px;
+    width: 400px;
+}
+
+
+#divGameInfo div a.start-game{
+    background-image: url("../images/StartMini.png");
+}
+
+#divGameInfo div a.game-settings{
+    background-image: url("../images/Settings.png");
+
+}
+/*************** GAME ID VIEW SPECIFIC ***************/
+
+#divGameId h2 {
+    background-image: url(../images/GameID.png);
+}
+
+#divGameId a.ok {
+    background-image: url(../images/OK.png);
+}
+
+#divGameId a {
+    display: block;
+    height: 13%;
+    margin-bottom: 10ex;
+    margin-left: auto;
+    margin-right: auto;
+    width:50%;
+}
+
+#divGameId label {
+    text-align: center;
+    display: block;
+    line-height: 6rem;
+    font-size: 3rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#divGameId #gameId {
+    font-size: 8rem;
+    margin-top: 2ex;
+    margin-bottom: 2ex;
+}
+
+/*************** GAME SETTINGS VIEW SPECIFIC ***************/
+
+#divGameSettings h2{
+    background-image: url(../images/Settings.png)
+}
+
+#divGameSettings .random-set{
+    background-image: url("../images/Random.png");
+    height:8%;
+}
+
+/*************** GAME VIEW SPECIFIC ***************/
+
+#divGameSettings{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#divGameSettings h3{
+    margin-bottom: 0.5%;
+}
+
+#divGameSettings a {
+    margin-top: 1.5%;
+    display: block;
+    font-size: 50px;
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+
+

@@ -1,0 +1,53 @@
+[
+	{
+		"type": "treasure",
+		"items": [
+			{ "cost": 6, "action": false, "coin": true, "value": 3, "name": "gold"   },
+			{ "cost": 3, "action": false, "coin": true, "value": 2, "name": "silver" },
+			{ "cost": 0, "action": false, "coin": true, "value": 1, "name": "copper" }
+		],
+		"countBehaviorName": "TreasureCardsCountBehavior"
+	},
+	{
+		"type": "kingdom",
+		"items": [
+		
+			{ "cost": 6, "action": true, "coin": false, "value": 0, "name": "adventurer" },
+			{ "cost": 4, "action": true, "coin": false, "value": 0, "name": "bureaucrat" },
+			{ "cost": 2, "action": true, "coin": false, "value": 0, "name": "cellar" },
+			{ "cost": 3, "action": true, "coin": false, "value": 0, "name": "chancellor" },
+			{ "cost": 2, "action": true, "coin": false, "value": 0, "name": "chapel" },
+			{ "cost": 5, "action": true, "coin": false, "value": 0, "name": "council_room" },
+			{ "cost": 4, "action": true, "coin": false, "value": 0, "name": "feast" },
+			{ "cost": 5, "action": true, "coin": false, "value": 0, "name": "festival" },
+			{ "cost": 4, "action": false,"coin": false, "value": 0, "name": "gardens"},
+			{ "cost": 5, "action": true, "coin": false, "value": 0, "name": "laboratory" },
+			{ "cost": 5, "action": true, "coin": false, "value": 0, "name": "library" },
+			{ "cost": 5, "action": true, "coin": false, "value": 0, "name": "market" },
+			{ "cost": 4, "action": true, "coin": false, "value": 0, "name": "militia" },
+			{ "cost": 5, "action": true, "coin": false, "value": 0, "name": "mine" },
+			{ "cost": 2, "action": true, "coin": false, "value": 0, "name": "moat" },
+			{ "cost": 4, "action": true, "coin": false, "value": 0, "name": "moneylender" },
+			{ "cost": 4, "action": true, "coin": false, "value": 0, "name": "remodel" },
+			{ "cost": 4, "action": true, "coin": false, "value": 0, "name": "smithy" },
+			{ "cost": 4, "action": true, "coin": false, "value": 0, "name": "spy" },
+			{ "cost": 4, "action": true, "coin": false, "value": 0, "name": "thief" },
+			{ "cost": 4, "action": true, "coin": false, "value": 0, "name": "throne_room" },
+			{ "cost": 3, "action": true, "coin": false, "value": 0, "name": "village" },
+			{ "cost": 5, "action": true, "coin": false, "value": 0, "name": "witch" },
+			{ "cost": 3, "action": true, "coin": false, "value": 0, "name": "woodcutter" },
+			{ "cost": 3, "action": true, "coin": false, "value": 0, "name": "workshop" }
+		],
+		"countBehaviorName": "KingdomCardsCountBehavior"
+	},
+	{
+		"type": "victory",
+		"items": [
+			{ "cost": 8, "action": false, "coin": false, "value": 0, "name": "province" },
+			{ "cost": 5, "action": false, "coin": false, "value": 0, "name": "duchy" },
+			{ "cost": 2, "action": false, "coin": false, "value": 0, "name": "estate" },
+			{ "cost": 0, "action": false, "coin": false, "value": 0, "name": "curse", "countBehaviorName": "CurseCardCountBehavior" }
+		],
+		"countBehaviorName": "VictoryCardsCountBehavior"
+	}
+]

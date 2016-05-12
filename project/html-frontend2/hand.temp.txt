@@ -1,0 +1,13 @@
+<div class="player hand">
+    <div>
+        <div class="fx-card9 gold"></div>
+        <div class="fx-card9 silver"></div>
+        <div class="fx-card9 chapel"></div>
+        <div class="fx-card9 militia"></div>
+        <div class="fx-card9 throne-room"></div>
+        <div class="fx-card9 thief"></div>
+        <div class="fx-card9 silver"></div>
+        <div class="fx-card9 gold"></div>
+        <div class="fx-card9 gold"></div>
+    </div>
+</div>

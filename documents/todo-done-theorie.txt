@@ -1,0 +1,39 @@
+done
+	teamverdeling (iedereen)
+	onderzoek spelregels (iedereen)
+	wireframes (iedereen)
+	setup toolchain (iedereen)
+	basic json program (maysam)
+	first screens of html (wout en jaan)
+	basic classes, first drafts, prepare use cases (michael)
+	tool gemaakt om images te downloaden (michael)
+	tool gemaakt voor images te resizen (michael)
+
+todo
+	ms project
+	verliest servlet state? zoja -> session testen
+
+OPMERKING!!! 
+
+	als iemand langer dan een af te spreken tijd, bijvoorbeeld één uur, aan iets werkt en het lukt niet dan meld deze dit
+	
+theorie
+	de client en server praten met elkaar
+	de client krijg commando's binnen van, en stuurt acties terug naar, de server
+	het server object "praat" met het game object
+		commando's komen binnen van het server object en worden vertaald voor het game object
+		het game object bekijkt de state, behandelt de huidige actie en stuurt informatie door via het server object
+	het object game kan alles (kaarten op stapels toevoegen etc)
+	een kaart object kan het game object manipuleren
+	
+	Note: 2 kanten hebben state, 
+		de server MOET binnenkomende data controleren om zeuren tegen te gaan
+		de client laat enkel huidig mogelijke acties toe (een bot kan deze omzeilen als de server ook geen controle doet)
+	Client: Javascript en HTML
+	Server: Java Servlet
+	Praat met, manipuleert: Een Interface
+	Game object kan alles: "Facade pattern"
+	Kaarten met verschillend gedrag: "Behavior pattern"
+	
+	
+	

@@ -1,0 +1,317 @@
+/*************** HAND ***************/
+
+
+#Hand{
+    position: absolute;
+    bottom: 1%;
+    left:25% ;
+    right:25%;
+    width: 960px;
+    height:290px;
+}
+
+#Hand *{
+    display: inline-block;
+    width: 172px;
+    height:275px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(109,120,109,0.4);
+    border-radius: 25px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+/*************** ACTION CARDS ***************/
+
+.row {
+    display: table-row !important;
+}
+
+#ActionCards .row > * {
+    display: table-cell !important;
+    box-sizing: border-box;
+}
+
+#ActionCards {
+    /*position: absolute;
+
+    top: 1%;
+    left:25%;
+    right:25%;*/
+    display: table;
+    margin: 1% auto 0 auto;
+    width: 960px;
+    height:290px;
+    border-spacing: 5px;
+}
+
+#ActionCards .row * {
+    width: 20%;
+    height: 150px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(109,120,109,0.4);
+    margin:0;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+#ActionCards span:first-of-type{
+    float:right;
+    background-color: red;
+    font-size: 120%;
+    width: 45px;
+    height: 20px;
+    text-align: center;
+}
+
+#ActionCards span:nth-child(2){
+    background-color: yellow;
+    font-size: 120%;
+    width: 45px;
+    float: left;
+    height: 20px;
+    text-align: center;
+}
+
+#ActionCard1{
+    background-image: url("../images/cards/spy.jpg");
+    background-size: cover;
+}
+
+.hvr-float {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+    -webkit-transform: translateY(-60px);
+    transform: translateY(-60px);
+}
+
+/*************** OPTIES ***************/
+
+#EndTurn{
+    bottom: 50%;
+    right: 50px;
+}
+
+#EndTurn:hover{
+    color: yellow;
+}
+
+
+#PlayTreasures{
+    bottom: 35%;
+    right: 50px;
+    font-size: 29px;
+}
+
+#PlayTreasures:hover{
+    color: yellow;
+}
+
+.counter{
+    line-height: 60px;
+    height: 60px;
+    width:250px;
+    position: absolute;
+    font-size: 40px;
+    color:white;
+}
+
+.counter span{
+    color:yellow;
+}
+
+/*************** FEEDBACK ***************/
+
+#Actions{
+    bottom: 50%;
+    left: 50px;
+}
+
+#Buys{
+    bottom: 42%;
+    left: 50px;
+}
+
+#Coins{
+    bottom: 34%;
+    left: 50px;
+}
+
+/*************** CARD ZOOM ***************/
+
+#CardZoom{
+    margin-left: 40%;
+    margin-top: 8%;
+    height: 603px;
+    width:390px;
+    background-size: cover;
+    position: absolute;
+    z-index: 10;
+    border-radius: 25px;
+    display: none;
+    top: 0px;
+    left: 0px;
+}
+
+#CardZoomBackground{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(77,77,77,0.9);
+    z-index: 9;
+    display: none;
+    top: 0px;
+    left: 0px;
+}
+
+/*************** PLAYGROUND ***************/
+
+#Playground{
+    display: inline-block;
+    margin-left: 25%;
+    margin-top: 20%;
+    height:321px;
+    width:46%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#Playground *{
+    display: inline-block;
+    width: 172px;
+    height:275px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(109,120,109,0.4);
+    border-radius: 25px;
+    margin-top: 23px;
+    margin-bottom: 23px;
+
+}
+
+#PlaygroundCard {
+    background-image: url("../images/cards/copper.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/*************** TREASURES + POINTS ***************/
+
+#TreasureCards {
+    position: absolute;
+    top: 1%;
+    right:1%;
+    width: 370px;
+    height:300px;
+}
+
+#TreasureCards div{
+    display: inline-block;
+    width: 147px;
+    height: 180px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(109,120,109,0.4);
+    margin:0;
+    border-radius: 25px;
+}
+
+#PointCards{
+    position: absolute;
+    top: 1%;
+    left:1%;
+    width: 370px;
+    height:300px;
+}
+
+#PointCards div{
+    display: inline-block;
+    width: 147px;
+    height: 180px;
+    border-style: solid;
+    border-width: thin;
+    background-color: rgba(109,120,109,0.4);
+    margin:0;
+    border-radius: 25px;
+}
+
+.Gold {
+    background-image: url(../images/cards/gold.jpg);
+    background-size: cover;
+}
+
+.Silver {
+    background-image: url(../images/cards/silver.jpg);
+    background-size: cover;
+}
+
+.Copper {
+    background-image: url(../images/cards/copper.jpg);
+    background-size: cover;
+}
+
+.Curse {
+    background-image: url(../images/cards/curse.jpg);
+    background-size: cover;
+}
+
+.Province{
+    background-image: url(../images/cards/province.jpg);
+    background-size: cover;
+}
+
+.Duchy{
+    background-image: url(../images/cards/duchy.jpg);
+    background-size: cover;
+}
+
+.Estate{
+    background-image: url(../images/cards/estate.jpg);
+    background-size: cover;
+}
+
+#Options{
+
+}
+
+/*************** DEBUGDIV ***************/
+
+#DebugDiv{
+    height: 280px;
+    width: 500px;
+    border: 1px solid #333;
+    overflow:scroll;
+    position: absolute;
+    bottom: 1%;
+    right: 0.6%;
+    color:white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 20px;
+    font-family: arial, sans-serif;
+}
+
+.options{
+    line-height: 100px;
+    height: 100px;
+    width:250px;
+    position: absolute;
+    font-size: 29px;
+    color:white;
+    text-align: center;
+}

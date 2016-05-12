@@ -1,0 +1,114 @@
+<div class="view game">
+	<div class="deck deck-victory">
+		<figure class="province" data-name="province" data-cost="8">
+			<img src="assets/images/cards/art/province_art.jpg" />
+			<div class="count">12</div>
+			<div class="buy hide"></div>
+			<figcaption class="coin8">province</figcaption>
+		</figure>
+		<figure class="duchy" data-name="duchy" data-cost="5">
+			<img src="assets/images/cards/art/duchy_art.jpg" />
+			<div class="count">12</div>
+			<div class="buy"></div>
+			<figcaption class="coin5">duchy</figcaption>
+		</figure>
+
+		<figure class="estate" data-name="estate" data-cost="2">
+			<img src="assets/images/cards/art/estate_art.jpg" />
+			<div class="count">12</div>
+			<div class="buy"></div>
+			<figcaption class="coin2">estate</figcaption>
+		</figure>
+		<figure class="curse" data-name="curse" data-cost="0">
+			<img src="assets/images/cards/art/curse_art.jpg" />
+			<div class="count">40</div>
+			<div class="buy"></div>
+			<figcaption class="coin0">curse</figcaption>
+		</figure>
+	</div>
+
+	<div class="deck deck-kingdom">
+		<figure class="chancellor" data-name="chancellor" data-cost="4">
+			<img src="assets/images/cards/art/chancellor_art.jpg" />
+			<div class="count">10</div>
+			<div class="buy"></div>
+			<figcaption class="coin4">chancellor</figcaption>
+		</figure>
+		<figure class="mine" data-name="mine" data-cost="5">
+			<img src="assets/images/cards/art/mine_art.jpg" />
+			<div class="count">10</div>
+			<div class="buy"></div>
+			<figcaption class="coin5">mine</figcaption>
+		</figure>
+		<figure class="laboratory" data-name="laboratory" data-cost="5">
+			<img src="assets/images/cards/art/laboratory_art.jpg" />
+			<div class="count">2</div>
+			<div class="buy"></div>
+			<figcaption class="coin5">laboratory</figcaption>
+		</figure>
+		<figure class="market" data-name="market" data-cost="5">
+			<img src="assets/images/cards/art/market_art.jpg" />
+			<div class="count">10</div>
+			<div class="buy"></div>
+			<figcaption class="coin5">market</figcaption>
+		</figure>
+		<figure class="adventurer" data-name="adventurer" data-cost="6">
+			<img src="assets/images/cards/art/adventurer_art.jpg" />
+			<div class="count">10</div>
+			<div class="buy hide"></div>
+			<figcaption class="coin6">adventurer</figcaption>
+		</figure>
+
+		<figure class="chapel" data-name="chapel" data-cost="2">
+			<img src="assets/images/cards/art/chapel_art.jpg" />
+			<div class="count">10</div>
+			<div class="buy"></div>
+			<figcaption class="coin2">chapel</figcaption>
+		</figure>
+		<figure class="bureaucrat" data-name="bureaucrat" data-cost="4">
+			<img src="assets/images/cards/art/bureaucrat_art.jpg" />
+			<div class="count">10</div>
+			<div class="buy"></div>
+			<figcaption class="coin4">bureaucrat</figcaption>
+		</figure>
+		<figure class="throne-room" data-name="throne-room" data-cost="4">
+			<img src="assets/images/cards/art/throne_room_art.jpg" />
+			<div class="count">10</div>
+			<div class="buy"></div>
+			<figcaption class="coin4">throne room</figcaption>
+		</figure>
+		<figure class="moneylender" data-name="moneylender" data-cost="4">
+			<img src="assets/images/cards/art/moneylender_art.jpg" />
+			<div class="count">10</div>
+			<div class="buy"></div>
+			<figcaption class="coin4">moneylender</figcaption>
+		</figure>
+		<figure class="feast" data-name="feast" data-cost="4">
+			<div class="buy"></div>
+			<img src="assets/images/cards/art/feast_art.jpg" />
+			<div class="count">10</div>
+			<figcaption class="coin4">feast</figcaption>
+		</figure>
+	</div><!-- class="deck deck-kingdom" -->
+
+	<div class="deck deck-treasure">
+		<figure class="gold" data-name="gold" data-cost="6">
+			<img src="assets/images/cards/art/gold_art.jpg" />
+			<div class="count">3</div>
+			<div class="buy hide"></div>
+			<figcaption class="coin6">gold</figcaption>
+		</figure>
+		<figure class="silver" data-name="silver" data-cost="3">
+			<img src="assets/images/cards/art/silver_art.jpg" />
+			<div class="count">40</div>
+			<div class="buy"></div>
+			<figcaption class="coin3">silver</figcaption>
+		</figure>
+		<figure class="copper" data-name="copper" data-cost="0">
+			<img src="assets/images/cards/art/copper_art.jpg" />
+			<div class="count">46</div>
+			<div class="buy"></div>
+			<figcaption class="coin0">copper</figcaption>
+		</figure>
+	</div><!-- class="deck deck-treasure" -->
+</div><!-- class="view game" -->

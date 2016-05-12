@@ -1,0 +1,42 @@
+// Some stuff that's been fiddled
+
+// css specificity
+// https://jsfiddle.net/jh2b2b2t/5/
+
+// rotate points
+// https://jsfiddle.net/v9q2kwcu/2/
+
+// hand of cards (not yet finished)
+// https://jsfiddle.net/Le1cpn16/7/
+
+// tristate jquery plugin
+// https://jsfiddle.net/d2suz7jt/1/
+
+// namespace script
+// https://jsfiddle.net/r09f7bz8/6/
+
+
+// Play sound
+$('<audio>').appendTo(document.body).on("todolookforreadyevent", function () {$(this).remove()}).attr('src', 'assets/media/thunder.mp3').get(0).play()
+
+
+card size
+ width:  345px
+ height: 552px
+
+in ascpect ratio it should be
+ width:  200px
+ height: 320px
+
+overlay card code (schould be done with classes, no time)
+    '<div style="position:absolute;left:50%;top:50%;width:345px;height:552px;margin-left:-172px;margin-top:-276px;">' +
+    '<img style="width:100%;height:100%;top:0;left:0;border-radius:20px;" src="' + image + '"/>' +
+    '<div style="position:absolute;bottom:3px;left:3%;width:94%;height:14px;background-color:black;border-radius:10px;"></div>' +
+    '</div>';
+
+radius: r
+origin: cx, cy
+angle:a
+x = cx + r * cos(a)
+y = cy + r * sin(a)
+0..2PI radians

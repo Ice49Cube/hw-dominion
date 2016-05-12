@@ -1,47 +1,109 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
 
-# Folder config file
-Desktop.ini
+################################################################################
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+.recommenders
+.loadpath
+local.properties
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+#*.vbs
 
-# Windows shortcuts
-*.lnk
+################################################################################
 
-# =========================
-# Operating System Files
-# =========================
+# Visual Studio 
 
-# OSX
-# =========================
+obj/
+bin/
 
-.DS_Store
-.AppleDouble
-.LSOverride
+################################################################################
 
-# Thumbnails
-._*
+# Eclipse
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
+.metadata
+.settings/
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# Eclipse Core
+.project
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+################################################################################
+
+# Server side
+
+Tomcat v6.0 Server at localhost-config/
+*.jar
+build/
+
+#WEB-INF/
+#META-INF/
+#*WEB-INF/*.xml
+
+################################################################################
+
+# Word temporary files
+
+*~$*
+
+################################################################################
+
+# PHP Storm
+
+.idea/
+
+################################################################################
+
+# javascript documentation folders
+
+/project/server/dominion/WebContent/assets/js/help/
+/documents/project/client/js/help/
+
+################################################################################
+
+# NetBeans
+
+private/
+dist/
+packages/
+
+project/dominion.routing/nbproject/private/private.properties
+project/dominion.routing/nbproject/private/private.properties
+project/dominion.routing/nbproject/private/private.xml
