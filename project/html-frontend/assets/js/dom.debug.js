@@ -31,13 +31,14 @@
         return console.log.apply(console, arguments);
     };
     /**
-     *
-     * @param {boolean} assertion The assertions to check.
-     * @ param {object} message The first argument to write.
+     * Assert a value and write a message when true.
+     * @param {Boolean} assertion The assertions to check.
+     * @param {*} [message=] The first argument to write.
      */
-    debug.assert = function (assertion) {
+    debug.assert = function (assertion, message) {
         if (!assertion) {
-            var args = Array.prototype.slice.call(arguments, 1);
+            var args = Array.prototype.slice.call(arguments, 2);
+            args.unshift(message);
             args.unshift("color: #F00; font-weight: bold;");
             args.unshift("%c Assertion failed!");
             debug.log.apply(console, args);
@@ -52,14 +53,25 @@
      */
     debug.log = dummy;
     /**
+     * Logs json with indentation.
+     * @param {Object|String} json A json object or string. (The string gets parsed first!)
+     * @memberOf dom.debug
+     */
+    debug.logJSON = function (json) {
+        if (typeof json === 'string') {
+            json = JSON.parse(json);
+        }
+        debug.log(JSON.stringify(json, null, '\t'));
+    };
+    /**
      * Enables/disables the debug log function.
      * @function enable
-     * @param {Boolean=} enabled To enable debug log true, else false. Doesn't change when no argument was given.
+     * @param {Boolean} [enabled=false] To enable debug log true, else false. Doesn't change when no argument was given.
      * @returns {Boolean} True when logging is enabled, else false.
      * @memberOf dom.debug
      */
     debug.enable = function (enabled) {
-        if (enabled !== undefined) {
+        if (enabled) {
             debug.log = enabled ? hook : dummy;
         }
         return debug.log === hook;
