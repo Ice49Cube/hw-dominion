@@ -59,8 +59,8 @@ $(function () {
     // that have an initialize method.
     initialize(dom, config);
     // Everything is initialized, now ready to show the first screen.
-    dom.view.showFirstView(dom.views.gameView);
-    //dom.view.showFirstView(dom.views.homeView);
+    //dom.view.showFirstView(dom.views.gameView);
+    dom.view.showFirstView(dom.views.homeView);
     var query = dom.util.queryString.parse(location.search);
     if (query.id) {
         dom.game.continueGame(query.id);
