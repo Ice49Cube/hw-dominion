@@ -34,6 +34,7 @@
      * Assert a value and write a message when true.
      * @param {Boolean} assertion The assertions to check.
      * @param {*} [message=] The first argument to write.
+     * @memberOf dom.debug
      */
     debug.assert = function (assertion, message) {
         if (!assertion) {
@@ -76,6 +77,10 @@
         }
         return debug.log === hook;
     };
+    /**
+     * @param {Boolean} [enabled=undefined]
+     * @memberOf dom.debug
+     */
     debug.initialize = function (enabled) {
         debug.enable(enabled);
         var css = "color: rgb(97, 97, 97); font-size: 50px; background-color: rgb(186, 186, 186); text-shadow: rgb(224, 224, 224) 1px 1px 0px;width:100%;text-align:center;display:block;";

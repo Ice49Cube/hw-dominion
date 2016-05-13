@@ -32,7 +32,7 @@
 .deck:nth-child(3) figure:nth-child(2) { animation: fx-fadein .3s 1.6s forwards; -webkit-animation: fx-fadein .3s 1.6s forwards; -moz-animation: fx-fadein .3s 1.6s forwards; }
 .deck:nth-child(3) figure:nth-child(3) { animation: fx-fadein .3s 1.7s forwards; -webkit-animation: fx-fadein .3s 1.7s forwards; -moz-animation: fx-fadein .3s 1.7s forwards; }
 
-.player.hand > div > div {
+.hand > div > div {
     opacity: 0;
     -moz-transition: all 1s linear;
     -webkit-transition: all 1s linear;
@@ -57,7 +57,7 @@
 .player.hand > div > div:nth-child(16) {animation: fx-fadein .3s 3.6s forwards; -webkit-animation: fx-fadein .3s 3.6s forwards; -moz-animation: fx-fadein 3s 3.6s forwards; }
 .player.hand > div > div:nth-child(17) {animation: fx-fadein .3s 3.7s forwards; -webkit-animation: fx-fadein .3s 3.7s forwards; -moz-animation: fx-fadein 3s 3.7s forwards; }*/
 
-.player.hand > div > div {
+.hand > div > div {
     -webkit-transform-origin: bottom center;
     -moz-transform-origin: bottom center;
     -ms-transform-origin: bottom center;

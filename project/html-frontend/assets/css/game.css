@@ -130,7 +130,7 @@ div.deck div.overlay {
 }
 
 /* The individual cards css is generated and resides in fx.css */
-div.player.hand {
+div.hand {
     bottom: 0;
     height: 340px;
     position: absolute;

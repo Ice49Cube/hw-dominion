@@ -7,7 +7,6 @@
     /*global namespace*/
     var game = namespace("game");
     var dom = namespace;
-    var info;
     var showFail = function (message) {
         dom.overlay.showError(message, {hide: false});
         dom.debug.log(message);
@@ -80,11 +79,10 @@
                 dom.hand.setCards(data.players[i].cards);
             }
         }
-        info = data;
     };
     game.startGameFailed = function (data) {
-        if(data.error && data.error.message && data.error.message === "No game data.") {
-            dom.overlay.showError(data.error.message, {hide:true,timeout:3000});
+        if (data.error && data.error.message && data.error.message === "No game data.") {
+            dom.overlay.showError(data.error.message, {hide: true, timeout: 3000});
             dom.view.getCurrent().hide(function () {
                 dom.view.clearViewStack();
                 dom.view.showFirstView(dom.views.homeView);

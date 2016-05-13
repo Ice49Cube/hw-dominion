@@ -90,6 +90,8 @@
     /**
      * @param {*} figure
      * @returns {GameCard}
+     * @memberOf dom.deck
+     * @private
      */
     var figureToGameCard = function (figure) {
         return {
