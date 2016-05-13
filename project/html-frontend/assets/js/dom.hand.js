@@ -3,20 +3,18 @@
  */
 (function () {
     "use strict";
-
     // addCard, removeCard
     // findCard?
     // enableDrag/disableDrag
-
-    /*global namespace*/
     var hand = namespace("hand");
     var dom = namespace;
     var elements = {};
-    var mouseData = {origin:{x:0,y:0}};
+    var mouseData = {origin: {x: 0, y: 0}};
     var draggingEnabled;
-
     /**
      * @param {Event} e
+     * @memberOf dom.hand
+     * @private
      */
     var card_mousedown = function (e) {
         if (draggingEnabled) {
@@ -28,6 +26,8 @@
     };
     /**
      * @param {Event} e
+     * @memberOf dom.hand
+     * @private
      */
     var document_mousemove = function (e) {
         if (mouseData.element) {
@@ -37,16 +37,48 @@
             });
         }
     };
+    /**
+     *
+     * @param {Event} e
+     * @memberOf dom.hand
+     * @private
+     */
     var document_mouseup = function () {
         if (mouseData.element) {
             mouseData.element = null;
-            mouseData.element.removeClass('dragging').attr('style','');
+            mouseData.element.removeClass('dragging').attr('style', '');
         }
     };
-    var findCard = function (id) {
-        return hand.elements.container.find('[data-id=' + id + ']');
+    /**
+     *
+     * @param {jQuery} $div
+     * @returns {PlayerCard}
+     */
+    var divToPlayerCard = function ($div) {
+        return {
+            id: $div.data('id'),
+            order: $div.data('order'),
+            cardId: $div.data('card-id')
+        };
     };
-
+    /**
+     *
+     * @param id
+     * @returns {jQuery|null}
+     */
+    var findByPlayerCardId = function (id) {
+        var $div = elements.container.children().filter('[data-id=' + id + ']');
+        return $div.length === 1 ? $div : null;
+    };
+    /**
+     *
+     * @param cardId
+     * @returns {jQuery|null}
+     */
+    var findByGameCardId = function (cardId) {
+        var $div = elements.container.children().filter('[data-card-id=' + cardId + ']');
+        return $div.length === 1 ? $div : null;
+    };
     hand.initialize = function () {
         elements.container = $('.player.hand > div');
         elements.dragging = null;
@@ -57,60 +89,40 @@
     /**
      * @param {PlayerCard[]} cards
      */
-     hand.setCards = function (cards) {
+    hand.setCards = function (cards) {
         var i;
-        cards.sort(function (a, b) { return a.order - b.order; });
-        for(i = 0; i < cards.length; i += 1) {
+        cards.sort(dom.util.numberSorter("order"));
+        elements.container.html('');
+        for (i = 0; i < cards.length; i += 1) {
             dom.hand.addCard(cards[i]);
         }
-        //images = elements.container.find("div");
     };
     /**
      * @param {PlayerCard} card
      */
     hand.addCard = function (card) {
-
-        var cards = elements.container.find("div");
-        elements.container.removeClass("fx-card" + cards.length);
-
-
-        /*
-        elements.container.removeClass("fx-card" + elements.container.find("div").length);
-        images.addClass("fx-card" + images.length);
-
-        dom.debug.log("Add card to hand: ", card);
+        dom.debug.log("hand.addCard");
         var gameCard = dom.deck.findCardById(card.cardId);
-        var cards = elements.container.find("div");
-        cards.each(function () {
-            dom.debug.log($(this));
-        });
-        elements.container.append($('<div></div>')
-                .attr(
-                {
-                    'class': gameCard.name.split('-').join('_'),
-                    'data-id': card.id,
-                    'data-cardId': card.cardId,
-                    'data-order': card.order
-                }
-            ).on("mousedown", card_mousedown)
-        );*/
+        dom.debug.log("GameCard: ", gameCard);
+        var playerCard = findByGameCardId(card.cardId);
+        if (playerCard === null) {
+            dom.debug.log("PlayerCard: (null) - first card");
+            var divs = elements.container.children();
+            divs.removeClass('fx-card' + divs.length);
+            divs.addClass('fx-card' + (divs.length + 1));
+            elements.container.append($('<div></div>')
+                .attr({
+                    "class": gameCard.name.split('-').join('_'),
+                    "data-count": 1,
+                    "data-id": card.id,
+                    "data-card-id": card.cardId,
+                    "data-order": card.order
+                })
+                .on("mousedown", card_mousedown)
+                .addClass('fx-card' + (divs.length + 1)));
+        } else {
+            dom.debug.log("PlayerCard: ", playerCard);
+            playerCard.attr('data-count', parseInt(playerCard.attr('data-count'), 10) + 1);
+        }
     };
-    /*
-     * @param {number} id
-     *
-    hand.removeCard = function (id) {
-
-        findCard(id).remove();
-    };
-    hand.findCardById = function (id) {
-
-    };
-    /*
-     * @param {string} cardId
-     * @returns {GameCard}
-     *
-    hand.findCardByGameCardId = function (cardId) {
-        return hand.findCardById();
-    };
-*/
 }());

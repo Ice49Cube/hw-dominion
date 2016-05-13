@@ -31,7 +31,17 @@
 .deck:nth-child(3) figure:nth-child(2) { animation: fx-fadein .3s 1.6s forwards; -webkit-animation: fx-fadein .3s 1.6s forwards; -moz-animation: fx-fadein .3s 1.6s forwards; }
 .deck:nth-child(3) figure:nth-child(3) { animation: fx-fadein .3s 1.7s forwards; -webkit-animation: fx-fadein .3s 1.7s forwards; -moz-animation: fx-fadein .3s 1.7s forwards; }
 
-.player.hand > div > div { opacity: 0; }
+.player.hand > div > div {
+    opacity: 0;
+    -webkit-transform-origin: bottom center;
+    -moz-transform-origin: bottom center;
+    -ms-transform-origin: bottom center;
+    transform-origin: bottom center;
+    -moz-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
 .player.hand > div > div:nth-child(1)  {animation: fx-fadein .3s 2.1s forwards; -webkit-animation: fx-fadein .3s 2.1s forwards; -moz-animation: fx-fadein 3s 2.1s forwards; }
 .player.hand > div > div:nth-child(2)  {animation: fx-fadein .3s 2.2s forwards; -webkit-animation: fx-fadein .3s 2.2s forwards; -moz-animation: fx-fadein 3s 2.2s forwards; }
 .player.hand > div > div:nth-child(3)  {animation: fx-fadein .3s 2.3s forwards; -webkit-animation: fx-fadein .3s 2.3s forwards; -moz-animation: fx-fadein 3s 2.3s forwards; }
@@ -50,6 +60,12 @@
 .player.hand > div > div:nth-child(16) {animation: fx-fadein .3s 3.6s forwards; -webkit-animation: fx-fadein .3s 3.6s forwards; -moz-animation: fx-fadein 3s 3.6s forwards; }
 .player.hand > div > div:nth-child(17) {animation: fx-fadein .3s 3.7s forwards; -webkit-animation: fx-fadein .3s 3.7s forwards; -moz-animation: fx-fadein 3s 3.7s forwards; }
 
+
+/*
+change name of fx-card
+move to parent element
+...?
+*/
 .fx-card1:nth-child(1) {left:375px;transform:rotateZ(0deg);}
 
 .fx-card2:nth-child(1) {left:360px;transform:rotateZ(-15deg);}

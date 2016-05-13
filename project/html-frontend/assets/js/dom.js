@@ -1,3 +1,4 @@
+////////////////////////////////////////////////////////////////////////////////
 /**
  * The dom namespace.
  * @namespace dom
@@ -37,7 +38,7 @@ $(function () {
     };
     // todo: Extend from settings loaded from local storage...
     dom.settings = {
-        fullScreen: true
+        fullScreen: false
     };
     // Hierarchical recursive namespace initialization. (what's in a namespace?)
     var initialize = function (d, c) {
@@ -99,6 +100,18 @@ $(function () {
  * @param {Function} [callback=undefined] Callback called on completed.
  */
 ////////////////////////////////////////////////////////////////////////////////
+//
+// Below are the types that are received on ajax responses.
+//
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * @typedef {Player} CurrentPlayer
+ * @extends Player
+ * @property {PlayerCard[]} cards
+ * @property {number} actions
+ * @property {number} buys
+ */
+////////////////////////////////////////////////////////////////////////////////
 /**
  * Describes a card in the game.
  *
@@ -119,12 +132,23 @@ $(function () {
  * @property {String} name - The name of the player.
  * @property {Number} score - The score of the player.
  */
+////////////////////////////////////////////////////////////////////////////////
 /**
+ * Describes a card
+ *
  *  @typedef {Object} PlayerCard
  *  @property {Number} id
- *  @property {String} pile "Discard", "Deck", "Hand", "Playing", "Table"
+ *  @property {String} pile "Discard", "Deck", "Hand", "Playing", "Table" (Only Hand, Playing and Table are received.)
  *  @property {Number} order The order in which the card is sorted.
- *  @property {Number} cardId The id of the card.
+ *  @property {Number} cardId The id of the game card (GameCard).
+ */
+////////////////////////////////////////////////////////////////////////////////
+/**
+ *
+ *
+ * @typedef {Object} Player
+ * @property {Number} id
+ * @property {String} name
  */
 ////////////////////////////////////////////////////////////////////////////////
 /**
@@ -133,7 +157,7 @@ $(function () {
  * @typedef {Object} StartGameResult
  * @property {string} id - The id of the game.
  * @property {GameCard[]} cards - The cards in the game.
- * @ property {Player[]} players - The players in the game.
+ * @property {Player[]} players - The players in the game.
  */
 ////////////////////////////////////////////////////////////////////////////////
 /**

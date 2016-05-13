@@ -24,7 +24,7 @@ div.deck figure {
 }
 /*div.deck div.count { */
 div.deck figure:after {
-    content: attr(data-count) '';
+    content: attr(data-count);
     background-color:black;
     border: 1px solid lightgoldenrodyellow;
     -webkit-border-radius: 48px;
@@ -145,22 +145,16 @@ div.hand > div {
     left: 0;
 }
 div.hand > div > div {
-    background-size: 100% 100%;
+    /* Do not change to "background: transparent none centeer center/100% 100% no-repeat;"
+       because it will break the effect. */
+    background-size: 100%;
     background-position: center center;
     background-repeat: no-repeat;
     border-radius: 10px;
     height: 240px;
     position: absolute;
     top: 15px;
-    -webkit-transform-origin: bottom center;
-    -moz-transform-origin: bottom center;
-    -ms-transform-origin: bottom center;
-    transform-origin: bottom center;
     width: 150px;
-    -moz-transition: all 1s linear;
-    -webkit-transition: all 1s linear;
-    -o-transition: all 1s linear;
-    transition: all 1s linear;
 }
 
 div.hand > div > div.dragging {
@@ -168,13 +162,52 @@ div.hand > div > div.dragging {
     transform:rotateZ(0deg);
 }
 
-div.playing {
+div.hand > div > div:after {
+    content: attr(data-count);
+    background-color:black;
+    border: 1px solid lightgoldenrodyellow;
+    -webkit-border-radius: 48px;
+    -moz-border-radius: 48px;
+    -ms-border-radius: 48px;
+    border-radius: 48px;
+    color: lightgoldenrodyellow;
+    cursor: pointer;
+    font-weight:bold;
+    font-size: 1.1rem;
+    height: 24px;
+    line-height: 24px;
     position: absolute;
+    text-align: center;
+    top: 32px;
+    left: 12px;
+    width: 24px;
+}
+
+
+
+div.playing {
     background: transparent url(../images/table.png) center center/100% 100% no-repeat;
-    width: 956px;
-    height: 309px;
-    top: 300px;
-    left: 156px;
+    border-collapse: collapse;
+    font-size: 0;
+    height: 210px;
+    left: 170px;
+    position: absolute;
+    top: 380px;
+    width: 940px;
+}
+div.playing > div {
+    background: transparent none center center/100% 100% no-repeat;
+    width: 100px; height: 160px;
+    display: inline-block;
+    margin-left: -50px;
+    margin-top: 25px;
+}
+div.playing > div:first-child {
+    margin-left: 20px !important;
+}
+
+div.game div.text {
+
 }
 
 .gold{background-image:url(../images/cards/gold.jpg);}

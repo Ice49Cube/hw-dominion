@@ -109,12 +109,12 @@
     };
     /**
      *
-     * @param {number|string} id
+     * @param {number|string} gameCardId
      * @returns {*}
      * @memberOf dom.deck
      */
-    deck.buyCard = function (id) {
-        var card = $('.deck figure[data-id="' + id + '"]');
+    deck.buyCard = function (gameCardId) {
+        var card = $('.deck figure[data-id="' + gameCardId + '"]');
         var count = parseInt(card.data('count'), 10);
         var taken;
         if (count > 0) {
@@ -133,12 +133,12 @@
         return taken;
     };
     /**
-     * @param {string|number} id
+     * @param {string|number} gameCardId
      * @returns {GameCard}
      * @memberOf dom.deck
      */
-    deck.findCardById = function (id) {
-        return figureToGameCard(elements.decks.find('figure[data-id="' + id + '"]'));
+    deck.findCardById = function (gameCardId) {
+        return figureToGameCard(elements.decks.find('figure[data-id="' + gameCardId + '"]'));
     };
     /**
      * @param {string} name

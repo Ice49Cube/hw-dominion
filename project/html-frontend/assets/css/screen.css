@@ -28,11 +28,11 @@ body {
 
 /* Display table for smooth vertical alignment. */
 .table {
-    position:absolute;
     display: table;
-    table-layout: fixed;
     height: 100%;
     left: 0;
+    position: absolute;
+    table-layout: fixed;
     top: 0;
     width: 100%;
 }
@@ -192,12 +192,12 @@ a, a:active, a:hover, a:link, a:visited {
     width: 650px;
 }
 
-/* ... google clearfix ;) ...
+/* ... google clearfix ;) ... */
 .clear-fix {
     content: "";
     display: table;
     clear: both;
-} */
+}
 
 /* Full screen images */
 .full-screen {

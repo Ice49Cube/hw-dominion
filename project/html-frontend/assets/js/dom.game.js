@@ -74,14 +74,12 @@
         var i;
         dom.views.gameIdView.setGameId(data.id);
         dom.deck.setCards(data.cards);
+        dom.players.setPlayers(data.players);
         for (i = 0; i < data.players.length; i += 1) {
             if (data.players[i].cards) {
-                dom.hand.addCards(data.players[i].cards);
-                console.log(data.players[i], data.players[i].cards);
+                dom.hand.setCards(data.players[i].cards);
             }
         }
-        dom.players.setPlayers(data.players);
-        //dom.players.setPlayers(data);
         info = data;
     };
     game.startGameFailed = function (data) {
