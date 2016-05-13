@@ -134,8 +134,8 @@ div.player.hand {
     bottom: 0;
     height: 340px;
     position: absolute;
-    left: 160px;
-    width: 956px;
+    left: 290px;
+    width: 700px;
 }
 div.hand > div {
     position: relative;
@@ -182,8 +182,6 @@ div.hand > div > div:after {
     left: 12px;
     width: 24px;
 }
-
-
 
 div.playing {
     background: transparent url(../images/table.png) center center/100% 100% no-repeat;

@@ -23,6 +23,7 @@ div.treasures {
 div.player.hand {
     border: 1px solid yellow;
     bottom: -1px;
+    left: 289px;
 }
 
 div.playing {

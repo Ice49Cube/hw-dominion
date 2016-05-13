@@ -6,9 +6,8 @@
 	<script language="JScript">
 <![CDATA[
 
-// https://jsfiddle.net/Le1cpn16/7/
 var rotate_deg = 30;
-var deck_width = 900;
+var deck_width = 700;
 var deck_height = 340;
 var card_width = 150;
 var card_height = 240;
@@ -26,7 +25,7 @@ function generateBlock(block) {
 		
 		var left = "left:" + (point.x + current) + "px;";
 		var transform = "transform:rotateZ(" + current + "deg);";
-		WScript.Echo(".fx-card" + block + ":nth-child(" + i + ") {" + left + transform + "}");
+		WScript.Echo(".fx-hand" + block + ":nth-child(" + i + ") {" + left + transform + "}");
 		degrees += rotate_deg;
 	}
 	WScript.Echo("");

@@ -10,14 +10,14 @@
     var dom = namespace;
     var elements = {};
     var mouseData = {origin: {x: 0, y: 0}};
-    var draggingEnabled;
+    var dragging = false;
     /**
      * @param {Event} e
      * @memberOf dom.hand
      * @private
      */
     var card_mousedown = function (e) {
-        if (draggingEnabled) {
+        if (dragging) {
             var element = $(e.target).addClass('dragging');
             mouseData.origin.x = element.get(0).offsetLeft;
             mouseData.origin.y = element.get(0).offsetTop;
@@ -39,7 +39,6 @@
     };
     /**
      *
-     * @param {Event} e
      * @memberOf dom.hand
      * @private
      */
@@ -61,15 +60,15 @@
             cardId: $div.data('card-id')
         };
     };
-    /**
+    /*
      *
      * @param id
      * @returns {jQuery|null}
-     */
+
     var findByPlayerCardId = function (id) {
         var $div = elements.container.children().filter('[data-id=' + id + ']');
         return $div.length === 1 ? $div : null;
-    };
+    };*/
     /**
      *
      * @param cardId
@@ -101,15 +100,15 @@
      * @param {PlayerCard} card
      */
     hand.addCard = function (card) {
-        dom.debug.log("hand.addCard");
+        //dom.debug.log("hand.addCard");
         var gameCard = dom.deck.findCardById(card.cardId);
-        dom.debug.log("GameCard: ", gameCard);
+        //dom.debug.log("GameCard: ", gameCard);
         var playerCard = findByGameCardId(card.cardId);
         if (playerCard === null) {
-            dom.debug.log("PlayerCard: (null) - first card");
+            //dom.debug.log("PlayerCard: (null) - first card");
             var divs = elements.container.children();
-            divs.removeClass('fx-card' + divs.length);
-            divs.addClass('fx-card' + (divs.length + 1));
+            divs.removeClass('fx-hand' + divs.length);
+            divs.addClass('fx-hand' + (divs.length + 1));
             elements.container.append($('<div></div>')
                 .attr({
                     "class": gameCard.name.split('-').join('_'),
@@ -119,9 +118,9 @@
                     "data-order": card.order
                 })
                 .on("mousedown", card_mousedown)
-                .addClass('fx-card' + (divs.length + 1)));
+                .addClass('fx-hand' + (divs.length + 1)));
         } else {
-            dom.debug.log("PlayerCard: ", playerCard);
+            //dom.debug.log("PlayerCard: ", playerCard);
             playerCard.attr('data-count', parseInt(playerCard.attr('data-count'), 10) + 1);
         }
     };
