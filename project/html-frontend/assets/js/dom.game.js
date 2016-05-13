@@ -90,7 +90,7 @@
             dom.view.getCurrent().hide(function () {
                 dom.view.clearViewStack();
                 dom.view.showFirstView(dom.views.homeView);
-                });
+            });
             if (dom.util.queryString.parse(location.search).id) {
                 window.history.pushState(null, "Dominion Game", location.pathname);
             }

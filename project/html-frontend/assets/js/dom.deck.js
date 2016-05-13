@@ -37,8 +37,8 @@
                     'data-count': card.count,
                     'data-id': card.id,
                     'data-name': card.name,
-                    'data-isAction': card.isAction,
-                    'data-isCoin': card.isCoin,
+                    'data-is-action': card.isAction,
+                    'data-is-coin': card.isCoin,
                     'data-value': card.value,
                     'title': name
                 }
@@ -95,10 +95,10 @@
         return {
             "id": figure.data('id'),
             "name": figure.data('name'),
-            "count": parseInt(figure.data('div.count'), 10),
+            "count": parseInt(figure.data('count'), 10),
             "cost": parseInt(figure.data('cost'), 10),
-            "isAction": figure.data('isAction'),
-            "isCoin": figure.data('isCoin'),
+            "isAction": figure.data('is-action'),
+            "isCoin": figure.data('is-coin'),
             "value": figure.data('value')
         };
 
@@ -134,7 +134,7 @@
     };
     /**
      * @param {string|number} id
-     * @returns {{id, name, count, cost, isAction, isCoin}|GameCard}
+     * @returns {GameCard}
      * @memberOf dom.deck
      */
     deck.findCardById = function (id) {
@@ -142,7 +142,7 @@
     };
     /**
      * @param {string} name
-     * @returns {{id, name, count, cost, isAction, isCoin}|GameCard}
+     * @returns {GameCard}
      * @memberOf dom.deck
      */
     deck.findCardByName = function (name) {
