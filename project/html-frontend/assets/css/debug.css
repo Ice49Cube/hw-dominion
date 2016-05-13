@@ -1,27 +1,32 @@
-div.view {
+/*div.view {
     border: 1px solid yellow;
 }
 
-div.deck-victory {
+div.victories {
     border: 1px solid yellow;
     top: -1px;
     left: -1px;
 }
 
-div.deck-kingdom {
+div.kingdoms {
     border: 1px solid yellow;
     top: -1px;
     left: 319px;
 }
 
-div.deck-treasure {
+div.treasures {
     border: 1px solid yellow;
     top: -1px;
     right: -1px;
-}
+}*/
 
 div.player.hand {
     border: 1px solid yellow;
     bottom: -1px;
-    right: -1px;
+}
+
+div.playing {
+    border: 1px solid yellow;
+    left: 169px;
+    top: 379px;
 }

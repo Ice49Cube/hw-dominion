@@ -91,7 +91,7 @@
      */
     var onSuccess = function (data, textStatus, jqXHR) {
         dom.debug.log('routing.onSuccess(data, textStatus, jqXHR)');
-        dom.debug.log('\tdata: ' + (data === null ? '(null)' : JSON.stringify(data)));
+        dom.debug.log('\tdata: ' + (data === null ? '(null)' : JSON.stringify(data, null, "\t")));
         dom.debug.log('\ttextStatus: ', textStatus);
         dom.debug.log('\tjqXHR: ', jqXHR);
         doDispatchData(data, jqXHR.status, textStatus, jqXHR);
