@@ -7,6 +7,7 @@
     /*global namespace*/
     var game = namespace("game");
     var dom = namespace;
+    var info;
     var showFail = function (message) {
         dom.overlay.showError(message, {hide: false});
         dom.debug.log(message);
@@ -73,12 +74,15 @@
         var i;
         dom.views.gameIdView.setGameId(data.id);
         dom.deck.setCards(data.cards);
+        for (i = 0; i < data.players.length; i += 1) {
+            if (data.players[i].cards) {
+                dom.hand.addCards(data.players[i].cards);
+                console.log(data.players[i], data.players[i].cards);
+            }
+        }
         dom.players.setPlayers(data.players);
         //dom.players.setPlayers(data);
-        //for (i = 0; i < data.players.length; i += 1) {
-        //    if(data.players[i].cards)
-        //        console.log(data.players[i], data.players[i].cards);
-        //}
+        info = data;
     };
     game.startGameFailed = function (data) {
         if(data.error && data.error.message && data.error.message === "No game data.") {
@@ -99,19 +103,9 @@
     game.testServerSuccess = function (data) { alert('Test Server Success: ' + JSON.stringify(data)); };
     game.testServerFailed = function (data) { alert('Test Server Failed: ' + JSON.stringify(data)); };
     ////////////////////////////////////////////////////////////////////////////
-    game.viewHighScores = function () {
-        dom.routing.invoke("viewHighScores");
-    };
-    game.viewHighScoresSuccess = function () {
-        return undefined;
-        //dom.views.highScoresView.setHighScores(data);
-        //dom.view.showNext(dom.views.highScoresView);
-        // BETTER!!!!
-        //view.showOverlay(views.highScoresView);
-    };
-    game.viewHighScoresFailed = function (data) {
-        showFail('View High Scores Failed: ' + JSON.stringify(data));
-    };
+    game.viewHighScores = function () { dom.routing.invoke("viewHighScores"); };
+    game.viewHighScoresSuccess = function (data) { dom.overlay.showHighScores(data); };
+    game.viewHighScoresFailed = function (data) { showFail('View High Scores Failed: ' + JSON.stringify(data)); };
     /*
      * @function
      * @name onComplete

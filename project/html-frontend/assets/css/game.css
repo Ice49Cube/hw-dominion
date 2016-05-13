@@ -22,16 +22,9 @@ div.deck figure {
     position: relative;
     width: 148px;
 }
-div.deck img.art {
-    -webkit-border-radius: 0 4px 0 0;
-    -moz-border-radius: 0 4px 0 0;
-    -ms-border-radius: 0 4px 0 0;
-    border-radius: 0 4px 0 0;
-    cursor: pointer;
-    width: 100%;
-    height: 110px;
-}
-div.deck div.count {
+/*div.deck div.count { */
+div.deck figure:after {
+    content: attr(data-count) '';
     background-color:black;
     border: 1px solid lightgoldenrodyellow;
     -webkit-border-radius: 48px;
@@ -50,6 +43,16 @@ div.deck div.count {
     right: -2px;
     width: 24px;
 }
+div.deck img.art {
+    -webkit-border-radius: 0 4px 0 0;
+    -moz-border-radius: 0 4px 0 0;
+    -ms-border-radius: 0 4px 0 0;
+    border-radius: 0 4px 0 0;
+    cursor: pointer;
+    width: 100%;
+    height: 110px;
+}
+
 div.deck div.buy {
     background: transparent url(../images/plus.png) center center/100% 100% no-repeat;
     cursor: pointer;
@@ -146,15 +149,34 @@ div.hand > div > div {
     background-position: center center;
     background-repeat: no-repeat;
     border-radius: 10px;
-    -webkit-transform-origin: bottom center;
-    -moz-transform-origin: bottom center;
-    -ms-transform-origin: bottom center;
     height: 240px;
     position: absolute;
     top: 15px;
+    -webkit-transform-origin: bottom center;
+    -moz-transform-origin: bottom center;
+    -ms-transform-origin: bottom center;
     transform-origin: bottom center;
     width: 150px;
+    -moz-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
 }
+
+div.hand > div > div.dragging {
+    cursor: move;
+    transform:rotateZ(0deg);
+}
+
+div.playing {
+    position: absolute;
+    background: transparent url(../images/table.png) center center/100% 100% no-repeat;
+    width: 956px;
+    height: 309px;
+    top: 300px;
+    left: 156px;
+}
+
 .gold{background-image:url(../images/cards/gold.jpg);}
 .silver{background-image:url(../images/cards/silver.jpg);}
 .copper{background-image:url(../images/cards/copper.jpg);}
@@ -189,14 +211,18 @@ div.hand > div > div {
 .curse{background-image:url(../images/cards/curse.jpg);}
 
 /* COINS add others when needed */
-/*div.deck figure figcaption.coin8 { background-image:url('../images/cards/coins/coin8.png') }
-div.deck figure figcaption.coin7 { background-image:url('../images/cards/coins/coin7.png') }
-div.deck figure figcaption.coin6 { background-image:url('../images/cards/coins/coin6.png') }
-div.deck figure figcaption.coin5 { background-image:url('../images/cards/coins/coin5.png') }
-div.deck figure figcaption.coin4 { background-image:url('../images/cards/coins/coin4.png') }
-div.deck figure figcaption.coin3 { background-image:url('../images/cards/coins/coin3.png') }
-div.deck figure figcaption.coin2 { background-image:url('../images/cards/coins/coin2.png') }
-div.deck figure figcaption.coin0 { background-image:url('../images/cards/coins/coin0.png') }*/
+/* Removed to have a hover effect on "img" element
+.coin8 { background-image:url('../images/cards/coins/coin8.png') }
+.coin7 { background-image:url('../images/cards/coins/coin7.png') }
+.coin6 { background-image:url('../images/cards/coins/coin6.png') }
+.coin5 { background-image:url('../images/cards/coins/coin5.png') }
+.coin4 { background-image:url('../images/cards/coins/coin4.png') }
+.coin3 { background-image:url('../images/cards/coins/coin3.png') }
+.coin2 { background-image:url('../images/cards/coins/coin2.png') }
+.coin0 { background-image:url('../images/cards/coins/coin0.png') }
+*/
+
+
 
 
 
@@ -249,5 +275,3 @@ div.player.table img:first-child,
 div.player.hand img:first-child {
     margin-left: 35px !important;
 }*/
-
-

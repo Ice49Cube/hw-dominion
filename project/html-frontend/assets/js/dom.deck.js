@@ -6,6 +6,7 @@
     "use strict";
     /*global namespace*/
     var deck = namespace("deck");
+    var util = namespace('util');
     var dom = namespace;
     var elements = { };
     var divDeckFigure_click, divDeckDivBuy_click;
@@ -32,17 +33,17 @@
             .attr(
                 {
                     'class': csName,
+                    'data-cost': card.cost,
+                    'data-count': card.count,
                     'data-id': card.id,
                     'data-name': card.name,
-                    'data-cost': card.cost,
-                    'data-action': card.isAction,
-                    'data-coin': card.isCoin,
+                    'data-isAction': card.isAction,
+                    'data-isCoin': card.isCoin,
                     'data-value': card.value,
                     'title': name
                 }
             );
         figure.append($('<img/>').addClass('art').attr('src', "assets/images/cards/art/" + card.name + "_art.jpg").attr('alt', name).attr('title', name))
-            .append($('<div></div>').addClass('count').text(card.count))
             .append($('<div></div>').addClass('buy').addClass('hide').attr('title', 'buy'))
             .append($('<figcaption></figcaption>').text(name))
             .append($('<img/>').addClass('coin').attr('src', "assets/images/cards/coins/coin" + card.cost + ".png").attr('title', 'costs ' + card.cost));
@@ -86,37 +87,25 @@
         elements.game.trigger($.Event("buycard", {id: $(this).parent().data('id') }));
         dom.deck.updateCards(-1);
     };
-    var equalsFilter = function (name, value) {
-        return function (x) {
-            return x[name] === value;
-        };
-    };
     /**
-     * @param {*|jQuery|HTMLElement} figure
+     * @param {*} figure
      * @returns {GameCard}
      */
     var figureToGameCard = function (figure) {
         return {
             "id": figure.data('id'),
             "name": figure.data('name'),
-            "count": parseInt(figure.find('div.count').text(), 10),
+            "count": parseInt(figure.data('div.count'), 10),
             "cost": parseInt(figure.data('cost'), 10),
             "isAction": figure.data('isAction'),
-            "isCoin": figure.data('isCoin')
+            "isCoin": figure.data('isCoin'),
+            "value": figure.data('value')
         };
 
     };
     var loadElements = function () {
         elements.figures = elements.decks.find('figure');
         elements.buys = elements.decks.find('div.buy');
-    };
-    var numberSorter = function (name, ascending) {
-        return function (a, b) {
-            if (ascending) {
-                return a[name] - b[name];
-            }
-            return b[name] - a[name];
-        };
     };
     /**
      *
@@ -126,17 +115,16 @@
      */
     deck.buyCard = function (id) {
         var card = $('.deck figure[data-id="' + id + '"]');
-        var child = card.find('div.count');
-        var count = parseInt(child.text(), 10);
+        var count = parseInt(card.data('count'), 10);
         var taken;
         if (count > 0) {
             count = count - 1;
-            child.text(count);
             taken = true;
         } else {
-            child.text('0');
+            count = 0;
             taken = false;
         }
+        card.attr('data-count', count);
         if (count <= 0 && card.find('.overlay').length === 0) {
             var overlay = $('<div class="overlay"></div>');
             card.append(overlay);
@@ -177,9 +165,9 @@
      * @memberOf dom.deck
      */
     deck.setCards = function (cards) {
-        var victories = cards.filter(equalsFilter("deck", "Victory")).sort(numberSorter('cost', true));
-        var kingdoms = cards.filter(equalsFilter("deck", "Kingdom")).sort(numberSorter('cost', true));
-        var treasures = cards.filter(equalsFilter("deck", "Treasure")).sort(numberSorter('cost', true));
+        var victories = cards.filter(util.equalsFilter("deck", "Victory")).sort(util.numberSorter('cost', true));
+        var kingdoms = cards.filter(util.equalsFilter("deck", "Kingdom")).sort(util.numberSorter('cost', true));
+        var treasures = cards.filter(util.equalsFilter("deck", "Treasure")).sort(util.numberSorter('cost', true));
         treasures.reverse();
         elements.decks.html('');
         addCardsToDeck(elements.victory, victories, 2, 4);

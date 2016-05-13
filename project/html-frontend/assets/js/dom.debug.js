@@ -40,7 +40,7 @@
             var args = Array.prototype.slice.call(arguments, 1);
             args.unshift("color: #F00; font-weight: bold;");
             args.unshift("%c Assertion failed!");
-            console.log.apply(console, args);
+            debug.log.apply(console, args);
         }
     };
     /**

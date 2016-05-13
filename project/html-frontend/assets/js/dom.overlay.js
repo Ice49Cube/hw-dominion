@@ -131,6 +131,22 @@
         return overlay.show(html, options);
     };
     /**
+     * @param {ViewHighScoresResult} data
+     * @memberOf dom.overlay
+     */
+    overlay.showHighScores = function (data) {
+        var score, i, html = [];
+        for (i = 0; i < data.scores.length; i += 1) {
+            score = data.scores[i];
+            html.push(
+                $('<p></p>')
+                    .append($('<span></span>').text(score.name + ":"))
+                    .append(document.createTextNode(score.score.toString()))
+            );
+        }
+        overlay.show($('<div style="position:relative;top:40px;left:40px;width:1200px;height:880px;overflow-y:scroll;background-color:lightgoldenrodyellow;border:2px solid gold;border-radius:30px;color: black;"></div>').append(html), {hide:false});
+    };
+    /**
      * Shows an overlay with an error message.
      * @param message The error message to show.
      * @param options The options, @see show.

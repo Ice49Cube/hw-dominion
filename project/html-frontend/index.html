@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/forms.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/screen.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/views.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/game.css">
     <link rel="stylesheet" type="text/css" href="assets/css/fx.css">
     <link rel="stylesheet" type="text/css" href="assets/css/patch.css">
@@ -13,7 +13,6 @@
 	<title>Dominion</title>
 </head>
 <body>
-
 	<div class="table background">
 		<div class="cell">
 			<div class="view home">
@@ -61,12 +60,15 @@
 				<a class="button-back" href="#" title="Back" tabindex="8"></a>
 			</div>
             <div class="view game">
+                <!-- cards to take -->
+
                 <div class="deck victories"></div>
                 <div class="deck kingdoms"></div>
                 <div class="deck treasures"></div>
-                <div class="player hand">
-					<div></div>
-				</div>
+                <!-- currently playing -->
+                <div class="playing"><div></div></div>
+                <!-- cards in hand of player -->
+                <div class="player hand"><div></div></div>
                 <div class="players">
                     <div class="player-info"></div>
                     <div class="player-info"></div>

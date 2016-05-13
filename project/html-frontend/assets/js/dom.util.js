@@ -5,6 +5,34 @@
 (function () {
     "use strict";
     /*global namespace*/
+    var util = namespace('util');
+    /**
+     * Filter function factory.
+     * @param {String} name The property name on which to filter.
+     * @param {Object} value The value to filter.
+     * @returns {Function} A filter function.
+     * @memberOf dom.util
+     */
+    util.equalsFilter = function (name, value) {
+        return function (x) {
+            return x[name] === value;
+        };
+    };
+    /**
+     * Sorter function factory.
+     * @param {String} name The property name on which to filter.
+     * @param {Boolean} [ascending=false] True for ascending.
+     * @returns {Function}
+     * @memberOf dom.util
+     */
+    util.numberSorter = function (name, ascending) {
+        return function (a, b) {
+            if (ascending) {
+                return a[name] - b[name];
+            }
+            return b[name] - a[name];
+        };
+    };
     /**
      * Contains methods for full screen mode.
      * @namespace dom.util.fullScreen

@@ -18,10 +18,6 @@ function namespace(name) {
     }
     return value;
 }
-////////////////////////////////////////////////////////////////////////////////
-// Make dom global. (Access the namespace by the "dom" reference.)
-window.dom = namespace;
-////////////////////////////////////////////////////////////////////////////////
 /**
  * The actual startup procedure.
  * @function startup
@@ -38,6 +34,10 @@ $(function () {
         },
         views: {},
         debug: true
+    };
+    // todo: Extend from settings loaded from local storage...
+    dom.settings = {
+        fullScreen: true
     };
     // Hierarchical recursive namespace initialization. (what's in a namespace?)
     var initialize = function (d, c) {
@@ -58,6 +58,7 @@ $(function () {
     // that have an initialize method.
     initialize(dom, config);
     // Everything is initialized, now ready to show the first screen.
+    //dom.view.showFirstView(dom.views.gameView);
     dom.view.showFirstView(dom.views.homeView);
     var query = dom.util.queryString.parse(location.search);
     if (query.id) {

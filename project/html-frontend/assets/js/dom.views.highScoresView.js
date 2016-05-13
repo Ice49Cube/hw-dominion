@@ -21,15 +21,5 @@
      * @param {ViewHighScoresResult} data
      */
     highScoresView.setHighScores = function (data) {
-        var score, i, html = [];
-        for (i = 0; i < data.scores.length; i += 1) {
-            score = data.scores[i];
-            html.push(
-                $('<p></p>')
-                    .append($('<span></span>').text(score.name + ":"))
-                    .append(document.createTextNode(score.score.toString()))
-            );
-        }
-        divHighScores.find('div').html(html);
     };
 }());

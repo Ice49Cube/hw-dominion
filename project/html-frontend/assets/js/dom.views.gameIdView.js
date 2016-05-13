@@ -17,7 +17,9 @@
         elements.input = elements.view.find('input[type=text]');
         elements.label = elements.view.find('label');
         elements.a.on("click", function () {
-            //dom.util.fullScreen.request(document.body);
+            if (dom.settings.fullScreen) {
+                dom.util.fullScreen.request(document.body);
+            }
             dom.view.showNext(dom.views.gameView);
         });
         elements.input.on("focus", function () {
