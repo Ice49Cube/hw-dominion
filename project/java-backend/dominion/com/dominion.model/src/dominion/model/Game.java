@@ -98,6 +98,10 @@ public class Game {
 		return this.players.values().stream().filter(filter).toArray(size -> new Player[size]);
 	}
 
+        public String getState() {
+            return this.state;
+        }
+        
 	public boolean isFinished(Connection con) throws Exception {
 		String sql = "SELECT MAX(counter) as counter FROM" + " ("
 				+ " SELECT `count` = 0 AS counter FROM gamecards WHERE" + " game = ? AND name = \"province\"" + " UNION"

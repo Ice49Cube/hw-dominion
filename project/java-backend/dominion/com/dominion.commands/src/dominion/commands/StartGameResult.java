@@ -9,7 +9,8 @@ public class StartGameResult extends ResultBase {
     private PlayerResult[] players;
     private GameCard[] cards;
     private String cardSet;
-
+    private String state;
+    
     public StartGameResult() {
         super("startGame");
     }
@@ -25,6 +26,7 @@ public class StartGameResult extends ResultBase {
         }
         this.cards = game.getCards();
         this.cardSet = game.getCardSet();
+        this.state = game.getState();
     }
     
     public int getId() {
@@ -42,8 +44,12 @@ public class StartGameResult extends ResultBase {
     public String getCardSet() {
     	return this.cardSet;
     }
+    
+    public String getState() {
+    	return this.state;
+    }
 
-    public void setId(int value) {
+   /* public void setId(int value) {
         this.id = value;
     }
 
@@ -57,5 +63,5 @@ public class StartGameResult extends ResultBase {
     
     public void setCardSet(String value) {
     	this.cardSet = value;
-    }
+    }*/
 }

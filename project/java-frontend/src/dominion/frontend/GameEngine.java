@@ -53,7 +53,11 @@ public class GameEngine {
     public void startGame(StartGameResult data) {
         this.game = new Game(data);
         // Buy or actions behavior? Actions = 0, then buy...
-        this.behavior = new ActionBehavior();
+        if (this.game.getState().equals("Action")) {
+            this.behavior = new ActionBehavior();
+        } else {
+            this.behavior = new BuyBehavior();
+        }
     }
 
     public void testServer(TestServerResult data) {
