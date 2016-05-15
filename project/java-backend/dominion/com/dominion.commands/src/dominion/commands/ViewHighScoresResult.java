@@ -4,19 +4,19 @@ import dominion.routing.*;
 
 public class ViewHighScoresResult extends ResultBase 
 {
-    private HighScore [] scores;
+    private HighScoreResult [] scores;
     
     public ViewHighScoresResult()
     {
 	super("viewHighScores");
     }
     
-    public HighScore[] getScores()
+    public HighScoreResult[] getScores()
     {
         return this.scores;
     }
     
-    public void setScores(HighScore[] value)
+    public void setScores(HighScoreResult[] value)
     {
         this.scores = value;
     }

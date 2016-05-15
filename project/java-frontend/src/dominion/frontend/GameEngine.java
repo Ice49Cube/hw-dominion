@@ -1,6 +1,5 @@
 package dominion.frontend;
 
-import dominion.commands.TestServerResult;
 import dominion.frontend.behaviors.*;
 import dominion.frontend.responses.*;
 

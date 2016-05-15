@@ -4,22 +4,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class GameCard 
 {
-    @JsonIgnore()
-    private final Game game;
-
     private final int id;
-    private final String name;
-    private final String deck;
     private final int count;
     private final int cost;
-    private final int value;
+    private final String deck;
+	@JsonIgnore()
+    private final Game game;
     private final boolean isAction;
     private final boolean isCoin;
+    private final String name;
+    private final int value;
     
-    public GameCard(int id, Game game, String name, String deck, int count, int cost, int value, boolean isAction, boolean isCoin)
+    public GameCard(Game game, int id, String name, String deck, int count, int cost, int value, boolean isAction, boolean isCoin)
     {
-        this.id = id;
         this.game = game;
+        this.id = id;
         this.name = name;
         this.deck = deck;
         this.count = count;
@@ -27,14 +26,6 @@ public class GameCard
         this.value = value;
         this.isAction = isAction;
         this.isCoin = isCoin;
-    }
-    
-    public boolean getIsAction() {
-        return this.isAction;
-    }
-    
-    public boolean getIsCoin() {
-        return this.isCoin;
     }
     
     public int getCount()
@@ -62,6 +53,14 @@ public class GameCard
         return this.id;
     }
 
+    public boolean getIsAction() {
+        return this.isAction;
+    }
+    
+    public boolean getIsCoin() {
+        return this.isCoin;
+    }
+
     public String getName()
     {
         return this.name;
@@ -71,8 +70,4 @@ public class GameCard
     {
         return this.value;
     }
-    /*public void setCount(int value)
-    {
-        this.count = value;
-    }*/
 }

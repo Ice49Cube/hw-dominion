@@ -1,15 +1,10 @@
 package dominion.frontend;
 
-import dominion.frontend.collections.CardCostComparator;
-import dominion.frontend.responses.GameCard;
-import dominion.frontend.responses.Player;
-import dominion.frontend.responses.StartGameResult;
+import dominion.frontend.collections.*;
+import dominion.frontend.responses.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-import java.util.HashMap;
-import java.util.function.Predicate;
+import java.util.*;
+import java.util.function.*;
 
 public class Game {
     
@@ -60,7 +55,8 @@ public class Game {
         }
     }
 }
-    /* private void startGame(CommandBase command) throws Exception
+    /*
+    private void startGame(CommandBase command) throws Exception
     {
         StartGameResult result = (StartGameResult);
         System.out.println("game id: " + result.id);
@@ -75,4 +71,5 @@ public class Game {
                 }
             }
         }
-    } */
+    }
+    */

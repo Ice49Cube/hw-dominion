@@ -2,7 +2,7 @@ package dominion.commands;
 
 import dominion.model.Game;
 
-public class Player {
+public class PlayerResult {
 
     private int id;
     private String name;
@@ -23,13 +23,15 @@ public class Player {
         this.name = value;
     }
 
-    public static Player fromGame(Game game, dominion.model.Player source) {
+    /* Note: The Game package doesn't know the command package. 
+     * 		 Plus it's a factory method.*/
+    public static PlayerResult fromGame(Game game, dominion.model.Player source) {
         boolean isCurrent = source.getId() == game.getCurrentPlayerId();
-        Player player = isCurrent ? new CurrentPlayer() : new Player();
+        PlayerResult player = isCurrent ? new CurrentPlayerResult() : new PlayerResult();
         player.setId(source.getId());
         player.setName(source.getName());
         if (isCurrent) {
-            CurrentPlayer current = (CurrentPlayer) player;
+            CurrentPlayerResult current = (CurrentPlayerResult) player;
             current.setCards(source.getCards(c
                     -> c.getPile().equals("Hand")
                     || c.getPile().equals("Table")
@@ -37,7 +39,6 @@ public class Player {
             );
             current.setActions(source.getActions());
             current.setBuys(source.getBuys());
-            //current.setCoins(source.getCoins());
         }
         return player;
     }

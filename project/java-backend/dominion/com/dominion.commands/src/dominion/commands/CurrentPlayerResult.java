@@ -2,7 +2,7 @@ package dominion.commands;
 
 import dominion.model.PlayerCard;
 
-public class CurrentPlayer extends Player {
+public class CurrentPlayerResult extends PlayerResult {
 
     private PlayerCard[] cards;
     private int actions;

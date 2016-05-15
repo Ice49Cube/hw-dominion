@@ -6,28 +6,32 @@ import dominion.routing.*;
 public class StartGameResult extends ResultBase {
 
     private int id;
-    private Player[] players;
+    private PlayerResult[] players;
     private GameCard[] cards;
     private String cardSet;
+
+    public StartGameResult() {
+        super("startGame");
+    }
     
     public StartGameResult(Game game) {
-        super("startGame");
+        this();
         this.id = game.getId();
         dominion.model.Player[] players = game.getPlayers();
-        this.players = new Player[players.length];
+        this.players = new PlayerResult[players.length];
         int index = 0;
         for (dominion.model.Player player : players) {
-            this.players[index++] = Player.fromGame(game, player);
+            this.players[index++] = PlayerResult.fromGame(game, player);
         }
         this.cards = game.getCards();
         this.cardSet = game.getCardSet();
     }
-
+    
     public int getId() {
         return this.id;
     }
 
-    public Player[] getPlayers() {
+    public PlayerResult[] getPlayers() {
         return this.players;
     }
 
@@ -37,5 +41,21 @@ public class StartGameResult extends ResultBase {
     
     public String getCardSet() {
     	return this.cardSet;
+    }
+
+    public void setId(int value) {
+        this.id = value;
+    }
+
+    public void setPlayers(PlayerResult[] value) {
+        this.players = value;
+    }
+
+    public void setCards(GameCard[] value) {
+        this.cards = value;
+    }
+    
+    public void setCardSet(String value) {
+    	this.cardSet = value;
     }
 }

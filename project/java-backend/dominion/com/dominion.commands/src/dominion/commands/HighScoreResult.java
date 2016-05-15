@@ -1,11 +1,11 @@
 package dominion.commands;
 
-public class HighScore 
+public class HighScoreResult 
 {
     private final String name;
     private final Integer score;
 
-    public HighScore(String name, Integer score)
+    public HighScoreResult(String name, Integer score)
     {
         this.name = name;
         this.score = score;

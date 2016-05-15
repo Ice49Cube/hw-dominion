@@ -8,10 +8,7 @@ import java.util.function.Predicate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import dominion.commands.*;
-import dominion.model.Game;
-import dominion.model.GameCard;
-import dominion.model.Player;
-import dominion.model.PlayerCard;
+import dominion.model.*;
 import dominion.model.database.*;
 import dominion.routing.*;
 
@@ -60,9 +57,7 @@ public class GameEngine {
 	// TODO: check/validate session
 	@RoutedCommand()
 	public ResultBase playAction(PlayActionCommand command) {
-		return new ResultBase("playAction"){
-			public String data = command.getData();
-		};
+		return null;
 	}
 	
 	// TODO: check/validate session
@@ -94,15 +89,15 @@ public class GameEngine {
 	@RoutedCommand()
 	public ViewHighScoresResult viewHighScores(EmptyCommand command) {
 		ViewHighScoresResult result = new ViewHighScoresResult();
-		List<HighScore> scores = new ArrayList<HighScore>();
-		scores.add(new HighScore("Jaan", 9003));
-		scores.add(new HighScore("Wout", 9002));
-		scores.add(new HighScore("Maysam", 9001));
-		scores.add(new HighScore("Michaël", 9000));
+		List<HighScoreResult> scores = new ArrayList<HighScoreResult>();
+		scores.add(new HighScoreResult("Jaan", 9003));
+		scores.add(new HighScoreResult("Wout", 9002));
+		scores.add(new HighScoreResult("Maysam", 9001));
+		scores.add(new HighScoreResult("Michaël", 9000));
 		for (Integer i = 99; i > 0; i--) {
-			scores.add(new HighScore("Player " + i, i));
+			scores.add(new HighScoreResult("Player " + i, i));
 		}
-		result.setScores(scores.toArray(new HighScore[scores.size()]));
+		result.setScores(scores.toArray(new HighScoreResult[scores.size()]));
 		return result;
 	}
 

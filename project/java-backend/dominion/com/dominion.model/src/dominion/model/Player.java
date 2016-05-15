@@ -7,8 +7,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Player {
 
+	@JsonIgnore()
     private final Game game;
     private final int id;
     private final String name;

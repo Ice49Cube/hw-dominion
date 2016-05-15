@@ -77,22 +77,6 @@ public class Routing
     	this.resultMapper.writeValue(writer, result);
     }
     
-    /*
-     * Serializes an exception, with extra information, into a ErrorResult 
-     * object and writes that object to the printwriter.
-     * @param ex The exception to serialize into JSON 
-     * and write to a PrintWriter.
-     * @param information The extra information to serialize into JSON 
-     * and write to a PrintWriter.
-     * @param writer The writer to write the serialized exception to.
-     * @throws java.io.IOException Exception thrown by a jackson ObjectMapper.
-     */
-    /*public void exception(Exception ex, String information, PrintWriter writer) throws IOException
-    {
-        ErrorResult result = new ErrorResult(null, ex.getMessage(), information);
-        this.resultMapper.writeValue(writer, result);
-    }*/
-    
     /**
      * Initializes the Routing object's members.
      */

@@ -10,7 +10,7 @@ public class ActionBehavior implements IGameEngineBehavior {
 
     @Override
     public CommandBase process(GameEngine engine, Game game) throws Exception {
-        game.printGameCards();
+        //game.printGameCards();
         // Todo: commandline input here to let current player play actions
         // Todo: return the next command for the server
         // User has no action cards -> send cancel buys to server...

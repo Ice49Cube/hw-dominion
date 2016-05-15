@@ -1,20 +1,16 @@
 package dominion.game.cards;
 
+import dominion.commands.PlayActionCommand;
+import dominion.model.Game;
 import dominion.model.info.*;
 import dominion.routing.ResultBase;
 
-public class Militia implements ICard {
+public class Militia implements IActionCard {
+
 
 	@Override
-	public ResultBase execute() {
-		// TODO Auto-generated method stub
-		
-		return null;
-	}
-	
-	
-	public int getCost() {
-		return CardInfo.Militia.getCost();
+	public ResultBase execute(Game game, PlayActionCommand command) {
+		return null;		
 	}
 
 	
