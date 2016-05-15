@@ -129,6 +129,11 @@ div.deck div.overlay {
     width: calc(100% + 8px);
 }
 
+/* The message displayed on the screen */
+div.deck div.message {
+
+}
+
 /* The individual cards css is generated and resides in fx.css */
 div.hand {
     bottom: 0;
@@ -137,6 +142,7 @@ div.hand {
     left: 290px;
     width: 700px;
 }
+
 div.hand > div {
     position: relative;
     width: 100%;
@@ -146,7 +152,7 @@ div.hand > div {
 }
 div.hand > div > div {
     /* Do not change to "background: transparent none centeer center/100% 100% no-repeat;"
-       because it will break the effect. */
+       because it will break the effect.*/
     background-size: 100%;
     background-position: center center;
     background-repeat: no-repeat;
@@ -155,11 +161,6 @@ div.hand > div > div {
     position: absolute;
     top: 15px;
     width: 150px;
-}
-
-div.hand > div > div.dragging {
-    cursor: move;
-    transform:rotateZ(0deg);
 }
 
 div.hand > div > div:after {
@@ -183,6 +184,12 @@ div.hand > div > div:after {
     width: 24px;
 }
 
+div.hand > div > div.glow {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+    margin: -1px 0 0 -1px;
+}
+
 div.playing {
     background: transparent url(../images/table.png) center center/100% 100% no-repeat;
     border-collapse: collapse;
@@ -204,8 +211,14 @@ div.playing > div:first-child {
     margin-left: 20px !important;
 }
 
-div.game div.text {
-
+div.game div.message {
+    top: 300px;
+    left: 170px;
+    position: absolute;
+    width: 940px;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
 }
 
 .gold{background-image:url(../images/cards/gold.jpg);}

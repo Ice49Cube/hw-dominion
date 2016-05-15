@@ -21,33 +21,6 @@
         e.preventDefault();
     };
     /**
-     * Initializes the view module.
-     * @memberOf dom.view
-     * @private
-     */
-    var initializeView = function () {
-        // * Disable f5
-        if (!dom.debug.enable()) {
-            $(document).on("keydown", function (e) {
-                if ((e.which || e.keyCode) === 116) {
-                    e.preventDefault();
-                }
-            });
-        }
-        // * Disable dragging
-        // * Disable right click
-        $(document).bind("dragstart", function () {
-            return false;
-        }).on("contextmenu", function () {
-            return false;
-        });
-        // * Allow context menu on input
-        $('input').on("contextmenu", function (e) {
-            e.stopPropagation();
-            return true;
-        });
-    };
-    /**
      * Clears all the items of the view stack and hides the back button.
      * @function clearViewStack
      * @memberOf dom.view
@@ -111,8 +84,38 @@
      * @memberOf dom.view
      */
     view.initialize = function () {
-        initializeView();
+        // * Disable f5
+        if (!dom.debug.enable()) {
+            $(document).on("keydown", function (e) {
+                if ((e.which || e.keyCode) === 116) {
+                    e.preventDefault();
+                }
+            });
+        }
+        // * Disable dragging
+        // * Disable right click
+        $(document).bind("dragstart", function () {
+            return false;
+        }).on("contextmenu", function () {
+            return false;
+        });
+            // * Allow context menu on input
+        $('input[type=text]').on("contextmenu", function (e) {
+            e.stopPropagation();
+            return true;
+        });
         buttonBack = $('a.button-back').on("click", buttonBack_click);
+        $(window).resize(function () {
+            // todo: http://stackoverflow.com/questions/1713771/how-to-detect-page-zoom-level-in-all-modern-browsers
+            /*var wnd = $(window);
+            var ow = 1280, oh = 960;
+            var w = wnd.width();
+            var h = wnd.height();
+            var zoom = (w / 4) * 3 > h ? h / oh : w / ow;
+            $('.view').css({
+                "zoom": Math.floor(zoom * 100) + "%"
+            });*/
+        });
     };
     /**
      * Shows or hides the back button.

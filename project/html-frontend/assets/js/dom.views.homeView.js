@@ -20,6 +20,7 @@
         });
     };
     homeView.show = function (oncompleted) {
+        elements.view.append(dom.settings.getElement());
         elements.view.fadeIn(oncompleted);
     };
     homeView.hide = function (oncompleted) {

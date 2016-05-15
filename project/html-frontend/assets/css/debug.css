@@ -1,5 +1,6 @@
-/*div.view {
+div.view {
     border: 1px solid yellow;
+    overflow: visible;
 }
 
 div.victories {
@@ -18,9 +19,9 @@ div.treasures {
     border: 1px solid yellow;
     top: -1px;
     right: -1px;
-}*/
+}
 
-div.player.hand {
+div.hand {
     border: 1px solid yellow;
     bottom: -1px;
     left: 289px;
@@ -29,5 +30,5 @@ div.player.hand {
 div.playing {
     border: 1px solid yellow;
     left: 169px;
-    top: 379px;
+    top: 399px;
 }

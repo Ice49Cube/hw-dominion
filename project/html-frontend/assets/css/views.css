@@ -23,7 +23,7 @@ html, body {
 
 body {
     background: black url("../images/background2.jpg") center center/cover no-repeat fixed;
-    overflow: auto;
+    overflow: hidden;
 }
 
 /* Display table for smooth vertical alignment. */
@@ -36,6 +36,8 @@ body {
     top: 0;
     width: 100%;
 }
+
+/* Apply on full screen */
 .table.background {
     background: black url("../images/background2.jpg") center center/cover no-repeat fixed;
 }
@@ -63,6 +65,7 @@ a, a:active, a:hover, a:link, a:visited {
     height: 960px;
     margin: 0 auto;
     width: 1280px;
+    overflow: hidden;
     position: relative;
 }
 
@@ -211,3 +214,55 @@ a, a:active, a:hover, a:link, a:visited {
 }
 .full-screen.reduced { background-image: url(../images/fullscreen.png) }
 .full-screen.enabled { background-image: url(../images/reduce.png) }
+
+div.view div.settings {
+    background: rgba(0,0,0,0.4) url(../images/settings.png) top center/auto 12% no-repeat;
+    left: 540px;
+    bottom: -180px;
+    width: 200px;
+    height: 200px;
+    border: 2px solid darkgoldenrod;
+    position: absolute;
+    -webkit-transform-origin: top left;
+    -moz-transform-origin: top left;
+    -ms-transform-origin: top left;
+    transform-origin: top left;
+    border-radius: 20px;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+    font-size: 0.5rem;
+}
+
+div.view div.settings:hover {
+    background: rgba(0,0,0,1) url(../images/settings.png) top center/auto 15% no-repeat;
+    bottom: 0;
+    left: 320px;
+    width: 640px;
+    height: 480px;
+    font-size: 1.2rem;
+}
+
+div.view div.settings > div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 15%;
+}
+
+div.view div.settings > div input[type=checkbox] {
+    margin-left: 30%;
+}
+
+div.view div.settings > div label {
+    text-shadow: 2px 2px 1px darkorange  ;
+    display: block;
+    margin-bottom: 10px;
+}
+
+div.view div.settings > div label:active {
+}
+

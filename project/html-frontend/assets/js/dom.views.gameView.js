@@ -58,6 +58,7 @@
         });*/
     };
     gameView.show = function (oncompleted) {
+        elements.view.append(dom.settings.getElement());
         setTimeout(function () {
             elements.view.fadeIn(oncompleted);
         }, 500);

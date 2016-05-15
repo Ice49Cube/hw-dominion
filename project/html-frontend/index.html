@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/game.css">
     <link rel="stylesheet" type="text/css" href="assets/css/fx.css">
     <link rel="stylesheet" type="text/css" href="assets/css/patch.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/debug.css">
+	<!--link rel="stylesheet" type="text/css" href="assets/css/debug.css"-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Dominion</title>
 </head>
@@ -61,65 +61,34 @@
 			</div>
             <div class="view game">
                 <!-- cards to take -->
-
                 <div class="deck victories"></div>
                 <div class="deck kingdoms"></div>
                 <div class="deck treasures"></div>
+                <!-- -->
+                <div class="message">LORD BOTTINGTON GAINS A REMODEL</div>
                 <!-- currently playing -->
-                <div class="playing">
-                    <div class="clear-fix" style="background-image:url(assets/images/cards/province.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                    <div style="background-image:url(assets/images/cards/gold.jpg)"></div>
-                </div>
+                <div class="playing" title="Drag and drop the cards you wish to play here..."></div>
                 <!-- cards in hand of player -->
-                <div class="hand"><div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                    <div class="copper fx-hand17" data-count="3" data-id="10" data-card-id="3" data-order="9"></div>
-                </div></div>
+                <div class="hand"><div></div></div>
+                <!-- other player info -->
                 <div class="players">
                     <div class="player-info">
                         <span class="name">Player 1</span>
-
                     </div>
                     <div class="player-info">
                         <span class="name">Player 1</span>
-
                     </div>
                     <div class="player-info">
                         <span class="name">Player 1</span>
-
+                    </div>
+                </div>
+                <div class="settings">
+                    <div>
+                        <label><input type="checkbox" class="input-full-screen" />Auto full screen?</label>
+                        <label><input type="checkbox" class="input-full-screen" />Auto aspect ratio?</label>
+                        <label><input type="checkbox" class="input-full-screen" />Overwrite url in history?</label>
+                        <!-- Stored locally! cookie law...
+                        Sound volume(off=0) -->
                     </div>
                 </div>
             </div>
@@ -131,20 +100,6 @@
             <div class="view"></div>
         </div>
     </div>
-    <!--
-    <div class="table overlay">
-         <div class="cell">
-             <div class="view settings">
-                     Stored locally! cookie law...
-                     Sound volume(off=0)
-                     Auto full screen
-                     Overwrite url in history
-                     Auto aspect ratio
-
-             </div>
-         </div>
-     </div>
-     -->
     <!-- libs.min.js MUST come first, dom.js MUST come second, the order of the other scripts doesn't matter. -->
     <!-- libs.min.js contains jQuery and clipboard -->
     <script type="text/javascript" src="assets/js/libs.min.js"></script>
@@ -159,12 +114,12 @@
     <script type="text/javascript" src="assets/js/dom.player.js"></script>
     <script type="text/javascript" src="assets/js/dom.players.js"></script>
     <script type="text/javascript" src="assets/js/dom.routing.js"></script>
+    <script type="text/javascript" src="assets/js/dom.settings.js"></script>
     <script type="text/javascript" src="assets/js/dom.util.js"></script>
     <script type="text/javascript" src="assets/js/dom.view.js"></script>
     <!-- The order of the scripts below doesn't matter -->
     <script type="text/javascript" src="assets/js/dom.views.gameIdView.js"></script>
     <script type="text/javascript" src="assets/js/dom.views.gameInfoView.js"></script>
-    <script type="text/javascript" src="assets/js/dom.views.gameSettingsView.js"></script>
     <script type="text/javascript" src="assets/js/dom.views.gameView.js"></script>
     <script type="text/javascript" src="assets/js/dom.views.highScoresView.js"></script>
     <script type="text/javascript" src="assets/js/dom.views.homeView.js"></script>

@@ -36,10 +36,6 @@ $(function () {
         views: {},
         debug: true
     };
-    // todo: Extend from settings loaded from local storage...
-    dom.settings = {
-        fullScreen: false
-    };
     // Hierarchical recursive namespace initialization. (what's in a namespace?)
     var initialize = function (d, c) {
         var prop;

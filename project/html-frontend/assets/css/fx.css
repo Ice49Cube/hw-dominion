@@ -1,5 +1,51 @@
 
-/* Uncomment to enable fx...
+/* Cards fade-in
+.deck figure { opacity: 0; }
+.deck.victories figure:nth-child(1) { animation: fx-fadein .3s 0.1s forwards; -webkit-animation: fx-fadein .3s 0.1s forwards; -moz-animation: fx-fadein .3s 0.1s forwards; }
+.deck.victories figure:nth-child(2) { animation: fx-fadein .3s 0.2s forwards; -webkit-animation: fx-fadein .3s 0.2s forwards; -moz-animation: fx-fadein .3s 0.2s forwards; }
+.deck.kingdoms  figure:nth-child(1) { animation: fx-fadein .3s 0.3s forwards; -webkit-animation: fx-fadein .3s 0.3s forwards; -moz-animation: fx-fadein .3s 0.3s forwards; }
+.deck.kingdoms  figure:nth-child(2) { animation: fx-fadein .3s 0.4s forwards; -webkit-animation: fx-fadein .3s 0.4s forwards; -moz-animation: fx-fadein .3s 0.4s forwards; }
+.deck.kingdoms  figure:nth-child(3) { animation: fx-fadein .3s 0.5s forwards; -webkit-animation: fx-fadein .3s 0.5s forwards; -moz-animation: fx-fadein .3s 0.5s forwards; }
+.deck.kingdoms  figure:nth-child(4) { animation: fx-fadein .3s 0.6s forwards; -webkit-animation: fx-fadein .3s 0.6s forwards; -moz-animation: fx-fadein .3s 0.6s forwards; }
+.deck.kingdoms  figure:nth-child(5) { animation: fx-fadein .3s 0.7s forwards; -webkit-animation: fx-fadein .3s 0.7s forwards; -moz-animation: fx-fadein .3s 0.7s forwards; }
+.deck.treasures figure:nth-child(1) { animation: fx-fadein .3s 0.8s forwards; -webkit-animation: fx-fadein .3s 0.8s forwards; -moz-animation: fx-fadein .3s 0.8s forwards; }
+.deck.victories figure:nth-child(3) { animation: fx-fadein .3s 0.9s forwards; -webkit-animation: fx-fadein .3s 0.9s forwards; -moz-animation: fx-fadein .3s 0.9s forwards; }
+.deck.victories figure:nth-child(4) { animation: fx-fadein .3s 1.0s forwards; -webkit-animation: fx-fadein .3s 1.0s forwards; -moz-animation: fx-fadein .3s 1.0s forwards; }
+.deck.kingdoms  figure:nth-child(6) { animation: fx-fadein .3s 1.1s forwards; -webkit-animation: fx-fadein .3s 1.1s forwards; -moz-animation: fx-fadein .3s 1.1s forwards; }
+.deck.kingdoms  figure:nth-child(7) { animation: fx-fadein .3s 1.2s forwards; -webkit-animation: fx-fadein .3s 1.2s forwards; -moz-animation: fx-fadein .3s 1.2s forwards; }
+.deck.kingdoms  figure:nth-child(8) { animation: fx-fadein .3s 1.3s forwards; -webkit-animation: fx-fadein .3s 1.3s forwards; -moz-animation: fx-fadein .3s 1.3s forwards; }
+.deck.kingdoms  figure:nth-child(9) { animation: fx-fadein .3s 1.4s forwards; -webkit-animation: fx-fadein .3s 1.4s forwards; -moz-animation: fx-fadein .3s 1.4s forwards; }
+.deck.kingdoms  figure:nth-child(10){ animation: fx-fadein .3s 1.5s forwards; -webkit-animation: fx-fadein .3s 1.5s forwards; -moz-animation: fx-fadein .3s 1.5s forwards; }
+.deck.treasures figure:nth-child(2) { animation: fx-fadein .3s 1.6s forwards; -webkit-animation: fx-fadein .3s 1.6s forwards; -moz-animation: fx-fadein .3s 1.6s forwards; }
+.deck.treasures figure:nth-child(3) { animation: fx-fadein .3s 1.7s forwards; -webkit-animation: fx-fadein .3s 1.7s forwards; -moz-animation: fx-fadein .3s 1.7s forwards; }*/
+
+/* Cards fade-in
+.hand > div > div {
+    opacity: 0;
+    -webkit-transition: transform 0.3s linear;
+    -moz-transition: transform 0.3s linear;
+    -o-transition: transform 0.3s linear;
+    transition: transform 0.3s linear;
+}
+.hand > div > div:nth-child(1)  {animation: fx-fadein .3s 2.1s forwards; -webkit-animation: fx-fadein .3s 2.1s forwards; -moz-animation: fx-fadein 3s 2.1s forwards; }
+.hand > div > div:nth-child(2)  {animation: fx-fadein .3s 2.2s forwards; -webkit-animation: fx-fadein .3s 2.2s forwards; -moz-animation: fx-fadein 3s 2.2s forwards; }
+.hand > div > div:nth-child(3)  {animation: fx-fadein .3s 2.3s forwards; -webkit-animation: fx-fadein .3s 2.3s forwards; -moz-animation: fx-fadein 3s 2.3s forwards; }
+.hand > div > div:nth-child(4)  {animation: fx-fadein .3s 2.4s forwards; -webkit-animation: fx-fadein .3s 2.4s forwards; -moz-animation: fx-fadein 3s 2.4s forwards; }
+.hand > div > div:nth-child(5)  {animation: fx-fadein .3s 2.5s forwards; -webkit-animation: fx-fadein .3s 2.5s forwards; -moz-animation: fx-fadein 3s 2.5s forwards; }
+.hand > div > div:nth-child(6)  {animation: fx-fadein .3s 2.6s forwards; -webkit-animation: fx-fadein .3s 2.6s forwards; -moz-animation: fx-fadein 3s 2.6s forwards; }
+.hand > div > div:nth-child(7)  {animation: fx-fadein .3s 2.7s forwards; -webkit-animation: fx-fadein .3s 2.7s forwards; -moz-animation: fx-fadein 3s 2.7s forwards; }
+.hand > div > div:nth-child(8)  {animation: fx-fadein .3s 2.8s forwards; -webkit-animation: fx-fadein .3s 2.8s forwards; -moz-animation: fx-fadein 3s 2.8s forwards; }
+.hand > div > div:nth-child(9)  {animation: fx-fadein .3s 2.9s forwards; -webkit-animation: fx-fadein .3s 2.9s forwards; -moz-animation: fx-fadein 3s 2.9s forwards; }
+.hand > div > div:nth-child(10) {animation: fx-fadein .3s 3.0s forwards; -webkit-animation: fx-fadein .3s 3.0s forwards; -moz-animation: fx-fadein 3s 3.0s forwards; }
+.hand > div > div:nth-child(11) {animation: fx-fadein .3s 3.1s forwards; -webkit-animation: fx-fadein .3s 3.1s forwards; -moz-animation: fx-fadein 3s 3.1s forwards; }
+.hand > div > div:nth-child(12) {animation: fx-fadein .3s 3.2s forwards; -webkit-animation: fx-fadein .3s 3.2s forwards; -moz-animation: fx-fadein 3s 3.2s forwards; }
+.hand > div > div:nth-child(13) {animation: fx-fadein .3s 3.3s forwards; -webkit-animation: fx-fadein .3s 3.3s forwards; -moz-animation: fx-fadein 3s 3.3s forwards; }
+.hand > div > div:nth-child(14) {animation: fx-fadein .3s 3.4s forwards; -webkit-animation: fx-fadein .3s 3.4s forwards; -moz-animation: fx-fadein 3s 3.4s forwards; }
+.hand > div > div:nth-child(15) {animation: fx-fadein .3s 3.5s forwards; -webkit-animation: fx-fadein .3s 3.5s forwards; -moz-animation: fx-fadein 3s 3.5s forwards; }
+.hand > div > div:nth-child(16) {animation: fx-fadein .3s 3.6s forwards; -webkit-animation: fx-fadein .3s 3.6s forwards; -moz-animation: fx-fadein 3s 3.6s forwards; }
+.hand > div > div:nth-child(17) {animation: fx-fadein .3s 3.7s forwards; -webkit-animation: fx-fadein .3s 3.7s forwards; -moz-animation: fx-fadein 3s 3.7s forwards; }*/
+
+/* Fade in
 @-moz-keyframes fx-fadein {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -11,52 +57,9 @@
 @keyframes fx-fadein {
     from {opacity: 0;}
     to {opacity: 1;}
-}
+}*/
 
-.deck figure { opacity: 0; }
-.deck:nth-child(1) figure:nth-child(1) { animation: fx-fadein .3s 0.1s forwards; -webkit-animation: fx-fadein .3s 0.1s forwards; -moz-animation: fx-fadein .3s 0.1s forwards; }
-.deck:nth-child(1) figure:nth-child(2) { animation: fx-fadein .3s 0.2s forwards; -webkit-animation: fx-fadein .3s 0.2s forwards; -moz-animation: fx-fadein .3s 0.2s forwards; }
-.deck:nth-child(2) figure:nth-child(1) { animation: fx-fadein .3s 0.3s forwards; -webkit-animation: fx-fadein .3s 0.3s forwards; -moz-animation: fx-fadein .3s 0.3s forwards; }
-.deck:nth-child(2) figure:nth-child(2) { animation: fx-fadein .3s 0.4s forwards; -webkit-animation: fx-fadein .3s 0.4s forwards; -moz-animation: fx-fadein .3s 0.4s forwards; }
-.deck:nth-child(2) figure:nth-child(3) { animation: fx-fadein .3s 0.5s forwards; -webkit-animation: fx-fadein .3s 0.5s forwards; -moz-animation: fx-fadein .3s 0.5s forwards; }
-.deck:nth-child(2) figure:nth-child(4) { animation: fx-fadein .3s 0.6s forwards; -webkit-animation: fx-fadein .3s 0.6s forwards; -moz-animation: fx-fadein .3s 0.6s forwards; }
-.deck:nth-child(2) figure:nth-child(5) { animation: fx-fadein .3s 0.7s forwards; -webkit-animation: fx-fadein .3s 0.7s forwards; -moz-animation: fx-fadein .3s 0.7s forwards; }
-.deck:nth-child(3) figure:nth-child(1) { animation: fx-fadein .3s 0.8s forwards; -webkit-animation: fx-fadein .3s 0.8s forwards; -moz-animation: fx-fadein .3s 0.8s forwards; }
-.deck:nth-child(1) figure:nth-child(3) { animation: fx-fadein .3s 0.9s forwards; -webkit-animation: fx-fadein .3s 0.9s forwards; -moz-animation: fx-fadein .3s 0.9s forwards; }
-.deck:nth-child(1) figure:nth-child(4) { animation: fx-fadein .3s 1.0s forwards; -webkit-animation: fx-fadein .3s 1.0s forwards; -moz-animation: fx-fadein .3s 1.0s forwards; }
-.deck:nth-child(2) figure:nth-child(6) { animation: fx-fadein .3s 1.1s forwards; -webkit-animation: fx-fadein .3s 1.1s forwards; -moz-animation: fx-fadein .3s 1.1s forwards; }
-.deck:nth-child(2) figure:nth-child(7) { animation: fx-fadein .3s 1.2s forwards; -webkit-animation: fx-fadein .3s 1.2s forwards; -moz-animation: fx-fadein .3s 1.2s forwards; }
-.deck:nth-child(2) figure:nth-child(8) { animation: fx-fadein .3s 1.3s forwards; -webkit-animation: fx-fadein .3s 1.3s forwards; -moz-animation: fx-fadein .3s 1.3s forwards; }
-.deck:nth-child(2) figure:nth-child(9) { animation: fx-fadein .3s 1.4s forwards; -webkit-animation: fx-fadein .3s 1.4s forwards; -moz-animation: fx-fadein .3s 1.4s forwards; }
-.deck:nth-child(2) figure:nth-child(10){ animation: fx-fadein .3s 1.5s forwards; -webkit-animation: fx-fadein .3s 1.5s forwards; -moz-animation: fx-fadein .3s 1.5s forwards; }
-.deck:nth-child(3) figure:nth-child(2) { animation: fx-fadein .3s 1.6s forwards; -webkit-animation: fx-fadein .3s 1.6s forwards; -moz-animation: fx-fadein .3s 1.6s forwards; }
-.deck:nth-child(3) figure:nth-child(3) { animation: fx-fadein .3s 1.7s forwards; -webkit-animation: fx-fadein .3s 1.7s forwards; -moz-animation: fx-fadein .3s 1.7s forwards; }
-
-.hand > div > div {
-    opacity: 0;
-    -moz-transition: all 1s linear;
-    -webkit-transition: all 1s linear;
-    -o-transition: all 1s linear;
-    transition: all 1s linear;
-}
-.player.hand > div > div:nth-child(1)  {animation: fx-fadein .3s 2.1s forwards; -webkit-animation: fx-fadein .3s 2.1s forwards; -moz-animation: fx-fadein 3s 2.1s forwards; }
-.player.hand > div > div:nth-child(2)  {animation: fx-fadein .3s 2.2s forwards; -webkit-animation: fx-fadein .3s 2.2s forwards; -moz-animation: fx-fadein 3s 2.2s forwards; }
-.player.hand > div > div:nth-child(3)  {animation: fx-fadein .3s 2.3s forwards; -webkit-animation: fx-fadein .3s 2.3s forwards; -moz-animation: fx-fadein 3s 2.3s forwards; }
-.player.hand > div > div:nth-child(4)  {animation: fx-fadein .3s 2.4s forwards; -webkit-animation: fx-fadein .3s 2.4s forwards; -moz-animation: fx-fadein 3s 2.4s forwards; }
-.player.hand > div > div:nth-child(5)  {animation: fx-fadein .3s 2.5s forwards; -webkit-animation: fx-fadein .3s 2.5s forwards; -moz-animation: fx-fadein 3s 2.5s forwards; }
-.player.hand > div > div:nth-child(6)  {animation: fx-fadein .3s 2.6s forwards; -webkit-animation: fx-fadein .3s 2.6s forwards; -moz-animation: fx-fadein 3s 2.6s forwards; }
-.player.hand > div > div:nth-child(7)  {animation: fx-fadein .3s 2.7s forwards; -webkit-animation: fx-fadein .3s 2.7s forwards; -moz-animation: fx-fadein 3s 2.7s forwards; }
-.player.hand > div > div:nth-child(8)  {animation: fx-fadein .3s 2.8s forwards; -webkit-animation: fx-fadein .3s 2.8s forwards; -moz-animation: fx-fadein 3s 2.8s forwards; }
-.player.hand > div > div:nth-child(9)  {animation: fx-fadein .3s 2.9s forwards; -webkit-animation: fx-fadein .3s 2.9s forwards; -moz-animation: fx-fadein 3s 2.9s forwards; }
-.player.hand > div > div:nth-child(10) {animation: fx-fadein .3s 3.0s forwards; -webkit-animation: fx-fadein .3s 3.0s forwards; -moz-animation: fx-fadein 3s 3.0s forwards; }
-.player.hand > div > div:nth-child(11) {animation: fx-fadein .3s 3.1s forwards; -webkit-animation: fx-fadein .3s 3.1s forwards; -moz-animation: fx-fadein 3s 3.1s forwards; }
-.player.hand > div > div:nth-child(12) {animation: fx-fadein .3s 3.2s forwards; -webkit-animation: fx-fadein .3s 3.2s forwards; -moz-animation: fx-fadein 3s 3.2s forwards; }
-.player.hand > div > div:nth-child(13) {animation: fx-fadein .3s 3.3s forwards; -webkit-animation: fx-fadein .3s 3.3s forwards; -moz-animation: fx-fadein 3s 3.3s forwards; }
-.player.hand > div > div:nth-child(14) {animation: fx-fadein .3s 3.4s forwards; -webkit-animation: fx-fadein .3s 3.4s forwards; -moz-animation: fx-fadein 3s 3.4s forwards; }
-.player.hand > div > div:nth-child(15) {animation: fx-fadein .3s 3.5s forwards; -webkit-animation: fx-fadein .3s 3.5s forwards; -moz-animation: fx-fadein 3s 3.5s forwards; }
-.player.hand > div > div:nth-child(16) {animation: fx-fadein .3s 3.6s forwards; -webkit-animation: fx-fadein .3s 3.6s forwards; -moz-animation: fx-fadein 3s 3.6s forwards; }
-.player.hand > div > div:nth-child(17) {animation: fx-fadein .3s 3.7s forwards; -webkit-animation: fx-fadein .3s 3.7s forwards; -moz-animation: fx-fadein 3s 3.7s forwards; }*/
-
+/* Cards rotation */
 .hand > div > div {
     -webkit-transform-origin: bottom center;
     -moz-transform-origin: bottom center;
@@ -232,4 +235,3 @@
 .fx-hand17:nth-child(15) {left:343px;transform:rotateZ(68deg);}
 .fx-hand17:nth-child(16) {left:354px;transform:rotateZ(79deg);}
 .fx-hand17:nth-child(17) {left:365px;transform:rotateZ(90deg);}
-

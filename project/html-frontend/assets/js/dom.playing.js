@@ -14,12 +14,8 @@
      * @private
      */
     var playing_dragOver = function (e) {
-        if (e.originalEvent.dataTransfer.types.indexOf("playing-id") === -1) {
-            e.originalEvent.dataTransfer.dropEffect = "none";
-            return true;
-        }
         e.preventDefault();
-        e.originalEvent.dataTransfer.dropEffect = "move";
+        e.originalEvent.dpEffect = "move";
         return false;
     };
     /**
@@ -30,8 +26,17 @@
      */
     var playing_drop = function (e) {
         e.preventDefault();
-        var data = e.originalEvent.dataTransfer.getData("playing-id");
-        alert(data);
+        var data = e.originalEvent.dataTransfer.getData("Text");
+        try {
+            data = JSON.parse(data);
+        } catch (ex) {
+            dom.debug.log("playing.playing_drop", ex);
+            return;
+        }
+        if (data.hand === undefined) {
+            return;
+        }
+        dom.hand.removeCard(parseInt(data.hand.id, 10));
     };
     /**
      * @memberOf dom.playing

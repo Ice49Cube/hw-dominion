@@ -7,7 +7,7 @@
 // https://jsfiddle.net/v9q2kwcu/2/
 
 // hand of cards (not yet finished)
-// https://jsfiddle.net/Le1cpn16/11/
+// https://jsfiddle.net/Le1cpn16/13/
 
 // tristate jquery plugin
 // https://jsfiddle.net/d2suz7jt/1/
