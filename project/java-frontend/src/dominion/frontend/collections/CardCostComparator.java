@@ -19,9 +19,9 @@ public class CardCostComparator implements Comparator<GameCard> {
     @Override
     public int compare(GameCard o1, GameCard o2) {
         if (this.ascending) {
-            return o1.cost - o2.cost;
+            return o1.getCost() - o2.getCost();
         } else {
-            return o2.cost - o1.cost;
+            return o2.getCost() - o1.getCost();
         }
     }
 

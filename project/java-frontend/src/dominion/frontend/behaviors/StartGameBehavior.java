@@ -8,6 +8,7 @@ import dominion.frontend.GameEngine;
 import dominion.routing.CommandBase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StartGameBehavior implements IGameEngineBehavior {
 
@@ -15,13 +16,13 @@ public class StartGameBehavior implements IGameEngineBehavior {
     public CommandBase process(GameEngine engine, Game game) throws Exception {
         String choice;
         while (true) {
-            printMenu();
+            System.out.println("> New Game: N - Continue Game: code - Quit: Q");
+            System.out.print("> Your choice: ");
             choice = Console.readLine().trim();
             switch (choice) {
                 case "q":
                 case "Q":
-                    engine.setBehavior(null);
-                    return null;
+                    return engine.quit();
                 case "n":
                 case "N":
                     return createStartNewGameCommand();
@@ -32,31 +33,24 @@ public class StartGameBehavior implements IGameEngineBehavior {
     }
 
     private CommandBase createStartNewGameCommand() throws Exception {
-        String[] players = this.getPlayers();
+        String[] players = this.readPlayers();
         StartGameCommand command = new StartGameCommand();
-        command.setMethod("startGame");
         command.setPlayerNames(players);
-        command.setCardSet("ToDo Ask Card Set");
+        command.setCardSet(this.readCardSet());
         return command;
     }
 
     private CommandBase createStartNewGameCommand(String choice) {
         StartGameCommand command = new StartGameCommand();
-        command.setMethod("startGame");
         command.setCode(choice);
         return command;
     }
 
-    private void printMenu() {
-        System.out.println("New Game: N - Continue Game: code - Quit: Q");
-        System.out.print("Your choice: ");
-    }
-
-    private static String[] getPlayers() throws Exception {
+    private String[] readPlayers() throws Exception {
         ArrayList<String> players = new ArrayList();
         String player;
         while (players.size() < 4) {
-            System.out.print("Enter name for player " + (players.size() + 1));
+            System.out.print("> Enter name for player " + (players.size() + 1));
             if (players.size() > 1) {
                 System.out.print(" or enter to start");
             }
@@ -71,5 +65,16 @@ public class StartGameBehavior implements IGameEngineBehavior {
             }
         }
         return players.toArray(new String[players.size()]);
+    }
+    
+    private String readCardSet() throws Exception {
+        ArrayList<String> cardSets = new ArrayList(Arrays.asList(new String[]{"First Game", "Big Money", "Interaction", "Size Distortion", "Village Square", "Random"}));
+        while(true) {
+            System.out.println("> Available card sets: " + String.join(", ", cardSets.toArray(new String[cardSets.size()])));
+            System.out.print("> Please enter a cardset: ");
+            String cardSet = Console.readLine().trim();
+            if (cardSets.contains(cardSet)) 
+                return cardSet.replace(" ", "");
+        }
     }
 }

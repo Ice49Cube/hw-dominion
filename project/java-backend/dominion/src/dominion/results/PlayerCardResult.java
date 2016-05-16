@@ -1,4 +1,4 @@
-package dominion.commands;
+package dominion.results;
 
 public class PlayerCardResult {
 

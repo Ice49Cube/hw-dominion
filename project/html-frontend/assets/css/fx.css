@@ -1,5 +1,5 @@
 
-/* Cards fade-in
+/* Cards fade-in */
 .deck figure { opacity: 0; }
 .deck.victories figure:nth-child(1) { animation: fx-fadein .3s 0.1s forwards; -webkit-animation: fx-fadein .3s 0.1s forwards; -moz-animation: fx-fadein .3s 0.1s forwards; }
 .deck.victories figure:nth-child(2) { animation: fx-fadein .3s 0.2s forwards; -webkit-animation: fx-fadein .3s 0.2s forwards; -moz-animation: fx-fadein .3s 0.2s forwards; }
@@ -17,9 +17,9 @@
 .deck.kingdoms  figure:nth-child(9) { animation: fx-fadein .3s 1.4s forwards; -webkit-animation: fx-fadein .3s 1.4s forwards; -moz-animation: fx-fadein .3s 1.4s forwards; }
 .deck.kingdoms  figure:nth-child(10){ animation: fx-fadein .3s 1.5s forwards; -webkit-animation: fx-fadein .3s 1.5s forwards; -moz-animation: fx-fadein .3s 1.5s forwards; }
 .deck.treasures figure:nth-child(2) { animation: fx-fadein .3s 1.6s forwards; -webkit-animation: fx-fadein .3s 1.6s forwards; -moz-animation: fx-fadein .3s 1.6s forwards; }
-.deck.treasures figure:nth-child(3) { animation: fx-fadein .3s 1.7s forwards; -webkit-animation: fx-fadein .3s 1.7s forwards; -moz-animation: fx-fadein .3s 1.7s forwards; }*/
+.deck.treasures figure:nth-child(3) { animation: fx-fadein .3s 1.7s forwards; -webkit-animation: fx-fadein .3s 1.7s forwards; -moz-animation: fx-fadein .3s 1.7s forwards; }
 
-/* Cards fade-in
+/* Cards fade-in */
 .hand > div > div {
     opacity: 0;
     -webkit-transition: transform 0.3s linear;
@@ -43,9 +43,9 @@
 .hand > div > div:nth-child(14) {animation: fx-fadein .3s 3.4s forwards; -webkit-animation: fx-fadein .3s 3.4s forwards; -moz-animation: fx-fadein 3s 3.4s forwards; }
 .hand > div > div:nth-child(15) {animation: fx-fadein .3s 3.5s forwards; -webkit-animation: fx-fadein .3s 3.5s forwards; -moz-animation: fx-fadein 3s 3.5s forwards; }
 .hand > div > div:nth-child(16) {animation: fx-fadein .3s 3.6s forwards; -webkit-animation: fx-fadein .3s 3.6s forwards; -moz-animation: fx-fadein 3s 3.6s forwards; }
-.hand > div > div:nth-child(17) {animation: fx-fadein .3s 3.7s forwards; -webkit-animation: fx-fadein .3s 3.7s forwards; -moz-animation: fx-fadein 3s 3.7s forwards; }*/
+.hand > div > div:nth-child(17) {animation: fx-fadein .3s 3.7s forwards; -webkit-animation: fx-fadein .3s 3.7s forwards; -moz-animation: fx-fadein 3s 3.7s forwards; }
 
-/* Fade in
+/* Fade in*/
 @-moz-keyframes fx-fadein {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -57,7 +57,7 @@
 @keyframes fx-fadein {
     from {opacity: 0;}
     to {opacity: 1;}
-}*/
+}
 
 /* Cards rotation */
 .hand > div > div {

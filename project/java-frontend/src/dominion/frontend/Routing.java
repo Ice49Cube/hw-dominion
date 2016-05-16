@@ -1,25 +1,14 @@
 package dominion.frontend;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 
 import dominion.routing.ResultBase;
 import dominion.routing.CommandBase;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
+import java.io.*;
 import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.*;
+import java.util.*;
 
 public class Routing {
 
@@ -36,18 +25,37 @@ public class Routing {
         this.loadMethods();
     }
 
+    private String dispatch(HttpURLConnection http) throws Exception {
+        System.out.println("HTTP STATUS: " + http.getResponseCode() + " " + http.getResponseMessage());
+        switch (http.getResponseCode()) {
+            case HttpURLConnection.HTTP_OK:
+                return readStream(http.getInputStream());
+            default:
+                readError(http);
+                return null;
+        }
+    }
+
     public Method getMethod(String name) {
         return this.methods.get(name);
     }
 
     public ResultBase invoke(CommandBase command) throws Exception {
-        String json = post(mapper.writeValueAsString(command));
-        JsonNode node = mapper.readTree(json);
-        JsonNode methodNode = node.findValue("method");
-        System.out.println(methodNode.asText());
-        Method method = this.methods.get(methodNode.asText());
-        Class clazz = method.getParameterTypes()[0];
-        return (ResultBase) mapper.readValue(json, clazz);
+        try
+        {
+            String json = post(mapper.writeValueAsString(command));
+            JsonNode node = mapper.readTree(json);
+            JsonNode methodNode = node.findValue("method");
+            Method method = this.methods.get(methodNode.asText());
+            if (method == null) {
+                throw new NoSuchMethodException("Method '" + methodNode.asText() + "' not found.");
+            }
+            Class clazz = method.getParameterTypes()[0];
+            return (ResultBase) mapper.readValue(json, clazz);
+        }
+        catch(java.lang.reflect.InvocationTargetException e) {
+            throw new Exception(e.getCause() != null ? e.getCause() : e);
+        }
     }
 
     private void loadMethods() {
@@ -60,28 +68,42 @@ public class Routing {
     }
 
     private String post(String data) throws Exception {
-        try {
-            URL request = new URL(this.url);
-            URLConnection connection = request.openConnection();
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-            try (OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream())) {
-                out.write(data);
-                out.close();
-            }
-            StringBuilder builder = new StringBuilder();
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String line;
-                while ((line = in.readLine()) != null) {
-                    builder.append(line); // + "\r\n"(no need, json has no line breaks!)
-                }
-                in.close();
-            }
-            return builder.toString();
-        } catch (IOException e) {
-            Logger.getLogger(Routing.class.getName()).log(Level.SEVERE, "Error in request...", e);
-            throw new IllegalStateException(e);
+        System.out.println("Post: " + data);
+        URL request = new URL(this.url);
+        HttpURLConnection connection = (HttpURLConnection) request.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.connect();
+        try (OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream())) {
+            out.write(data);
+            out.close();
         }
+        String result = dispatch(connection);
+        return result;
+    }
+
+    private void readError(HttpURLConnection http) throws Exception {
+        if (http.getContentLengthLong() > 0 && http.getContentType().contains("application/json")) {
+            String json = this.readStream(http.getErrorStream());
+            Object oson = this.mapper.readValue(json, Object.class);
+            json = this.mapper.writer().withDefaultPrettyPrinter().writeValueAsString(oson);
+            throw new IllegalStateException(http.getResponseCode() + " " + http.getResponseMessage() + "\n" + json);
+        } else {
+            throw new IllegalStateException(http.getResponseCode() + " " + http.getResponseMessage());
+        }
+    }
+
+    private String readStream(InputStream stream) throws Exception {
+        StringBuilder builder = new StringBuilder();
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(stream))) {
+            String line;
+            while ((line = in.readLine()) != null) {
+                builder.append(line); // + "\r\n"(no need, json has no line breaks!)
+            }
+            in.close();
+        }
+        return builder.toString();
     }
 
     /**

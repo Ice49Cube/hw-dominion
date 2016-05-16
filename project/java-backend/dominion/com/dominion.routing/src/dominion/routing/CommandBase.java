@@ -12,6 +12,14 @@ public class CommandBase
     @JsonProperty("_method_")
     private String method;    
     
+    public CommandBase() {
+        System.out.println("Pass the method to the constructor, todo: fix unit tests!");
+    }
+    
+    public CommandBase(String method) {
+        this.method = method;
+    }
+    
     public String getMethod()
     {
         return this.method;

@@ -10,6 +10,10 @@ public class BuyCardCommand extends CommandBase
     private int playerId;
     private int[] usedPlayerCardId;
     
+    public BuyCardCommand() {
+        super("buyCard");
+    }
+    
     public boolean getCancel() {
         return this.cancel;
     }

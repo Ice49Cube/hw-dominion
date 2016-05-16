@@ -8,14 +8,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * by the methods on target.
  */
 public abstract class ResultBase {
-	//@JsonIgnore()
+	@JsonIgnore()
 	private final int code;
 	private boolean success;
 	private String method;
-
-	public ResultBase() {
-		this(false, 0, null);
-	}
 
 	/**
 	 * Constructs a ResultBase object with success set to true and code 200.

@@ -32,6 +32,11 @@ public class GameEngine {
         return this.behavior;
     }
 
+    public CommandBase quit() {
+        this.setBehavior(null);
+        return null;
+    }
+    
     public void run() throws Exception {
         while (this.behavior != null) {
             CommandBase command = this.behavior.process(this, this.game);
@@ -50,6 +55,14 @@ public class GameEngine {
     ////////////////////////////////////////////////////////////////////////////
     // <editor-fold desc="Callback methods">
 
+    public void startBuy(StartBuyResult data) {
+        this.behavior = new BuyBehavior();
+    }
+    
+    public void playAction(PlayActionResult data) {
+        // todo: play action
+    }
+
     public void startGame(StartGameResult data) {
         this.game = new Game(data);
         // Buy or actions behavior? Actions = 0, then buy...
@@ -60,6 +73,7 @@ public class GameEngine {
         }
     }
 
+    
     public void testServer(TestServerResult data) {
         System.out.println("Test server ok");
     }

@@ -85,9 +85,10 @@ public class CorsFilter implements Filter {
 		String param = config.getInitParameter("domains");
 		if (param != null) {
 			this.domains = param.split(",");
-			if (this.domains[0].equals("*"))
+			if (this.domains[0].equals("*")) {
 				System.out.println("\n    >>> WARNING: CORS is enabled by default for all!    <<<");
-			System.out.println("    >>>          See init-param in web.xml.             <<<\n");
+				System.out.println("    >>>          See init-param in web.xml.             <<<\n");
+			}
 		} else {
 			System.out.println("\n    >>> WARNING: CORS filter init-param is missing!    <<<\n");
 			if (DEFAULT_CORS) {

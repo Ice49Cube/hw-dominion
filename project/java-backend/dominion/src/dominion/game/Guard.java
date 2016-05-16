@@ -34,7 +34,7 @@ public class Guard {
 		if (ignoreCase) {
 			if (!s1.equalsIgnoreCase(s2)) {
 				throw new Exception(message);
-			}			
+			}
 		} else {
 			if (!s1.equals(s2)) {
 				throw new Exception(message);
@@ -69,8 +69,7 @@ public class Guard {
 
 	public static void validatePlayerHasCardsIn(Game game, Player player, String pile, int[] usedCards) {
 		// TODO Auto-generated method stub
-		
-		
+
 	}
 
 }

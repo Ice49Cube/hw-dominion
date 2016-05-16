@@ -3,14 +3,15 @@ package dominion.game;
 
 import java.sql.Connection;
 import java.util.*;
-import java.util.function.Predicate;
+import java.util.logging.Level;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.internal.logging.Logger;
 
 import dominion.commands.*;
 import dominion.model.*;
 import dominion.model.database.*;
 import dominion.routing.*;
+import dominion.results.*;
 
 public class GameEngine {
 	private Database database;
@@ -27,15 +28,10 @@ public class GameEngine {
 	///////////////////////////////////////////////////////////////////////////
 
 	@RoutedCommand()
-	public ResultBase buyCard(BuyCardCommand command) throws Exception
-	{
-		try
-		{
-			Guard.validateNotNull(game, "game");
-			Guard.validateEqual(command.getGameId(), game.getId(), "Game id is invalid.");
+	public ResultBase buyCard(BuyCardCommand command) throws Exception {
+		try {
+			this.validateGame(command.getGameId(), command.getPlayerId());
 			Player player = game.getCurrentPlayer();
-			Guard.validateEqual(command.getPlayerId(), player.getId(), "Player id is invalid.");
-			//PlayerCard card= player.getCard(c -> c.getCardId() == command.getCardId());
 			GameCard card = game.getCard(command.getCardId());
 			Guard.validateNotNull(card, "card");
 			int[] usedCards = command.getUsedPlayerCardId();
@@ -45,21 +41,32 @@ public class GameEngine {
 			} else {
 				Guard.forbidden();
 			}
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			return new ErrorResult(command.getMethod(), e);
 		}
 		return null; // Never gets here, Guard.forbidden() throws an exception.
 	}
 
-	
 	// TODO: check/validate session
 	@RoutedCommand()
 	public ResultBase playAction(PlayActionCommand command) {
-		return null;
+		try {
+			System.out.println("Game id: " + command.getGameId());
+			System.out.println("Game id: " + game.getId());
+			this.validateGame(command.getGameId(), command.getPlayerId());
+			if (command.getCancel()) {
+				try (Connection con = database.getConnection()) {
+					game.cancelActions(con);
+				}
+				return new StartBuyResult();
+			}
+			return null;// new PlayActionResult();
+		} catch (Exception e) {
+			Logger.getLogger(GameEngine.class).log(Level.SEVERE, e.toString());
+			return new ErrorResult(command.getMethod(), e);
+		}
 	}
-	
+
 	// TODO: check/validate session
 	@RoutedCommand()
 	public ResultBase startGame(StartGameCommand command) {
@@ -80,12 +87,12 @@ public class GameEngine {
 	@RoutedCommand()
 	public ResultBase testIets(EmptyCommand command) {
 		return new ResultBase("playMilitia") {
-			
+
 			public String beetjeTekst = "hello";
-			
+
 		};
 	}
-	
+
 	@RoutedCommand()
 	public ViewHighScoresResult viewHighScores(EmptyCommand command) {
 		ViewHighScoresResult result = new ViewHighScoresResult();
@@ -132,6 +139,13 @@ public class GameEngine {
 	private BuyCardResult buyCard(Game game, Player player, GameCard card) {
 		int maxOrder = player.getMaxOrder();
 		return null;
-		
+
 	}
+
+	private void validateGame(int gameId, int playerId) throws Exception {
+		Guard.validateNotNull(game, "game");
+		Guard.validateEqual(gameId, game.getId(), "Game id is invalid.");
+		Guard.validateEqual(playerId, game.getCurrentPlayerId(), "Player id is invalid.");
+	}
+
 }
