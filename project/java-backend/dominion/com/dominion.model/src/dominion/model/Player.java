@@ -72,6 +72,10 @@ public class Player {
         return this.id;
     }
 
+    public boolean getIsCurrent() {
+        return this.id == game.getCurrentPlayerId();
+    }
+    
     public int getMaxOrder() {
         return this.maxOrder;
     }

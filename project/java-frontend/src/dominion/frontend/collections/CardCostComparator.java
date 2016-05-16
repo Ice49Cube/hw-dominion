@@ -1,10 +1,10 @@
 package dominion.frontend.collections;
 
-import dominion.frontend.responses.GameCard;
+import dominion.results.*;
 
 import java.util.Comparator;
 
-public class CardCostComparator implements Comparator<GameCard> {
+public class CardCostComparator implements Comparator<GameCardInfo> {
 
     private final boolean ascending;
 
@@ -17,7 +17,7 @@ public class CardCostComparator implements Comparator<GameCard> {
     }
 
     @Override
-    public int compare(GameCard o1, GameCard o2) {
+    public int compare(GameCardInfo o1, GameCardInfo o2) {
         if (this.ascending) {
             return o1.getCost() - o2.getCost();
         } else {

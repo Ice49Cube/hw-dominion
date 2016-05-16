@@ -3,6 +3,7 @@ package dominion.results;
 import dominion.routing.*;
 
 public class TestServerResult extends ResultBase {
+	
 	public TestServerResult() {
 		super("testServer");
 	}

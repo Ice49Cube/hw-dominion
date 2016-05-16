@@ -11,7 +11,11 @@ import dominion.commands.*;
 import dominion.model.*;
 import dominion.model.database.*;
 import dominion.routing.*;
-import dominion.results.*;
+//NOTE: Because some result classes are partial generated with classes
+//      in the dominion.model name space (that is secret to the client) 
+//      the result classes are declared separately on the client side too.
+//      It was either double declarations both here versus here and there...
+import dominion.results.*; 
 
 public class GameEngine {
 	private Database database;
@@ -30,12 +34,16 @@ public class GameEngine {
 	@RoutedCommand()
 	public ResultBase buyCard(BuyCardCommand command) throws Exception {
 		try {
+			
 			this.validateGame(command.getGameId(), command.getPlayerId());
 			Player player = game.getCurrentPlayer();
+			
 			GameCard card = game.getCard(command.getCardId());
 			Guard.validateNotNull(card, "card");
 			int[] usedCards = command.getUsedPlayerCardId();
 			Guard.validatePlayerHasCardsIn(game, player, "Hand", usedCards);
+			
+			
 			if (player.getCoins() >= card.getCost() && card.getCount() > 0) {
 				return buyCard(game, player, card);
 			} else {
@@ -51,22 +59,18 @@ public class GameEngine {
 	@RoutedCommand()
 	public ResultBase playAction(PlayActionCommand command) {
 		try {
-			System.out.println("Game id: " + command.getGameId());
-			System.out.println("Game id: " + game.getId());
 			this.validateGame(command.getGameId(), command.getPlayerId());
+			Guard.validateEqual(this.game.getState(), "Action", "Invalid game state.");
 			if (command.getCancel()) {
-				try (Connection con = database.getConnection()) {
-					game.cancelActions(con);
-				}
-				return new StartBuyResult();
-			}
-			return null;// new PlayActionResult();
+				return this.cancelActions();
+			}			
+			return new ErrorResult(command.getMethod(), new Exception("TODO: return this.playAction()"));// new PlayActionResult();
 		} catch (Exception e) {
 			Logger.getLogger(GameEngine.class).log(Level.SEVERE, e.toString());
 			return new ErrorResult(command.getMethod(), e);
 		}
 	}
-
+	
 	// TODO: check/validate session
 	@RoutedCommand()
 	public ResultBase startGame(StartGameCommand command) {
@@ -85,26 +89,17 @@ public class GameEngine {
 	}
 
 	@RoutedCommand()
-	public ResultBase testIets(EmptyCommand command) {
-		return new ResultBase("playMilitia") {
-
-			public String beetjeTekst = "hello";
-
-		};
-	}
-
-	@RoutedCommand()
 	public ViewHighScoresResult viewHighScores(EmptyCommand command) {
 		ViewHighScoresResult result = new ViewHighScoresResult();
-		List<HighScoreResult> scores = new ArrayList<HighScoreResult>();
-		scores.add(new HighScoreResult("Jaan", 9003));
-		scores.add(new HighScoreResult("Wout", 9002));
-		scores.add(new HighScoreResult("Maysam", 9001));
-		scores.add(new HighScoreResult("Michaël", 9000));
+		List<HighScoreInfo> scores = new ArrayList<HighScoreInfo>();
+		scores.add(new HighScoreInfo("Jaan", 9003));
+		scores.add(new HighScoreInfo("Wout", 9002));
+		scores.add(new HighScoreInfo("Maysam", 9001));
+		scores.add(new HighScoreInfo("Michaël", 9000));
 		for (Integer i = 99; i > 0; i--) {
-			scores.add(new HighScoreResult("Player " + i, i));
+			scores.add(new HighScoreInfo("Player " + i, i));
 		}
-		result.setScores(scores.toArray(new HighScoreResult[scores.size()]));
+		result.setScores(scores.toArray(new HighScoreInfo[scores.size()]));
 		return result;
 	}
 
@@ -115,6 +110,13 @@ public class GameEngine {
 
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
+
+	private StartBetResult cancelActions() throws Exception {
+		try (Connection con = database.getConnection()) {
+			game.cancelActions(con);
+		}
+		return new StartBetResult(); //new StartBuyResult();
+	}
 
 	private StartGameResult startNewGame(String[] playerNames, String cardSet) throws Exception {
 		// TODO: add game to session

@@ -1,7 +1,10 @@
 package dominion.frontend;
 
+
+import dominion.results.*;
+
 import dominion.frontend.behaviors.*;
-import dominion.frontend.responses.*;
+//import dominion.frontend.responses.*;
 
 import dominion.routing.CommandBase;
 import dominion.routing.ResultBase;
@@ -12,7 +15,6 @@ public class GameEngine {
 
     ////////////////////////////////////////////////////////////////////////////
     // <editor-fold desc="Constructors and member declarations" defaultstate="collapsed">
-
     private final Routing routing;
 
     private Game game;
@@ -27,6 +29,23 @@ public class GameEngine {
     // </editor-fold>
     ////////////////////////////////////////////////////////////////////////////
     // <editor-fold desc="Dispatching methods" defaultstate="collapsed">
+    public void run() throws Exception {
+        while (this.behavior != null) {
+            this.step();
+        }
+    }
+    
+    public void step() throws Exception {
+        CommandBase command = this.behavior.process(this, this.game);
+        if (command != null) {
+            this.response = routing.invoke(command);
+            Method method = this.routing.getMethod(this.response.getMethod());
+            method.invoke(this, this.response);
+        }
+    }
+    // </editor-fold>
+    ////////////////////////////////////////////////////////////////////////////
+    // <editor-fold desc="Accessors and methods">
 
     public IGameEngineBehavior getBehavior() {
         return this.behavior;
@@ -35,17 +54,6 @@ public class GameEngine {
     public CommandBase quit() {
         this.setBehavior(null);
         return null;
-    }
-    
-    public void run() throws Exception {
-        while (this.behavior != null) {
-            CommandBase command = this.behavior.process(this, this.game);
-            if (command != null) {
-                this.response = routing.invoke(command);
-                Method method = this.routing.getMethod(this.response.getMethod());
-                method.invoke(this, this.response);
-            }
-        }
     }
 
     public void setBehavior(IGameEngineBehavior value) {
@@ -58,12 +66,14 @@ public class GameEngine {
     public void startBuy(StartBuyResult data) {
         this.behavior = new BuyBehavior();
     }
-    
+
     public void playAction(PlayActionResult data) {
         // todo: play action
     }
 
     public void startGame(StartGameResult data) {
+        dominion.results.StartGameResult x = new dominion.results.StartGameResult();
+        
         this.game = new Game(data);
         // Buy or actions behavior? Actions = 0, then buy...
         if (this.game.getState().equals("Action")) {
@@ -73,7 +83,6 @@ public class GameEngine {
         }
     }
 
-    
     public void testServer(TestServerResult data) {
         System.out.println("Test server ok");
     }

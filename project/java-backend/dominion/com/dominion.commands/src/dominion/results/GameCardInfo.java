@@ -1,7 +1,9 @@
-package dominion.frontend.responses;
+package dominion.results;
 
-public class GameCard {
+import dominion.model.*;
 
+public class GameCardInfo {
+    
     private int id;
     private String name;
     private String deck;
@@ -11,6 +13,28 @@ public class GameCard {
     private boolean isCoin;
     private int value;
 
+    public static GameCardInfo[] fromGame(Game game) {
+        GameCard[] cards = game.getCards();
+        GameCardInfo[] result = new GameCardInfo[cards.length];
+        for(int i = 0; i < cards.length; i++) {
+            result[i] = fromCard(cards[i]);
+        }
+        return result;
+    }
+
+    public static GameCardInfo fromCard(GameCard card) {
+        GameCardInfo result = new GameCardInfo();
+        result.setCost(card.getCost());
+        result.setCount(card.getCount());
+        result.setDeck(card.getDeck());
+        result.setId(card.getId());
+        result.setIsAction(card.getIsAction());
+        result.setIsCoin(card.getIsCoin());
+        result.setName(card.getName());
+        result.setValue(card.getValue());
+        return result;
+    }
+    
     public int getId() {
         return this.id;
     }
@@ -74,17 +98,4 @@ public class GameCard {
     public void setValue(int value) {
         this.value = value;
     }
-
 }
-
-/* 		{
-			"id": 647,
-			"count": 30,
-			"cost": 6,
-			"deck": "Treasure",
-			"isAction": false,
-			"isCoin": true,
-			"name": "gold",
-			"value": 3
-		},
- */

@@ -1,46 +1,22 @@
-package dominion.frontend.responses;
+package dominion.results;
 
+import dominion.model.*;
 import java.util.*;
-import java.util.function.Predicate;
+import java.util.function.*;
 
-public class Player {
+public class CurrentPlayerInfo {/* extends PlayerInfo {
 
-    private int id;
-    private String name;
     private HashMap<Integer, PlayerCard> cards;
     private int actions;
     private int buys;
+    // private int coins;
 
     public PlayerCard[] getCards(Predicate<? super PlayerCard> filter) {
         return this.cards.values().stream().filter(filter).toArray(size -> new PlayerCard[size]);
     }
-    
-    public int getId() {
-        return this.id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
 
     public PlayerCard[] getCards() {
         return this.cards == null ? null : this.cards.values().toArray(new PlayerCard[this.cards.size()]);
-    }
-
-    public int getActions() {
-        return this.actions;
-    }
-
-    public int getBuys() {
-        return this.buys;
-    }
-
-    public void setId(int value) {
-        this.id = value;
-    }
-
-    public void setName(String value) {
-        this.name = value;
     }
 
     public void setCards(PlayerCard[] value) {
@@ -54,6 +30,17 @@ public class Player {
         }
     }
 
+    public int getActions() {
+        return this.actions;
+    }
+
+    public int getBuys() {
+        return this.buys;
+    }
+
+    /*
+	 * public int getCoins() { return this.actions; }
+     /
     public void setActions(int value) {
         this.actions = value;
     }
@@ -62,4 +49,7 @@ public class Player {
         this.buys = value;
     }
 
+    /*
+	 * public void setCoins(int value) { this.actions = value; }
+     */
 }

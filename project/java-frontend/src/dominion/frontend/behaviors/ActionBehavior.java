@@ -3,7 +3,7 @@ package dominion.frontend.behaviors;
 import dominion.commands.PlayActionCommand;
 
 import dominion.frontend.*;
-import dominion.frontend.responses.*;
+import dominion.results.*;
 
 import dominion.routing.CommandBase;
 import java.util.*;
@@ -19,7 +19,7 @@ public class ActionBehavior implements IGameEngineBehavior {
         return cmd;
     }
 
-    private CommandBase playAction(GameEngine engine, Game game, Player player, ArrayList<PlayerCard> cards) {
+    private CommandBase playAction(GameEngine engine, Game game, PlayerInfo player, ArrayList<PlayerCardInfo> cards) {
         game.printGameCards();
         game.printPlayers();
         game.printCurrentPlayer();
@@ -28,7 +28,7 @@ public class ActionBehavior implements IGameEngineBehavior {
         return null;
     }
 
-    private void printActionCards(ArrayList<PlayerCard> cards) {
+    private void printActionCards(ArrayList<PlayerCardInfo> cards) {
 
     }
 
@@ -37,10 +37,10 @@ public class ActionBehavior implements IGameEngineBehavior {
         game.printGameCards();
         game.printPlayers();
         game.printCurrentPlayer();
-        Player player = game.getCurrentPlayer();
+        PlayerInfo player = game.getCurrentPlayer();
         // Does the player have actions left and action cards?
         if (player.getActions() != 0) {
-            ArrayList<PlayerCard> cards = game.getCurrentPlayerActionCards();
+            ArrayList<PlayerCardInfo> cards = game.getCurrentPlayerActionCards();
             if (!cards.isEmpty()) {
                 return this.playAction(engine, game, player, cards);
             }

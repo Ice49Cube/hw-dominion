@@ -2,12 +2,12 @@ package dominion.frontend.behaviors;
 
 import dominion.commands.*;
 import dominion.frontend.*;
-import dominion.frontend.responses.*;
+import dominion.results.*;
 import dominion.routing.*;
 
 public class BuyBehavior implements IGameEngineBehavior {
 
-    private BuyCardCommand buyCard(Game game, GameCard card, Player player) {
+    private BuyCardCommand buyCard(Game game, GameCardInfo card, PlayerInfo player) {
         BuyCardCommand cmd = new BuyCardCommand();
         cmd.setCancel(false);
         cmd.setCardId(card.getId());
@@ -16,18 +16,18 @@ public class BuyBehavior implements IGameEngineBehavior {
         return cmd;
     }
 
-    private CommandBase buyCard(GameEngine engine, Game game, Player player, int amount) throws Exception {
+    private CommandBase buyCard(GameEngine engine, Game game, PlayerInfo player, int amount) throws Exception {
         while (true) {
-            game.printGameCards();
+            game.printAll();
             System.out.println(String.format("> You have %d buys and %d$.", player.getBuys(), amount));
             System.out.print("> Enter a card name or C for cancel: ");
             String input = Console.readLine().trim();
             if (input.equalsIgnoreCase("C")) {
                 return this.cancelBuy(game);
             }
-            GameCard[] cards = game.getCards(c -> c.getName().equalsIgnoreCase(input));
+            GameCardInfo[] cards = game.getCards(c -> c.getName().equalsIgnoreCase(input));
             if (cards.length == 1) {
-                GameCard card = cards[0];
+                GameCardInfo card = cards[0];
                 if (card.getCost() <= amount) {
                     return buyCard(game, card, player);
                 }
@@ -50,12 +50,12 @@ public class BuyBehavior implements IGameEngineBehavior {
 
     @Override
     public CommandBase process(GameEngine engine, Game game) throws Exception {
-        Player player = game.getCurrentPlayer();
+        PlayerInfo player = game.getCurrentPlayer();
         if (player.getBuys() != 0) {
-            PlayerCard[] playerCards = player.getCards(c -> c.getPile().equals("Hand"));
+            PlayerCardInfo[] playerCards = player.getCards(c -> c.getPile().equals("Hand"));
             int total = 0;
-            for (PlayerCard playerCard : playerCards) {
-                GameCard card = game.getCard(playerCard.getCardId());
+            for (PlayerCardInfo playerCard : playerCards) {
+                GameCardInfo card = game.getCard(playerCard.getCardId());
                 if (card.getIsCoin()) {
                     total += card.getValue();
                 }

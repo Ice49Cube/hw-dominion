@@ -2,11 +2,10 @@ package dominion.frontend;
 
 import com.fasterxml.jackson.databind.*;
 
-import dominion.routing.ResultBase;
-import dominion.routing.CommandBase;
+import dominion.routing.*;
 
 import java.io.*;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.net.*;
 import java.util.*;
 
@@ -26,13 +25,12 @@ public class Routing {
     }
 
     private String dispatch(HttpURLConnection http) throws Exception {
-        System.out.println("HTTP STATUS: " + http.getResponseCode() + " " + http.getResponseMessage());
-        switch (http.getResponseCode()) {
-            case HttpURLConnection.HTTP_OK:
-                return readStream(http.getInputStream());
-            default:
-                readError(http);
-                return null;
+        System.out.println("HTTP: " + http.getResponseCode() + " " + http.getResponseMessage());
+        try {
+            return readStream(http.getInputStream());
+        } catch(Exception ex) {
+            readAndThrowError(http);
+            return null; // <- never gets here, previous statement throws an error
         }
     }
 
@@ -68,22 +66,22 @@ public class Routing {
     }
 
     private String post(String data) throws Exception {
-        System.out.println("Post: " + data);
+        System.out.println("JSON: " + data);
         URL request = new URL(this.url);
-        HttpURLConnection connection = (HttpURLConnection) request.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setDoOutput(true);
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.connect();
-        try (OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream())) {
+        HttpURLConnection http = (HttpURLConnection) request.openConnection();
+        http.setRequestMethod("POST");
+        http.setDoOutput(true);
+        http.setRequestProperty("Content-Type", "application/json");
+        http.connect();
+        try (OutputStreamWriter out = new OutputStreamWriter(http.getOutputStream())) {
             out.write(data);
             out.close();
         }
-        String result = dispatch(connection);
+        String result = dispatch(http);
         return result;
     }
 
-    private void readError(HttpURLConnection http) throws Exception {
+    private void readAndThrowError(HttpURLConnection http) throws Exception {
         if (http.getContentLengthLong() > 0 && http.getContentType().contains("application/json")) {
             String json = this.readStream(http.getErrorStream());
             Object oson = this.mapper.readValue(json, Object.class);

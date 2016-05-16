@@ -1,10 +1,10 @@
 package dominion.results;
 
-public class HighScoreResult {
+public class HighScoreInfo {
 	private final String name;
 	private final Integer score;
 
-	public HighScoreResult(String name, Integer score) {
+	public HighScoreInfo(String name, Integer score) {
 		this.name = name;
 		this.score = score;
 	}

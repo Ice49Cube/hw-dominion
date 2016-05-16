@@ -59,7 +59,7 @@ public class Game {
     ////////////////////////////////////////////////////////////////////////////
     // <editor-fold desc="Public">
     public void cancelActions(Connection con) throws Exception {
-        this.updateState(con, "Buy");
+        this.updateState(con, "Bet");
     }
 
     public GameCard getCard(int id) {
