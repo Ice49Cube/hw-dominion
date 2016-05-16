@@ -20,13 +20,14 @@ main();
 
 function formatItem(type, card)
 {
-	return 'INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, ' +
+	return 'INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, ' +
 		'"' + formatCasing(type) + '", ' +
 		'"' + card.name + '", ' +
 		' 10, ' + 
 		card.cost + ', ' +
 		(card.action ? 1 : 0) + ', ' +
-		(card.coin ? 1 : 0) +  
+		(card.coin ? 1 : 0) + ', ' +
+		card.value +
 	');\r\n' +
 		"SET @" + card.name + " = LAST_INSERT_ID();";
 }

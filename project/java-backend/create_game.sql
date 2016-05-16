@@ -1,45 +1,46 @@
 USE dominion;
 
-INSERT INTO games () VALUES ();
+INSERT INTO games (cardset, state) VALUES ("Random", "Action");
 SET @game = LAST_INSERT_ID();
 
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Treasure", "gold",  10, 6, 0, 1);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Treasure", "gold",  10, 6, 0, 1, 3);
 SET @gold = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Treasure", "silver",  10, 3, 0, 1);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Treasure", "silver",  10, 3, 0, 1, 2);
 SET @silver = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Treasure", "copper",  10, 0, 0, 1);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Treasure", "copper",  10, 0, 0, 1, 1);
 SET @copper = LAST_INSERT_ID();
 
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "adventurer",  10, 6, 1, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "adventurer",  10, 6, 1, 0, 0);
 SET @adventurer = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "bureaucrat",  10, 4, 1, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "bureaucrat",  10, 4, 1, 0, 0);
 SET @bureaucrat = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "cellar",  10, 2, 1, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "cellar",  10, 2, 1, 0, 0);
 SET @cellar = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "chancellor",  10, 3, 1, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "chancellor",  10, 3, 1, 0, 0);
 SET @chancellor = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "chapel",  10, 2, 1, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "chapel",  10, 2, 1, 0, 0);
 SET @chapel = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "council_room",  10, 5, 1, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "council_room",  10, 5, 1, 0, 0);
 SET @council_room = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "feast",  10, 4, 1, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "feast",  10, 4, 1, 0, 0);
 SET @feast = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "festival",  10, 5, 1, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "festival",  10, 5, 1, 0, 0);
 SET @festival = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "gardens",  10, 4, 0, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "gardens",  10, 4, 0, 0, 0);
 SET @gardens = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Kingdom", "laboratory",  10, 5, 1, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Kingdom", "laboratory",  10, 5, 1, 0, 0);
 SET @laboratory = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Victory", "province",  10, 8, 0, 0);
+
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Victory", "province",  10, 8, 0, 0, 0);
 SET @province = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Victory", "duchy",  10, 5, 0, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Victory", "duchy",  10, 5, 0, 0, 0);
 SET @duchy = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Victory", "estate",  10, 2, 0, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Victory", "estate",  10, 2, 0, 0, 0);
 SET @estate = LAST_INSERT_ID();
-INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin) VALUES (@game, "Victory", "curse",  10, 0, 0, 0);
+INSERT INTO gamecards (game, deck, `name`, `count`, cost, isaction, iscoin, `value`) VALUES (@game, "Victory", "curse",  10, 0, 0, 0, 0);
 SET @curse = LAST_INSERT_ID();
 
-INSERT INTO players (game, `name`) VALUES (@game, "michaël");
+INSERT INTO players (game, `name`, actions, buys) VALUES (@game, "michaël", 1, 1);
 SET @michael = LAST_INSERT_ID();
 INSERT INTO players (game, `name`) VALUES (@game, "maysam");
 SET @maysam = LAST_INSERT_ID();
@@ -68,7 +69,7 @@ INSERT INTO playercards (player, `order`, pile, card) VALUES(@maysam, 8, "Deck",
 INSERT INTO playercards (player, `order`, pile, card) VALUES(@maysam, 9, "Deck", @copper);
 INSERT INTO playercards (player, `order`, pile, card) VALUES(@maysam, 10, "Deck", @estate);
 
-UPDATE games SET currentplayer = @michael WHERE id = @game;
+UPDATE games SET player = @michael WHERE id = @game;
 
 # All cards that belong to players in the game
 SELECT * FROM playercards

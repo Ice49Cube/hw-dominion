@@ -69,6 +69,7 @@ CREATE TABLE players (
 	`name` VARCHAR(20) NOT NULL,
 	actions INT NOT NULL DEFAULT 0,
 	buys INT NOT NULL DEFAULT 0,
+	coins INT NOT NULL DEFAULT 0,
 	CONSTRAINT pk_player PRIMARY KEY (id),
 	CONSTRAINT uk1_player UNIQUE KEY (game, `name`),
 	CONSTRAINT fk1_player FOREIGN KEY(game) REFERENCES games(id)
