@@ -114,30 +114,15 @@ public class Player {
     public void cancelBuy(Connection con) throws Exception {
         Guard.validateCurrentPlayer(this, "cancelBuy");
         Guard.validateState(game, "Buy");
-        List<Player>players = Arrays.asList(game.getPlayers());
-        players.sort((Player o1, Player o2) -> o1.getId() - o2.getId());
-        int index = players.indexOf(game.getCurrentPlayer());
-        index += 1;
-        if (index > players.size()) {
-            index = 0;
-        }
-        Player player = players.get(index);
-        game.updateCurrentPlayerId(con, player.getId());
-        String sql = "UPDATE players SET actions = 1, buys = 1, coins = 0 WHERE id= ?";
-        Object [] args = new Object[]{player.getId()};
-        int affected = Database.executeUpdate(con, sql, args);
-        Guard.validateAffected(1, affected, "Player.cancelBuy - players");
+        game.nextPlayer(con);
     }
 
     public int getCoinCardValueByCardId(int playerCardId) {
         PlayerCard playerCard = this.getCard(playerCardId);
-        if (!playerCard.getPile().equals("Hand")) {
-            throw new IllegalArgumentException("Card is not in the player his hand. - Player.getCoinCardValueByCardId");
-        }
+        Guard.validateNotNull(playerCard, "Card does not belong to the player or does not exist. - Player.getCoinCardValueById");
+        Guard.validateTrue(playerCard.getPile().equals("Hand"), "Card is not in the player his hand. - Player.getCoinCardValueByCardId");
         GameCard gameCard = game.getCard(playerCard.getCardId());
-        if (!gameCard.getIsCoin()) {
-            throw new IllegalArgumentException("Card is not a coin. - Player.getCoinCardValueByCardId");
-        }
+        Guard.validateTrue(gameCard.getIsCoin(), "Card is not a coin. - Player.getCoinCardValueByCardId");
         return gameCard.getValue();
     }
 
@@ -199,5 +184,23 @@ public class Player {
 
     void setMinOrder(int value) {
         this.minOrder = value;
+    }
+    
+    void updateActions(int value) {
+        this.actions = value;
+    }
+
+    void updateBuys(int value) {
+        this.buys = value;
+    }
+    
+    void updateCoins(int value) {
+        this.coins = value;
+    }
+    
+    void updateAll(int buys, int coins, int actions) {
+        this.updateActions(actions);
+        this.updateBuys(buys);
+        this.updateCoins(coins);
     }
 }

@@ -11,6 +11,12 @@ import dominion.routing.ResultBase;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+/**
+ * Implements the callback methods. Each state (Action, Bet, Buy) has behavior.
+ * (Action implements another layer of behavior.) The Game model is updated
+ * before the next input behavior is activated/processed. Makes the next call
+ * and calls the corresponding callback upon result.
+ */
 public class GameEngine {
 
     ////////////////////////////////////////////////////////////////////////////

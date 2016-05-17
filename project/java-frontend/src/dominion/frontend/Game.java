@@ -64,9 +64,11 @@ public class Game {
         return this.info;
     }
     
-    public void nextPlayer(PlayerInfo player) {
-        
+    public void nextPlayer(PlayerInfo next) {
+        this.currentPlayer = next;
+        this.players.put(next.getId(), next);        
     }
+    
     ////////////////////////////////////////////////////////////////////////////
     // <editor-fold desc="Print Methods" defaultstate="collapsed">
 

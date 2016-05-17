@@ -7,6 +7,7 @@ import dominion.model.database.*;
 import java.sql.*;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Game {
     ////////////////////////////////////////////////////////////////////////////
@@ -102,11 +103,30 @@ public class Game {
         return this.state;
     }
 
-    public boolean isFinished(Connection con) throws Exception {
-        if (this.winner != -1) {
-            return true;
+    void nextPlayer(Connection con) throws Exception {
+        List<Player> sorted = players.values().stream().sorted((p1, p2) -> p1.getId() - p2.getId()).collect(Collectors.toList());
+        int index = sorted.indexOf(getCurrentPlayer());
+        index += 1;
+        if (index >= sorted.size()) {
+            index = 0;
         }
-        String sql = "SELECT MAX(counter) as counter FROM" + " ("
+        Player player = sorted.get(index);
+        String sql = "UPDATE players SET actions = 1, buys = 1, coins = 0 WHERE id= ?";
+        Object [] args = new Object[]{player.getId()};
+        int affected = Database.executeUpdate(con, sql, args);
+        Guard.validateAffected(1, affected, "Player.cancelBuy - players");
+        player.updateActions(1);
+        player.updateBuys(1);
+        player.updateCoins(0);
+        updateState(con, "Action");
+        updateCurrentPlayerId(con, player.getId());
+    }
+    
+        
+    public boolean isFinished(Connection con) throws Exception {
+        return this.winner != -1;
+        
+        /*String sql = "SELECT MAX(counter) as counter FROM" + " ("
                 + " SELECT `count` = 0 AS counter FROM gamecards WHERE" + " game = ? AND name = \"province\"" + " UNION"
                 + " SELECT COUNT(*) >= 3 AS counter FROM gamecards WHERE" + " game = ? AND `count` = 0" + " ) AS Q";
         try (PreparedStatement stmt = con.prepareStatement(sql);
@@ -116,7 +136,7 @@ public class Game {
             } else {
                 return false;
             }
-        }
+        }*/
     }
 
     // </editor-fold>
