@@ -37,14 +37,14 @@ public class GameEngine {
 			this.validateGame(cmd.getGameId(), cmd.getPlayerId());
 			if (cmd.getCancel()) {
 				try (Connection con = database.getConnection()) {
-					game.getCurrentPlayer().cancelBet(con);
+					game.cancelBet(con);
+					return new StartBuyResult();
 				}
-				return new StartBuyResult();
 			} else {
 				try (Connection con = database.getConnection()) {
-					game.getCurrentPlayer().betCoins(con, cmd.getCoinCards());
+					game.betCoins(con, cmd.getCoinCards());
+					return betCoins(cmd.getCoinCards());
 				}
-				return betCoins(cmd.getCoinCards());
 			}
 		} catch (Exception e) {
 			return new ErrorResult(cmd.getMethod(), e);
@@ -73,7 +73,7 @@ public class GameEngine {
 			this.validateGame(cmd.getGameId(), cmd.getPlayerId());
 			Guard.validateEqual(this.game.getState(), "Action", "Invalid game state.");
 			if (cmd.getCancel()) {
-				return this.cancelActions();
+				return this.cancelPlayAction();
 			}
 			return new ErrorResult(cmd.getMethod(), new Exception("TODO: GameEngine.playAction()"));// new
 		} catch (Exception e) {
@@ -124,7 +124,7 @@ public class GameEngine {
 
 	private NextPlayerResult buyCard() throws Exception {
 		try (Connection con = database.getConnection()) {
-			game.getCurrentPlayer().cancelBuy(con);
+			game.cancelBuy(con);
 			NextPlayerResult result = new NextPlayerResult();
 			result.setPlayer(PlayerInfo.fromPlayer(game, game.getCurrentPlayer()));
 			return result;
@@ -133,14 +133,9 @@ public class GameEngine {
 	
 	private BuyCardResult buyCard(int cardId) throws Exception {
 		try (Connection con = database.getConnection()) {
-			Player player = game.getCurrentPlayer();
-			GameCard gameCard = game.getCard(cardId);
-	        if (gameCard == null) {
-	            throw new IllegalStateException("Card not in game. - GameEngine.buyCard");
-	        }
-			PlayerCard playerCard = player.buyCard(con, gameCard);
+			PlayerCard playerCard = game.buyCard(con, cardId);
 			BuyCardResult result = new BuyCardResult();
-			result.setGameCard(GameCardInfo.fromCard(gameCard));
+			result.setGameCard(GameCardInfo.fromCard(game.getCard(cardId)));
 			result.setPlayerCard(PlayerCardInfo.fromCard(playerCard));
 			return result;
 		}
@@ -160,9 +155,9 @@ public class GameEngine {
 		return result;
 	}
 	
-	private StartBetResult cancelActions() throws Exception {
+	private StartBetResult cancelPlayAction() throws Exception {
 		try (Connection con = database.getConnection()) {
-			game.getCurrentPlayer().cancelActions(con);
+			game.cancelActions(con);
 		}
 		return new StartBetResult(game); // new StartBuyResult();
 	}

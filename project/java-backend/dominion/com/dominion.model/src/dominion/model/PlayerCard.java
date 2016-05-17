@@ -1,6 +1,8 @@
 package dominion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dominion.model.database.Database;
+import java.sql.Connection;
 
 public class PlayerCard 
 {
@@ -53,5 +55,15 @@ public class PlayerCard
     void setPile(String value)
     {
         this.pile = value;
+    }
+    
+    //\"Table\"
+    void updatePileAndOrder(Connection con, String pile, int order) throws Exception {
+        String sql = "UPDATE playercards SET pile = ?, `order` = ? WHERE id = ?";
+        Object[] args = new Object[]{pile, order, this.getId()};
+        int affected = Database.executeUpdate(con, sql, args);
+        Guard.validateAffected(1, affected, "PlayerCard.updatePileAndOrder");
+        this.pile = pile;
+        this.order = order;
     }
 }

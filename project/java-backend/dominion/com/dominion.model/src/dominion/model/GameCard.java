@@ -1,6 +1,8 @@
 package dominion.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
+import dominion.model.database.*;
+import java.sql.*;
 
 public class GameCard 
 {
@@ -73,5 +75,13 @@ public class GameCard
     public int getValue()
     {
         return this.value;
+    }
+    
+    void updateCount(Connection con, int value) throws Exception {
+        String sql = "UPDATE gamecards SET count = ? WHERE id = ?";
+        Object[] args = new Object[]{value, this.id};
+        int affected = Database.executeUpdate(con, sql, args);
+        Guard.validateAffected(1, affected, "GameCard.updateCount");
+        this.count = value;
     }
 }

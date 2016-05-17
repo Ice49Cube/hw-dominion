@@ -22,45 +22,49 @@ public class Game {
     private String cardSet;
 
     public Game(Connection con, String[] playerNames, String cardSetName) throws Exception {
-        CardSet cardSet = CardSet.parse(cardSetName, CardSet.getRandomCardSet());
-        this.cardSet = cardSet.getName();
+        CardSet source = CardSet.parse(cardSetName, CardSet.getRandomCardSet());
+        this.cardSet = source.getName();
         this.state = "Action";
-        this.id = this.insertGameIntoGames(con, this.cardSet);
-        this.cards = new HashMap<Integer, GameCard>();
-        this.insertCardIntoGameCards(con, "Treasure", CardInfo.Gold, playerNames.length);
-        this.insertCardIntoGameCards(con, "Treasure", CardInfo.Silver, playerNames.length);
-        GameCard copper = this.insertCardIntoGameCards(con, "Treasure", CardInfo.Copper, playerNames.length);
-        this.insertCardIntoGameCards(con, "Victory", CardInfo.Province, playerNames.length);
-        this.insertCardIntoGameCards(con, "Victory", CardInfo.Duchy, playerNames.length);
-        GameCard estate = this.insertCardIntoGameCards(con, "Victory", CardInfo.Estate, playerNames.length);
-        this.insertCardIntoGameCards(con, "Victory", CardInfo.Curse, playerNames.length);
-        for (CardInfo cardInfo : cardSet.getCards()) {
-            this.insertCardIntoGameCards(con, "Kingdom", cardInfo, playerNames.length);
+        this.id = this.insert(con, this.cardSet);
+        this.cards = new HashMap<>();
+        this.insertCard(con, "Treasure", CardInfo.Gold, playerNames.length);
+        this.insertCard(con, "Treasure", CardInfo.Silver, playerNames.length);
+        GameCard copper = this.insertCard(con, "Treasure", CardInfo.Copper, playerNames.length);
+        this.insertCard(con, "Victory", CardInfo.Province, playerNames.length);
+        this.insertCard(con, "Victory", CardInfo.Duchy, playerNames.length);
+        GameCard estate = this.insertCard(con, "Victory", CardInfo.Estate, playerNames.length);
+        this.insertCard(con, "Victory", CardInfo.Curse, playerNames.length);
+        for (CardInfo cardInfo : source.getCards()) {
+            this.insertCard(con, "Kingdom", cardInfo, playerNames.length);
         }
-        this.players = new HashMap<Integer, Player>();
+        this.players = new HashMap<>();
         for (int i = 0; i < playerNames.length; i++) {
             int first = i == 0 ? 1 : 0;
-            Player player = this.insertPlayerIntoGame(con, playerNames[i], first, first);
+            Player player = this.insertPlayer(con, playerNames[i], first, first);
             if (first == 1) {
-                this.updateCurrentPlayerId(con, player.getId());
+                this.updatePlayer(con, player.getId());
             }
             this.players.put(player.getId(), player);
-            this.insertCardsIntoPlayerCards(con, player, first == 1, copper.getId(), estate.getId());
+            player.insertCardsOnNewGame(con, first == 1, copper.getId(), estate.getId());
         }
     }
 
     public Game(Connection con, int gameId) throws Exception {
-        this.cards = new HashMap<Integer, GameCard>();
-        this.players = new HashMap<Integer, Player>();
+        this.cards = new HashMap<>();
+        this.players = new HashMap<>();
         this.id = gameId;
         this.loadGame(con);
     }
 
     // </editor-fold>
     ////////////////////////////////////////////////////////////////////////////
-    // <editor-fold desc="Public">
+    // <editor-fold desc="Accessors (Getters)" defaultstate="collapsed">
     public GameCard getCard(int id) {
         return this.cards.get(id);
+    }
+
+    public GameCard getCard(PlayerCard playerCard) {
+        return this.cards.get(playerCard.getCardId());
     }
 
     public GameCard[] getCards() {
@@ -73,6 +77,16 @@ public class Game {
 
     public String getCardSet() {
         return this.cardSet;
+    }
+
+    public Player getNextPlayer() {
+        List<Player> sorted = this.players.values().stream().sorted((p1, p2) -> p1.getId() - p2.getId()).collect(Collectors.toList());
+        int index = sorted.indexOf(this.getCurrentPlayer());
+        index += 1;
+        if (index >= sorted.size()) {
+            index = 0;
+        }
+        return sorted.get(index);
     }
 
     public Player getCurrentPlayer() {
@@ -91,6 +105,11 @@ public class Game {
         return this.players.get(id);
     }
 
+    public Player getPlayer(Predicate<? super Player> filter) {
+        Optional<Player> result = this.players.values().stream().filter(filter).findFirst();
+        return result.isPresent() ? result.get() : null;
+    }
+
     public Player[] getPlayers() {
         return this.players.values().toArray(new Player[this.players.size()]);
     }
@@ -102,47 +121,107 @@ public class Game {
     public String getState() {
         return this.state;
     }
+    // </editor-fold>
+    ////////////////////////////////////////////////////////////////////////////
+    // <editor-fold desc="Facade methods" defaultstate="collapsed">
 
-    void nextPlayer(Connection con) throws Exception {
-        List<Player> sorted = players.values().stream().sorted((p1, p2) -> p1.getId() - p2.getId()).collect(Collectors.toList());
-        int index = sorted.indexOf(getCurrentPlayer());
-        index += 1;
-        if (index >= sorted.size()) {
-            index = 0;
-        }
-        Player player = sorted.get(index);
-        String sql = "UPDATE players SET actions = 1, buys = 1, coins = 0 WHERE id= ?";
-        Object [] args = new Object[]{player.getId()};
-        int affected = Database.executeUpdate(con, sql, args);
-        Guard.validateAffected(1, affected, "Player.cancelBuy - players");
-        player.updateActions(1);
-        player.updateBuys(1);
-        player.updateCoins(0);
-        updateState(con, "Action");
-        updateCurrentPlayerId(con, player.getId());
+    private int getGameCardValueByPlayerCardId(Player currentPlayer, int playerCardId) {
+        PlayerCard playerCard = currentPlayer.getCard(playerCardId);
+        Guard.validateNotNull(playerCard, "Card does not belong to the player or does not exist. - Player.getCoinCardValueById");
+        Guard.validateTrue(playerCard.getPile().equals("Hand"), "Card is not in the player his hand. - Player.getCoinCardValueByCardId");
+        GameCard gameCard = this.getCard(playerCard);
+        Guard.validateTrue(gameCard.getIsCoin(), "Card is not a coin. - Player.getCoinCardValueByCardId");
+        return gameCard.getValue();
     }
-    
-        
-    public boolean isFinished(Connection con) throws Exception {
-        return this.winner != -1;
-        
-        /*String sql = "SELECT MAX(counter) as counter FROM" + " ("
-                + " SELECT `count` = 0 AS counter FROM gamecards WHERE" + " game = ? AND name = \"province\"" + " UNION"
-                + " SELECT COUNT(*) >= 3 AS counter FROM gamecards WHERE" + " game = ? AND `count` = 0" + " ) AS Q";
-        try (PreparedStatement stmt = con.prepareStatement(sql);
-                ResultSet rs = Database.executeQuery(con, stmt, new Object[]{this.id, this.id})) {
-            if (rs.next()) {
-                return rs.getInt("counter") == 1;
-            } else {
-                return false;
-            }
-        }*/
+
+    public void betCoins(Connection con, int[] playerCardId) throws Exception {
+        //Guard.validateCurrentPlayer(this, "betCoins");
+        Guard.validateState(this, "Bet");
+        // Validates it are are coin cards at the same time...
+        Player currentPlayer = this.getCurrentPlayer();
+        int total = 0;
+        for (int i = 0; i < playerCardId.length; i++) {
+            total += getGameCardValueByPlayerCardId(currentPlayer, playerCardId[i]);
+        }
+        // Verified, update the cards and the player his coin value...
+        int max = currentPlayer.getMaxOrder();
+        for (int i = 0; i < playerCardId.length; i++) {
+            PlayerCard playerCard = currentPlayer.getCard(playerCardId[i]);
+            // Move from hand to table
+            playerCard.updatePileAndOrder(con, "Table", ++max);
+        }
+        currentPlayer.setMaxOrder(max);
+        currentPlayer.updateCoins(con, currentPlayer.getCoins() + total);
+    }
+
+    public PlayerCard buyCard(Connection con, int gameCardId) throws Exception {
+        //Guard.validateCurrentPlayer(this, "buyCard");
+        Guard.validateState(this, "Buy");
+        GameCard gameCard = this.getCard(gameCardId);
+        Guard.validateNotNull(gameCard, "Card not in game. - Game.buyCard");
+        Guard.validateTrue(gameCard.getCount() > 0, "No more cards available. - Game.buyCard");
+        Player currentPlayer = this.getCurrentPlayer();
+        Guard.validateTrue(currentPlayer.getCoins() >= gameCard.getCost(), "Current player is too poor. - Game.buyCard");
+        gameCard.updateCount(con, gameCard.getCount() - 1);
+        currentPlayer.updateCoins(con, currentPlayer.getCoins() - gameCard.getCost());
+        int newOrder = currentPlayer.getMaxOrder() + 1;
+        PlayerCard result = currentPlayer.insertCard(con, gameCard.getId(), "Discard", newOrder);
+        currentPlayer.setMaxOrder(newOrder);
+        return result;
+    }
+
+    public void cancelActions(Connection con) throws Exception {
+        //Guard.validateCurrentPlayer(this, "cancelActions");
+        Guard.validateState(this, "Action");
+        this.updateState(con, "Bet");
+    }
+
+    public void cancelBet(Connection con) throws Exception {
+        //Guard.validateCurrentPlayer(this, "cancelBet");
+        Guard.validateState(this, "Bet");
+        this.updateState(con, "Buy");
+    }
+
+    public void cancelBuy(Connection con) throws Exception {
+        //Guard.validateCurrentPlayer(this, "cancelBuy");
+        Guard.validateState(this, "Buy");
+        Player next = this.getNextPlayer();
+        next.updateAll(con, 1, 1, 0);
+        this.updatePlayerAndState(con, next.getId(), "Action");
     }
 
     // </editor-fold>
     ////////////////////////////////////////////////////////////////////////////
-    // <editor-fold desc="Private" defaultstate="collapsed">
-    private GameCard insertCardIntoGameCards(Connection con, String deck, CardInfo cardInfo, int numberOfPlayers)
+    // <editor-fold desc="Update methods" defaultstate="collapsed">
+    private void updatePlayerAndState(Connection con, int playerId, String state) throws Exception {
+        String sql = "UPDATE games SET player = ?, state = ? WHERE id = ?";
+        Object[] args = new Object[]{playerId, state, this.id};
+        int affected = Database.executeUpdate(con, sql, args);
+        Guard.validateAffected(1, affected, "Game.updatePlayerAndState");
+        this.player = playerId;
+        this.state = state;
+    }
+
+    private void updatePlayer(Connection con, int playerId) throws Exception {
+        String sql = "UPDATE games SET player = ? WHERE id = ?";
+        Object[] args = new Object[]{playerId, this.id};
+        int affected = Database.executeUpdate(con, sql, args);
+        Guard.validateAffected(1, affected, "Game.updatePlayer");
+        this.player = playerId;
+    }
+
+    private void updateState(Connection con, String state) throws Exception {
+        String sql = "UPDATE games SET state = ? WHERE id = ?";
+        Object[] args = new Object[]{state, this.id};
+        int affected = Database.executeUpdate(con, sql, args);
+        Guard.validateAffected(1, affected, "Game.updateState");
+        this.state = state;
+    }
+
+    // </editor-fold>
+    ////////////////////////////////////////////////////////////////////////////
+    // <editor-fold desc="Create new or read existing game" defaultstate="collapsed">
+    private GameCard insertCard(Connection con, String deck, CardInfo cardInfo, int numberOfPlayers)
             throws Exception {
         String sql = "INSERT INTO gamecards (game, name, deck, `count`, cost, value, isaction, iscoin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         int count = cardInfo.getCount(numberOfPlayers);
@@ -155,32 +234,12 @@ public class Game {
         return card;
     }
 
-    private void insertCardsIntoPlayerCards(Connection con, Player player, boolean first, int copper, int estate)
-            throws Exception {
-        ArrayList<Integer> randoms = Util.getRandomRange(3, 0, 10);
-        for (int i = 0; i < 10; i++) {
-            String pile = i < 5 ? "Deck" : "Hand";
-            int cardId = randoms.contains(i) ? estate : copper;
-            PlayerCard card = insertCardIntoPlayerCards(con, player, cardId, pile, i);
-            player.addCard(card);
-        }
-        player.setMinOrder(0);
-        player.setMaxOrder(9);
-    }
-
-    private PlayerCard insertCardIntoPlayerCards(Connection con, Player player, int cardId, String pile, int order)
-            throws Exception {
-        String sql = "INSERT INTO playercards (player, card, pile, `order`) VALUES(?, ?, ?, ?)";
-        int recordId = Database.executeInsert(con, sql, new Object[]{player.getId(), cardId, pile, order});
-        return new PlayerCard(player, recordId, cardId, pile, order);
-    }
-
-    private int insertGameIntoGames(Connection con, String cardSet) throws Exception {
+    private int insert(Connection con, String cardSet) throws Exception {
         return Database.executeInsert(con, "INSERT INTO games (cardset, state) VALUES (?, \"Action\")",
                 new Object[]{cardSet});
     }
 
-    private Player insertPlayerIntoGame(Connection con, String playerName, int actions, int buys) throws Exception {
+    private Player insertPlayer(Connection con, String playerName, int actions, int buys) throws Exception {
         String sql = "INSERT INTO players (game, `name`, actions, buys) VALUES (?, ?, ?, ?)";
         int recordId = Database.executeInsert(con, sql, new Object[]{this.id, playerName, actions, buys});
         return new Player(this, recordId, playerName, actions, buys, 0);
@@ -188,8 +247,8 @@ public class Game {
 
     private void loadCards(Connection con) throws Exception {
         String sql = "SELECT * FROM gamecards INNER JOIN games ON game = games.id WHERE games.id = ? ORDER BY deck";
-        try(PreparedStatement stmt = con.prepareStatement(sql);
-            ResultSet rs = Database.executeQuery(con, stmt, new Object[]{this.id})) {
+        try (PreparedStatement stmt = con.prepareStatement(sql);
+                ResultSet rs = Database.executeQuery(con, stmt, new Object[]{this.id})) {
             while (rs.next()) {
                 GameCard card = this.readGameCard(rs);
                 this.cards.put(card.getId(), card);
@@ -209,28 +268,28 @@ public class Game {
         String sql = "SELECT * FROM playercards" + " INNER JOIN players ON player = players.id"
                 + " INNER JOIN games ON game = games.id" + " INNER JOIN gamecards ON playercards.card = gamecards.id"
                 + " WHERE games.id = ?" + " ORDER BY players.id, pile, `order`";
-        Player player = null;
+        Player current = null;
         try (PreparedStatement stmt = con.prepareStatement(sql);
                 ResultSet rs = Database.executeQuery(con, stmt, new Object[]{this.id})) {
             while (rs.next()) {
                 // First time/first loop cycle?
-                if (player == null) {
+                if (current == null) {
                     readGame(rs);
                 }
                 int playerId = rs.getInt("players.id");
                 if (!players.containsKey(playerId)) {
-                    player = readPlayer(rs);
-                    players.put(player.getId(), player);
+                    current = readPlayer(rs);
+                    players.put(current.getId(), current);
                 } else {
-                    player = players.get(playerId);
+                    current = players.get(playerId);
                 }
                 int order = rs.getInt("order");
-                if (player.getMinOrder() > order) {
-                    player.setMinOrder(order);
-                } else if (player.getMaxOrder() < order) {
-                    player.setMaxOrder(order);
+                if (current.getMinOrder() > order) {
+                    current.setMinOrder(order);
+                } else if (current.getMaxOrder() < order) {
+                    current.setMaxOrder(order);
                 }
-                player.addCard(readPlayerCard(rs, player));
+                current.addCard(readPlayerCard(rs, current));
             }
         }
     }
@@ -257,22 +316,23 @@ public class Game {
         return new PlayerCard(player, rs.getInt("playercards.id"), rs.getInt("playercards.card"),
                 rs.getString("playercards.pile"), rs.getInt("playercards.order"));
     }
-
-    void updateCurrentPlayerId(Connection con, int playerId) throws Exception {
-        String sql = "UPDATE games SET player = ? WHERE id = ?";
-        Object[] args = new Object[]{playerId, this.id};
-        int affected = Database.executeUpdate(con, sql, args);
-        Guard.validateAffected(1, affected, "Game.setCurrentPlayerId - games");
-        this.player = playerId;
-    }
-
-    void updateState(Connection con, String state) throws Exception {
-        String sql = "UPDATE games SET state = ? WHERE id = ?";
-        Object[] args = new Object[]{state, this.id};
-        int affected = Database.executeUpdate(con, sql, args);
-        Guard.validateAffected(1, affected, "Game.updateState - games");
-        this.state = state;
-    }    
     // </editor-fold>
     ////////////////////////////////////////////////////////////////////////////
 }
+/*
+     
+    public boolean isFinished(Connection con) throws Exception {
+        return this.winner != -1;
+
+        /*String sql = "SELECT MAX(counter) as counter FROM" + " ("
+                + " SELECT `count` = 0 AS counter FROM gamecards WHERE" + " game = ? AND name = \"province\"" + " UNION"
+                + " SELECT COUNT(*) >= 3 AS counter FROM gamecards WHERE" + " game = ? AND `count` = 0" + " ) AS Q";
+        try (PreparedStatement stmt = con.prepareStatement(sql);
+                ResultSet rs = Database.executeQuery(con, stmt, new Object[]{this.id, this.id})) {
+            if (rs.next()) {
+                return rs.getInt("counter") == 1;
+            } else {
+                return false;
+            }
+        }
+    }*/
