@@ -4,7 +4,18 @@ import dominion.routing.ResultBase;
 
 public class StartBuyResult extends ResultBase {
 
-	public StartBuyResult() {
-		super("startBuy");
-	}
+    //private PlayerInfo player;
+    
+    public StartBuyResult() {
+        super("startBuy");
+    }
+
+    /*public PlayerInfo getPlayer() {
+        return this.player;
+    }
+
+    public void setPlayer(PlayerInfo value) {
+        this.player = value;
+    }*/
+
 }

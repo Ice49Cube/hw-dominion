@@ -4,17 +4,17 @@ import java.util.*;
 
 class Util 
 {
-    public static ArrayList<Integer> getRandomRange(int size)
+    static ArrayList<Integer> getRandomRange(int size)
     {
         return getRandomRange(size, 0, size);
     }
 
-    public static ArrayList<Integer> getRandomRange(int size, int max)
+    static ArrayList<Integer> getRandomRange(int size, int max)
     {
         return getRandomRange(size, 0, max);
     }
 
-    public static ArrayList<Integer> getRandomRange(int size, int min, int max)
+    static ArrayList<Integer> getRandomRange(int size, int min, int max)
     {
         Random random = new Random(new Date().getTime());
         ArrayList<Integer> numbers = new ArrayList();

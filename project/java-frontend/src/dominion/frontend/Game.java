@@ -18,9 +18,9 @@ public class Game {
     public Game(StartGameResult data) {
         this.cards = new HashMap();
         this.players = new HashMap();
-        this.info = data.getGameInfo();
-        this.setCards(data.getGameCardInfo());
-        this.setPlayers(data.getPlayerInfo());
+        this.info = data.getGame();
+        this.setCards(data.getGameCards());
+        this.setPlayers(data.getPlayers());
     }
 
     public ArrayList<PlayerCardInfo> getCurrentPlayerActionCards() {
@@ -48,16 +48,8 @@ public class Game {
         return this.cards.values().stream().filter(filter).toArray(size -> new GameCardInfo[size]);
     }
 
-    public String getCardSet() {
-        return this.info.getCardSet();
-    }
-
     public PlayerInfo getCurrentPlayer() {
         return this.currentPlayer; // this.players.values().stream().filter(p -> p.cards != null).findFirst().get();
-    }
-
-    public int getId() {
-        return this.info.getId();
     }
 
     public PlayerInfo getPlayer(int id) {
@@ -68,10 +60,13 @@ public class Game {
         return this.players.values().stream().toArray(size -> new PlayerInfo[size]);
     }
 
-    public String getState() {
-        return this.info.getState();
+    public GameInfo getInfo() {
+        return this.info;
     }
-
+    
+    public void nextPlayer(PlayerInfo player) {
+        
+    }
     ////////////////////////////////////////////////////////////////////////////
     // <editor-fold desc="Print Methods" defaultstate="collapsed">
 
@@ -125,7 +120,7 @@ public class Game {
     }
 
     public void printGameInfo() {
-        System.out.println("> Game id: " + this.getId() + " state is >>> " + this.getState() + " <<<");
+        System.out.println("> Game id: " + this.info.getId() + " state is >>> " + this.info.getState() + " <<<");
     }
     public void printPlayers() {
         System.out.println("> Players: [<" + String.join("> , <", this.players.values().stream().map(p -> p.getName()).toArray(size -> new String[size])) + ">]");

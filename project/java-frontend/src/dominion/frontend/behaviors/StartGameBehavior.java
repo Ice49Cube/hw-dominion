@@ -1,16 +1,20 @@
 package dominion.frontend.behaviors;
 
-import dominion.commands.StartGameCommand;
-import dominion.frontend.Console;
-import dominion.frontend.Game;
-import dominion.frontend.GameEngine;
+import dominion.commands.*;
+import dominion.frontend.*;
+import dominion.routing.*;
 
-import dominion.routing.CommandBase;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+import java.util.regex.Pattern;
+import javax.naming.NamingException;
 
 public class StartGameBehavior implements IGameEngineBehavior {
+
+    private static final Pattern USERNAME_PATTERN = Pattern.compile("(?:[A-Za-z0-9_]{1,20}+)");
+
+    private boolean validatePlayerName(String playerName) throws Exception {
+        return USERNAME_PATTERN.matcher(playerName).matches();
+    }
 
     @Override
     public CommandBase process(GameEngine engine, Game game) throws Exception {
@@ -60,21 +64,24 @@ public class StartGameBehavior implements IGameEngineBehavior {
                 if (players.size() > 1) {
                     break;
                 }
+            } else if (!this.validatePlayerName(player)) {
+                System.out.println("> Invalid player name!");
             } else if (!players.contains(player)) {
                 players.add(player);
             }
         }
         return players.toArray(new String[players.size()]);
     }
-    
+
     private String readCardSet() throws Exception {
         ArrayList<String> cardSets = new ArrayList(Arrays.asList(new String[]{"First Game", "Big Money", "Interaction", "Size Distortion", "Village Square", "Random"}));
-        while(true) {
+        while (true) {
             System.out.println("> Available card sets: " + String.join(", ", cardSets.toArray(new String[cardSets.size()])));
             System.out.print("> Please enter a cardset: ");
             String cardSet = Console.readLine().trim();
-            if (cardSets.contains(cardSet)) 
+            if (cardSets.contains(cardSet)) {
                 return cardSet.replace(" ", "");
+            }
         }
     }
 }

@@ -5,15 +5,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class GameCard 
 {
     private final int id;
-    private final int count;
     private final int cost;
     private final String deck;
-	@JsonIgnore()
+    @JsonIgnore()
     private final Game game;
     private final boolean isAction;
     private final boolean isCoin;
     private final String name;
     private final int value;
+    private int count;
     
     public GameCard(Game game, int id, String name, String deck, int count, int cost, int value, boolean isAction, boolean isCoin)
     {
@@ -31,6 +31,10 @@ public class GameCard
     public int getCount()
     {
         return this.count;
+    }
+    
+    void setCount(int value) {
+        this.count = value;
     }
     
     public int getCost()

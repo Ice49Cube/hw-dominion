@@ -41,7 +41,7 @@ public class Game {
             int first = i == 0 ? 1 : 0;
             Player player = this.insertPlayerIntoGame(con, playerNames[i], first, first);
             if (first == 1) {
-                this.setCurrentPlayerId(con, player.getId());
+                this.updateCurrentPlayerId(con, player.getId());
             }
             this.players.put(player.getId(), player);
             this.insertCardsIntoPlayerCards(con, player, first == 1, copper.getId(), estate.getId());
@@ -58,10 +58,6 @@ public class Game {
     // </editor-fold>
     ////////////////////////////////////////////////////////////////////////////
     // <editor-fold desc="Public">
-    public void cancelActions(Connection con) throws Exception {
-        this.updateState(con, "Bet");
-    }
-
     public GameCard getCard(int id) {
         return this.cards.get(id);
     }
@@ -107,6 +103,9 @@ public class Game {
     }
 
     public boolean isFinished(Connection con) throws Exception {
+        if (this.winner != -1) {
+            return true;
+        }
         String sql = "SELECT MAX(counter) as counter FROM" + " ("
                 + " SELECT `count` = 0 AS counter FROM gamecards WHERE" + " game = ? AND name = \"province\"" + " UNION"
                 + " SELECT COUNT(*) >= 3 AS counter FROM gamecards WHERE" + " game = ? AND `count` = 0" + " ) AS Q";
@@ -127,10 +126,10 @@ public class Game {
             throws Exception {
         String sql = "INSERT INTO gamecards (game, name, deck, `count`, cost, value, isaction, iscoin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         int count = cardInfo.getCount(numberOfPlayers);
-        int id = Database.executeInsert(con, sql,
+        int recordId = Database.executeInsert(con, sql,
                 new Object[]{this.id, cardInfo.getName(), deck, count, cardInfo.getCost(), cardInfo.getValue(),
                     cardInfo.getIsAction() ? 1 : 0, cardInfo.getIsCoin() ? 1 : 0});
-        GameCard card = new GameCard(this, id, cardInfo.getName(), deck, count, cardInfo.getCost(), cardInfo.getValue(),
+        GameCard card = new GameCard(this, recordId, cardInfo.getName(), deck, count, cardInfo.getCost(), cardInfo.getValue(),
                 cardInfo.getIsAction(), cardInfo.getIsCoin());
         this.cards.put(card.getId(), card);
         return card;
@@ -152,8 +151,8 @@ public class Game {
     private PlayerCard insertCardIntoPlayerCards(Connection con, Player player, int cardId, String pile, int order)
             throws Exception {
         String sql = "INSERT INTO playercards (player, card, pile, `order`) VALUES(?, ?, ?, ?)";
-        int id = Database.executeInsert(con, sql, new Object[]{player.getId(), cardId, pile, order});
-        return new PlayerCard(player, id, cardId, pile, order);
+        int recordId = Database.executeInsert(con, sql, new Object[]{player.getId(), cardId, pile, order});
+        return new PlayerCard(player, recordId, cardId, pile, order);
     }
 
     private int insertGameIntoGames(Connection con, String cardSet) throws Exception {
@@ -163,15 +162,14 @@ public class Game {
 
     private Player insertPlayerIntoGame(Connection con, String playerName, int actions, int buys) throws Exception {
         String sql = "INSERT INTO players (game, `name`, actions, buys) VALUES (?, ?, ?, ?)";
-        int id = Database.executeInsert(con, sql, new Object[]{this.id, playerName, actions, buys});
-        return new Player(this, id, playerName, actions, buys);
+        int recordId = Database.executeInsert(con, sql, new Object[]{this.id, playerName, actions, buys});
+        return new Player(this, recordId, playerName, actions, buys, 0);
     }
 
     private void loadCards(Connection con) throws Exception {
-        String sql = "SELECT * FROM gamecards" + " INNER JOIN games ON game = games.id" + " WHERE games.id = ?"
-                + " ORDER BY deck";
-        try (PreparedStatement stmt = con.prepareStatement(sql);
-                ResultSet rs = Database.executeQuery(con, stmt, new Object[]{this.id})) {
+        String sql = "SELECT * FROM gamecards INNER JOIN games ON game = games.id WHERE games.id = ? ORDER BY deck";
+        try(PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = Database.executeQuery(con, stmt, new Object[]{this.id})) {
             while (rs.next()) {
                 GameCard card = this.readGameCard(rs);
                 this.cards.put(card.getId(), card);
@@ -182,7 +180,7 @@ public class Game {
     private void loadGame(Connection con) throws Exception {
         loadPlayers(con);
         loadCards(con);
-        if (this.players.size() == 0 || this.cards.size() == 0) {
+        if (this.players.isEmpty() || this.cards.isEmpty()) {
             throw new IllegalStateException("No game data.");
         }
     }
@@ -226,10 +224,7 @@ public class Game {
 
     private Player readPlayer(ResultSet rs) throws Exception {
         return new Player(this, rs.getInt("players.id"), rs.getString("players.name"), rs.getInt("players.actions"),
-                rs.getInt("players.buys") /*
-											 * , rs.getInt("players.coins")
-         */
-        );
+                rs.getInt("players.buys"), rs.getInt("players.coins"));
     }
 
     private GameCard readGameCard(ResultSet rs) throws Exception {
@@ -243,21 +238,21 @@ public class Game {
                 rs.getString("playercards.pile"), rs.getInt("playercards.order"));
     }
 
-    private void setCurrentPlayerId(Connection con, int playerId) throws Exception {
+    void updateCurrentPlayerId(Connection con, int playerId) throws Exception {
         String sql = "UPDATE games SET player = ? WHERE id = ?";
-        int affected = Database.executeUpdate(con, sql, new Object[]{playerId, this.id});
-        if (affected != 1) {
-            throw new IllegalStateException("Could not update the current player.");
-        } else {
-            this.player = playerId;
-        }
-    }
-    
-    private void updateState(Connection con, String state) throws Exception {
-        Database.execute(con, "UPDATE games SET state = ? WHERE id = ?", new Object[]{state, this.id});
-        this.state = state;
+        Object[] args = new Object[]{playerId, this.id};
+        int affected = Database.executeUpdate(con, sql, args);
+        Guard.validateAffected(1, affected, "Game.setCurrentPlayerId - games");
+        this.player = playerId;
     }
 
+    void updateState(Connection con, String state) throws Exception {
+        String sql = "UPDATE games SET state = ? WHERE id = ?";
+        Object[] args = new Object[]{state, this.id};
+        int affected = Database.executeUpdate(con, sql, args);
+        Guard.validateAffected(1, affected, "Game.updateState - games");
+        this.state = state;
+    }    
     // </editor-fold>
     ////////////////////////////////////////////////////////////////////////////
 }

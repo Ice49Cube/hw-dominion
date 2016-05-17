@@ -45,12 +45,12 @@ public class PlayerCard
         return this.player;
     }
     
-    public void setOrder(int value)
+    void setOrder(int value)
     {
         this.order = value;
     }
 
-    public void setPile(String value)
+    void setPile(String value)
     {
         this.pile = value;
     }

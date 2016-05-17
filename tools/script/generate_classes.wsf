@@ -1,7 +1,23 @@
 <?xml version="1.0" ?>
 <job>
 	<resource id="template"><![CDATA[
-public class [CLASSNAME] implements ICard {
+
+	package dominion.game.cards;
+
+import dominion.commands.PlayActionCommand;
+import dominion.model.*;
+import dominion.routing.*;
+
+public interface ICard {
+	
+	boolean getIsCompleted(Game game);
+	ResultBase execute(Game game, PlayActionCommand command);
+
+}
+
+	
+	
+	public class [CLASSNAME] implements ICard {
 
 
 	public

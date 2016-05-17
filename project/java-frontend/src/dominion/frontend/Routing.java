@@ -101,6 +101,7 @@ public class Routing {
             }
             in.close();
         }
+        System.out.println("JSON: " + builder.toString());
         return builder.toString();
     }
 

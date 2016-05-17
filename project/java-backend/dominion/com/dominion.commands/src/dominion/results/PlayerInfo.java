@@ -11,8 +11,12 @@ public class PlayerInfo {
     private HashMap<Integer, PlayerCardInfo> cards;
     private int actions;
     private int buys;
-    // private int coins;
+    private int coins;
 
+    public void addCard(PlayerCardInfo card) {
+        this.cards.put(card.getId(), card);
+    }
+    
     public int getId() {
         return this.id;
     }
@@ -47,16 +51,17 @@ public class PlayerInfo {
         PlayerInfo result = new PlayerInfo();
         result.setId(source.getId());
         result.setName(source.getName());
-        if(source.getIsCurrent()) {
+        if (source.getIsCurrent()) {
             result.setActions(source.getActions());
             result.setBuys(source.getBuys());
+            result.setCoins(source.getCoins());
             PlayerCard[] cards = source.getCards(
                     c -> c.getPile().equals("Hand") || c.getPile().equals("Table") || c.getPile().equals("Playing"));
             result.setCards(PlayerCardInfo.fromCards(source, cards));
         }
         return result;
     }
-    
+
     public PlayerCardInfo[] getCards(Predicate<? super PlayerCardInfo> filter) {
         return this.cards == null ? null : this.cards.values().stream().filter(filter).toArray(size -> new PlayerCardInfo[size]);
     }
@@ -65,11 +70,15 @@ public class PlayerInfo {
         return this.cards == null ? null : this.cards.values().toArray(new PlayerCardInfo[this.cards.size()]);
     }
 
+    public PlayerCardInfo getCard(int id) {
+        return this.cards.get(id);
+    }
+    
     public void setCards(PlayerCardInfo[] value) {
         if (value != null) {
             this.cards = new HashMap<>();
-            for(int i = 0; i < value.length; i++) {
-               this.cards.put(value[i].getId(), value[i]);
+            for (int i = 0; i < value.length; i++) {
+                this.cards.put(value[i].getId(), value[i]);
             }
         } else {
             this.cards = null;
@@ -84,9 +93,10 @@ public class PlayerInfo {
         return this.buys;
     }
 
-    /*
-	 * public int getCoins() { return this.actions; }
-     */
+    public int getCoins() {
+        return this.coins;
+    }
+
     public void setActions(int value) {
         this.actions = value;
     }
@@ -95,7 +105,8 @@ public class PlayerInfo {
         this.buys = value;
     }
 
-    /*
-	 * public void setCoins(int value) { this.actions = value; }
-     */
+    public void setCoins(int value) {
+        this.coins = value;
+    }
+
 }

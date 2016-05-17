@@ -11,15 +11,15 @@ public class BuyBehavior implements IGameEngineBehavior {
         BuyCardCommand cmd = new BuyCardCommand();
         cmd.setCancel(false);
         cmd.setCardId(card.getId());
-        cmd.setGameId(game.getId());
+        cmd.setGameId(game.getInfo().getId());
         cmd.setPlayerId(player.getId());
         return cmd;
     }
 
-    private CommandBase buyCard(GameEngine engine, Game game, PlayerInfo player, int amount) throws Exception {
+    private CommandBase buyCard(GameEngine engine, Game game, PlayerInfo player) throws Exception {
         while (true) {
             game.printAll();
-            System.out.println(String.format("> You have %d buys and %d$.", player.getBuys(), amount));
+            this.printBuys(player);
             System.out.print("> Enter a card name or C for cancel: ");
             String input = Console.readLine().trim();
             if (input.equalsIgnoreCase("C")) {
@@ -28,7 +28,7 @@ public class BuyBehavior implements IGameEngineBehavior {
             GameCardInfo[] cards = game.getCards(c -> c.getName().equalsIgnoreCase(input));
             if (cards.length == 1) {
                 GameCardInfo card = cards[0];
-                if (card.getCost() <= amount) {
+                if (card.getCost() <= player.getCoins()) {
                     return buyCard(game, card, player);
                 }
                 System.out.println("> Not rich enough for this card! Press enter...");
@@ -40,18 +40,26 @@ public class BuyBehavior implements IGameEngineBehavior {
     }
 
     private CommandBase cancelBuy(Game game) {
+        PlayerInfo player = game.getCurrentPlayer();
+        game.printAll();
+        this.printBuys(player);
         System.out.println("> No coin cards or buys left...");
         BuyCardCommand cmd = new BuyCardCommand();
-        cmd.setGameId(game.getId());
-        cmd.setPlayerId(game.getCurrentPlayer().getId());
+        cmd.setGameId(game.getInfo().getId());
+        cmd.setPlayerId(player.getId());
         cmd.setCancel(true);
         return cmd;
     }
 
+    private void printBuys(PlayerInfo player) {
+        int buys = player.getBuys();
+        System.out.println(String.format("> You have %d buy%s and %d$.", buys, buys == 1 ? "" : "s", player.getCoins()));
+    }
+    
     @Override
     public CommandBase process(GameEngine engine, Game game) throws Exception {
         PlayerInfo player = game.getCurrentPlayer();
-        if (player.getBuys() != 0) {
+        if (player.getBuys() > 0) {
             PlayerCardInfo[] playerCards = player.getCards(c -> c.getPile().equals("Hand"));
             int total = 0;
             for (PlayerCardInfo playerCard : playerCards) {
@@ -60,7 +68,7 @@ public class BuyBehavior implements IGameEngineBehavior {
                     total += card.getValue();
                 }
             }
-            return buyCard(engine, game, player, total);
+            return buyCard(engine, game, player);
         }
         return cancelBuy(game);
     }

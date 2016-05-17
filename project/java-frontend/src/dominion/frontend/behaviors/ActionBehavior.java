@@ -13,19 +13,15 @@ public class ActionBehavior implements IGameEngineBehavior {
     private CommandBase cancelAction(Game game) {
         System.out.println("> No action cards or actions left...");
         PlayActionCommand cmd = new PlayActionCommand();
-        cmd.setGameId(game.getId());
+        cmd.setGameId(game.getInfo().getId());
         cmd.setPlayerId(game.getCurrentPlayer().getId());
         cmd.setCancel(true);
         return cmd;
     }
 
     private CommandBase playAction(GameEngine engine, Game game, PlayerInfo player, ArrayList<PlayerCardInfo> cards) {
-        game.printGameCards();
-        game.printPlayers();
-        game.printCurrentPlayer();
         this.printActionCards(cards);
-        engine.setBehavior(null);
-        return null;
+        return engine.quit();
     }
 
     private void printActionCards(ArrayList<PlayerCardInfo> cards) {
@@ -34,9 +30,7 @@ public class ActionBehavior implements IGameEngineBehavior {
 
     @Override
     public CommandBase process(GameEngine engine, Game game) throws Exception {
-        game.printGameCards();
-        game.printPlayers();
-        game.printCurrentPlayer();
+        game.printAll();
         PlayerInfo player = game.getCurrentPlayer();
         // Does the player have actions left and action cards?
         if (player.getActions() != 0) {

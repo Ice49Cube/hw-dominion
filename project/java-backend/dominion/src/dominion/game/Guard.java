@@ -72,4 +72,9 @@ public class Guard {
 
 	}
 
+	public static void validateTrue(boolean expression, String message) {
+		if(!expression) {
+			throw new IllegalStateException(message);
+		}
+	}
 }
