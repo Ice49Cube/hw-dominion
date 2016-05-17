@@ -4,7 +4,7 @@ import java.io.*;
 
 /**
  * Java System.console() has bugs in NetBeans, so created a small static class
- * with the basic functions for the console.
+ * with the basic functions for the console. (Could've used Scanner...)
  */
 public class Console {
 
@@ -22,18 +22,6 @@ public class Console {
     public static String readLine(String message) throws IOException {
         System.out.print(message);
         return instance.bufferedReader.readLine();
-    }
-
-    /*public static String input(String message) throws IOException
-    {
-        return readLine(message);
-    }*/
-    public static void println(String message) {
-        System.out.println(message);
-    }
-
-    public static void print(String message) {
-        System.out.print(message);
     }
 
     public static BufferedReader getReader() {

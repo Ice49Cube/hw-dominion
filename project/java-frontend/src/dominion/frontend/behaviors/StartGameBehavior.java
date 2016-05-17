@@ -21,8 +21,7 @@ public class StartGameBehavior implements IGameEngineBehavior {
         String choice;
         while (true) {
             System.out.println("> New Game: N - Continue Game: code - Quit: Q");
-            System.out.print("> Your choice: ");
-            choice = Console.readLine().trim();
+            choice = Console.readLine("> Your choice: ").trim();
             switch (choice) {
                 case "q":
                 case "Q":
@@ -58,8 +57,7 @@ public class StartGameBehavior implements IGameEngineBehavior {
             if (players.size() > 1) {
                 System.out.print(" or enter to start");
             }
-            System.out.print(": ");
-            player = Console.readLine().trim();
+            player = Console.readLine(": ").trim();
             if (player.equals("")) {
                 if (players.size() > 1) {
                     break;
@@ -74,13 +72,14 @@ public class StartGameBehavior implements IGameEngineBehavior {
     }
 
     private String readCardSet() throws Exception {
-        ArrayList<String> cardSets = new ArrayList(Arrays.asList(new String[]{"First Game", "Big Money", "Interaction", "Size Distortion", "Village Square", "Random"}));
+        String[] strings = new String[]{"First Game", "Big Money", "Interaction", "Size Distortion", "Village Square", "Random"};
+        ArrayList<String> cardSets = new ArrayList<>(Arrays.asList(strings));
         while (true) {
-            System.out.println("> Available card sets: " + String.join(", ", cardSets.toArray(new String[cardSets.size()])));
-            System.out.print("> Please enter a cardset: ");
-            String cardSet = Console.readLine().trim();
-            if (cardSets.contains(cardSet)) {
-                return cardSet.replace(" ", "");
+            System.out.println("> Available card sets: " + String.join(", ", strings));
+            String cardSet = Console.readLine("> Please enter a cardset: ").trim();
+            Optional<String> result = cardSets.stream().filter(c -> c.equalsIgnoreCase(cardSet)).findFirst();
+            if (result.isPresent()) {
+                return result.get().replace(" ", "");
             }
         }
     }

@@ -139,7 +139,7 @@ public class Game {
             throws Exception {
         ArrayList<Integer> randoms = Util.getRandomRange(3, 0, 10);
         for (int i = 0; i < 10; i++) {
-            String pile = first ? (i < 5 ? "Deck" : "Hand") : "Deck";
+            String pile = i < 5 ? "Deck" : "Hand";
             int cardId = randoms.contains(i) ? estate : copper;
             PlayerCard card = insertCardIntoPlayerCards(con, player, cardId, pile, i);
             player.addCard(card);

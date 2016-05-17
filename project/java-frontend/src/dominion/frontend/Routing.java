@@ -26,12 +26,23 @@ public class Routing {
 
     private String dispatch(HttpURLConnection http) throws Exception {
         System.out.println("HTTP: " + http.getResponseCode() + " " + http.getResponseMessage());
-        try {
-            return readStream(http.getInputStream());
-        } catch(Exception ex) {
-            readAndThrowError(http);
-            return null; // <- never gets here, previous statement throws an error
+        if (http.getContentLengthLong() > 0
+                && http.getContentType().contains("application/json")) {
+            try {
+                return readStream(http.getInputStream());
+            } catch (Exception ex) {
+                readAndThrowError(http, ex);
+                return null; // <- never gets here, previous statement throws an error
+            }
+        } else {
+            throw new IllegalStateException(
+                    String.format("%s %s\nContent-Type: %s\nContent-Length: %d",
+                            http.getResponseCode(),
+                            http.getResponseMessage(),
+                            http.getContentType(),
+                            http.getContentLengthLong()));
         }
+
     }
 
     public Method getMethod(String name) {
@@ -39,8 +50,7 @@ public class Routing {
     }
 
     public ResultBase invoke(CommandBase command) throws Exception {
-        try
-        {
+        try {
             String json = post(mapper.writeValueAsString(command));
             JsonNode node = mapper.readTree(json);
             JsonNode methodNode = node.findValue("method");
@@ -50,8 +60,7 @@ public class Routing {
             }
             Class clazz = method.getParameterTypes()[0];
             return (ResultBase) mapper.readValue(json, clazz);
-        }
-        catch(java.lang.reflect.InvocationTargetException e) {
+        } catch (java.lang.reflect.InvocationTargetException e) {
             throw new Exception(e.getCause() != null ? e.getCause() : e);
         }
     }
@@ -81,15 +90,11 @@ public class Routing {
         return result;
     }
 
-    private void readAndThrowError(HttpURLConnection http) throws Exception {
-        if (http.getContentLengthLong() > 0 && http.getContentType().contains("application/json")) {
-            String json = this.readStream(http.getErrorStream());
-            Object oson = this.mapper.readValue(json, Object.class);
-            json = this.mapper.writer().withDefaultPrettyPrinter().writeValueAsString(oson);
-            throw new IllegalStateException(http.getResponseCode() + " " + http.getResponseMessage() + "\n" + json);
-        } else {
-            throw new IllegalStateException(http.getResponseCode() + " " + http.getResponseMessage());
-        }
+    private void readAndThrowError(HttpURLConnection http, Exception ex) throws Exception {
+        String json = this.readStream(http.getErrorStream());
+        Object oson = this.mapper.readValue(json, Object.class);
+        json = this.mapper.writer().withDefaultPrettyPrinter().writeValueAsString(oson);
+        throw new IllegalStateException(http.getResponseCode() + " " + http.getResponseMessage() + "\n" + json, ex);
     }
 
     private String readStream(InputStream stream) throws Exception {

@@ -20,8 +20,7 @@ public class BuyBehavior implements IGameEngineBehavior {
         while (true) {
             game.printAll();
             this.printBuys(player);
-            System.out.print("> Enter a card name or C for cancel: ");
-            String input = Console.readLine().trim();
+            String input = Console.readLine("> Enter a card name or C for cancel: ").trim();
             if (input.equalsIgnoreCase("C")) {
                 return this.cancelBuy(game);
             }
@@ -41,9 +40,7 @@ public class BuyBehavior implements IGameEngineBehavior {
 
     private CommandBase cancelBuy(Game game) {
         PlayerInfo player = game.getCurrentPlayer();
-        game.printAll();
-        this.printBuys(player);
-        System.out.println("> No coin cards or buys left...");
+        System.out.println("> No coin cards, buys left or cancelled...");
         BuyCardCommand cmd = new BuyCardCommand();
         cmd.setGameId(game.getInfo().getId());
         cmd.setPlayerId(player.getId());
@@ -60,14 +57,6 @@ public class BuyBehavior implements IGameEngineBehavior {
     public CommandBase process(GameEngine engine, Game game) throws Exception {
         PlayerInfo player = game.getCurrentPlayer();
         if (player.getBuys() > 0) {
-            PlayerCardInfo[] playerCards = player.getCards(c -> c.getPile().equals("Hand"));
-            int total = 0;
-            for (PlayerCardInfo playerCard : playerCards) {
-                GameCardInfo card = game.getCard(playerCard.getCardId());
-                if (card.getIsCoin()) {
-                    total += card.getValue();
-                }
-            }
             return buyCard(engine, game, player);
         }
         return cancelBuy(game);

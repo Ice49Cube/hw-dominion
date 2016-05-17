@@ -87,12 +87,13 @@ CREATE TABLE playercards (
 	CONSTRAINT fk2_playercard FOREIGN KEY(card) REFERENCES gamecards(id)
 );
 
-CREATE TABLE discarded (
+CREATE TABLE trash (
 	id INT NOT NULL AUTO_INCREMENT,
 	game INT NOT NULL,
 	card INT NOT NULL,
 	player INT NOT NULL,
 	CONSTRAINT pk_discard PRIMARY KEY (id),
-	CONSTRAINT fk1_discard FOREIGN KEY(game) REFERENCES games(id),
-	CONSTRAINT fk2_discard FOREIGN KEY(card) REFERENCES gamecards(id)
+	CONSTRAINT fk1_discard FOREIGN KEY(game)   REFERENCES games(id),
+	CONSTRAINT fk2_discard FOREIGN KEY(card)   REFERENCES gamecards(id),
+	CONSTRAINT fk3_discard FOREIGN KEY(player) REFERENCES players(id)
 );
