@@ -1,31 +1,45 @@
 package dominion.model;
 
 import dominion.model.database.*;
+import dominion.model.info.*;
 import java.sql.*;
 
-public class GameCard 
-{
-    private final int id;
-    private final int cost;
-    private final String deck;
+public class GameCard {
+    
     private final Game game;
-    private final boolean isAction;
-    private final boolean isCoin;
-    private final String name;
-    private final int value;
+    private final int id;
+    private final String deck;
+    private final CardInfo info;
     private int count;
     
-    GameCard(Game game, int id, String name, String deck, int count, int cost, int value, boolean isAction, boolean isCoin)
+    private GameCard(Game game, int id, String deck, int count, CardInfo info)
     {
         this.game = game;
         this.id = id;
-        this.name = name;
         this.deck = deck;
         this.count = count;
-        this.cost = cost;
-        this.value = value;
-        this.isAction = isAction;
-        this.isCoin = isCoin;
+        this.info = info;
+    }
+    
+    static GameCard create(Connection con, Game game, String deck, CardInfo info, int numberOfPlayers) throws Exception {
+        String sql = "INSERT INTO gamecards (game, name, deck, `count`, cost, value, isaction, iscoin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        int count = info.getCount(numberOfPlayers);
+        Object[] args = new Object[] {
+            game.getId(), 
+            info.getName(), 
+            deck, 
+            count, 
+            info.getCost(), 
+            info.getValue(), 
+            info.getIsAction() ? 1 : 0, 
+            info.getIsCoin() ? 1 : 0
+        };
+        int recordId = Database.executeInsert(con, sql, args);
+        return new GameCard(game, recordId, deck, count, info);
+    }
+
+    static GameCard load(Game game, ResultSet rs) throws Exception {
+        return new GameCard(game, rs.getInt("gamecards.id"), rs.getString("gamecards.deck"), rs.getInt("gamecards.count"), CardInfo.parse(rs.getString("gamecards.name")));
     }
     
     public int getCount()
@@ -39,7 +53,7 @@ public class GameCard
     
     public int getCost()
     {
-    	return this.cost;
+    	return this.info.getCost();
     }
     
     public String getDeck()
@@ -58,21 +72,21 @@ public class GameCard
     }
 
     public boolean getIsAction() {
-        return this.isAction;
+        return this.info.getIsAction();
     }
     
     public boolean getIsCoin() {
-        return this.isCoin;
+        return this.info.getIsCoin();
     }
 
     public String getName()
     {
-        return this.name;
+        return this.info.getName();
     }
     
     public int getValue()
     {
-        return this.value;
+        return this.info.getValue();
     }
     
     void updateCount(Connection con, int value) throws Exception {
@@ -82,4 +96,5 @@ public class GameCard
         Guard.validateAffected(1, affected, "GameCard.updateCount");
         this.count = value;
     }
+    
 }

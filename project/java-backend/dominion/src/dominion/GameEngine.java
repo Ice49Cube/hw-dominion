@@ -18,11 +18,15 @@ import dominion.routing.*;
 //      It was either double declarations "both here" versus "here and there"...
 import dominion.results.*;
 
+/**
+ * This layer knows the commands to update the model and what's changed
+ * in order to return the right results.
+ */
 public class GameEngine {
     private Database database;
 
     // Currently only one game, with sessions multiple :)
-    private Game2 game;
+    private Game game;
 
     public GameEngine() throws Exception {
         database = new Database(new PooledMySQLConnectionProvider());
@@ -34,7 +38,7 @@ public class GameEngine {
     @RoutedCommand()
     public ResultBase betCoins(BetCoinsCommand cmd) throws Exception {
         try {
-            this.validateGame(cmd.getGameId(), cmd.getPlayerId());
+            Guard.validateGame(this.game, cmd.getGameId(), cmd.getPlayerId());
             if (cmd.getCancel()) {
                 try (Connection con = database.getConnection()) {
                     game.cancelBet(con);
@@ -54,8 +58,7 @@ public class GameEngine {
     @RoutedCommand()
     public ResultBase buyCard(BuyCardCommand cmd) throws Exception {
         try {
-
-            this.validateGame(cmd.getGameId(), cmd.getPlayerId());
+            Guard.validateGame(this.game, cmd.getGameId(), cmd.getPlayerId());
             if (cmd.getCancel()) {
                 return buyCard();
             } else {
@@ -70,7 +73,7 @@ public class GameEngine {
     @RoutedCommand()
     public ResultBase playAction(PlayActionCommand cmd) {
         try {
-            this.validateGame(cmd.getGameId(), cmd.getPlayerId());
+            Guard.validateGame(this.game, cmd.getGameId(), cmd.getPlayerId());
             Guard.validateEqual(this.game.getState(), "Action", "Invalid game state.");
             if (cmd.getCancel()) {
                 return this.cancelPlayAction();
@@ -165,7 +168,7 @@ public class GameEngine {
     private StartGameResult continueGame(Integer gameId) throws Exception {
         // TODO: load game from session or restore game and save in session...
         try (Connection con = database.getConnection()) {
-            this.game = new Game(con, gameId);
+            this.game = Game.load(con, gameId);
             return createStartGameResult();
         }
     }
@@ -177,7 +180,7 @@ public class GameEngine {
     private StartGameResult startNewGame(String[] playerNames, String cardSet) throws Exception {
         // TODO: add game to session
         try (Connection con = database.getConnection()) {
-            this.game = new Game(con, playerNames, cardSet);
+            this.game = Game.create(con, playerNames, cardSet);
             return createStartGameResult();
         }
     }
@@ -192,10 +195,5 @@ public class GameEngine {
      * clear out older games zombies from HashMap) retrieve game from
      * Session/HashMap in RoutedCommands and pass as argument...
      */
-    private void validateGame(int gameId, int playerId) throws Exception {
-        Guard.validateNotNull(game, "game");
-        Guard.validateEqual(gameId, game.getId(), "Game id is invalid.");
-        Guard.validateEqual(playerId, game.getCurrentPlayerId(), "Player id is invalid.");
-    }
-
+    
 }
