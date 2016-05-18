@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 
-import dominion.game.*;
+import dominion.cards.*;
 import dominion.routing.*;
 
 /**

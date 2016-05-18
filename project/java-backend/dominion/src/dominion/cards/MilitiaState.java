@@ -1,4 +1,4 @@
-package dominion.game.cards;
+package dominion.cards;
 
 public class MilitiaState {
 

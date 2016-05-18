@@ -1,6 +1,5 @@
 package dominion.model;
 
-import com.fasterxml.jackson.annotation.*;
 import dominion.model.database.*;
 import java.sql.*;
 
@@ -9,7 +8,6 @@ public class GameCard
     private final int id;
     private final int cost;
     private final String deck;
-    @JsonIgnore()
     private final Game game;
     private final boolean isAction;
     private final boolean isCoin;
@@ -17,7 +15,7 @@ public class GameCard
     private final int value;
     private int count;
     
-    public GameCard(Game game, int id, String name, String deck, int count, int cost, int value, boolean isAction, boolean isCoin)
+    GameCard(Game game, int id, String name, String deck, int count, int cost, int value, boolean isAction, boolean isCoin)
     {
         this.game = game;
         this.id = id;

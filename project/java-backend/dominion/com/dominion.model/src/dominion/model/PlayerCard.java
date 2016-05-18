@@ -1,19 +1,17 @@
 package dominion.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import dominion.model.database.Database;
 import java.sql.Connection;
 
 public class PlayerCard 
 {
-    @JsonIgnore()
     private final Player player;
     private final int cardId;
     private final int id;
     private String pile;
     private int order;
     
-    public PlayerCard(Player player, int id, int cardId, String pile, int order)
+    PlayerCard(Player player, int id, int cardId, String pile, int order)
     {
         this.id = id;
         this.player = player;

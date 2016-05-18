@@ -1,4 +1,4 @@
-package dominion.game;
+package dominion;
 
 import java.util.regex.Pattern;
 

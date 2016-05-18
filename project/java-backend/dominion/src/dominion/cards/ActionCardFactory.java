@@ -1,4 +1,4 @@
-package dominion.game.cards;
+package dominion.cards;
 
 import java.util.HashMap;
 

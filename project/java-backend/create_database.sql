@@ -40,7 +40,7 @@ CREATE TABLE games (
 	id INT NOT NULL AUTO_INCREMENT,
 	cardset VARCHAR(20) NOT NULL,
 	player INT,
-	state ENUM('Action', 'Bet', 'Buy') DEFAULT "Action",
+	state ENUM('Action', 'Bet', 'Buy', 'Over') DEFAULT "Action",
 	winner INT DEFAULT -1,
 	startdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT pk_game PRIMARY KEY (id),
