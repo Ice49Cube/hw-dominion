@@ -29,6 +29,7 @@ public class Game {
         this.cardSet = cardSet;
         this.state = state;
         this.winner = winner;
+        this.player = player;
         this.cards = new HashMap<>();
         this.players = new HashMap<>();
     }
@@ -66,6 +67,25 @@ public class Game {
     }
 
     public static Game load(Connection con, int id) throws Exception {
+        return Game.loadCards(Game.loadPlayers(con, id), con);
+    }
+
+    private static Game load(ResultSet rs) throws Exception {
+        return new Game(rs.getInt("games.id"), rs.getString("games.cardSet"), rs.getInt("games.player"), rs.getString("games.state"), rs.getInt("games.winner"));
+    }
+
+    private static Game loadCards(Game game, Connection con)throws Exception {
+        String sql = "SELECT * FROM gamecards INNER JOIN games ON game = games.id WHERE games.id = ? ORDER BY deck";
+        Object[] args = new Object[]{game.getId()};
+        try (PreparedStatement stmt = con.prepareStatement(sql); ResultSet rs = Database.executeQuery(con, stmt, args)) {
+            while (rs.next()) {
+                game.addCard(GameCard.load(game, rs));
+            }
+        }
+        return game;
+    }
+    
+    private static Game loadPlayers(Connection con, int id) throws Exception {
         String sql = "SELECT * FROM playercards"
                 + " INNER JOIN players ON playercards.player = players.id"
                 + " INNER JOIN games ON players.game = games.id"
@@ -75,7 +95,7 @@ public class Game {
         Object[] args = new Object[]{id};
         Game game = null;
         try (PreparedStatement stmt = con.prepareStatement(sql);
-                ResultSet rs = Database.executeQuery(con, stmt, args)) {
+             ResultSet rs = Database.executeQuery(con, stmt, args)) {
             int min = 0, max = 0;
             while (rs.next()) {
                 if (game == null) {
@@ -92,19 +112,11 @@ public class Game {
                 Order order = player.getOrder();
                 if(playerCard.getOrder() > order.getMax()) order.setMax(max);
                 else if(playerCard.getOrder() < order.getMin()) order.setMin(min);
-                GameCard gameCard = GameCard.load(game, rs);
-                if(game.cards.get(gameCard.getId()) == null) {
-                    game.addCard(gameCard);
-                }                
             }
         }
         return game;
     }
-
-    private static Game load(ResultSet rs) throws Exception {
-        return new Game(rs.getInt("games.id"), rs.getString("games.cardSet"), rs.getInt("games.player"), rs.getString("games.state"), rs.getInt("games.winner"));
-    }
-
+    
     // </editor-fold>
     ////////////////////////////////////////////////////////////////////////////
     // <editor-fold desc="Public methods and accessors" defaultstate="collapsed">
